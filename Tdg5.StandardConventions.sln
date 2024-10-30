@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tdg5.StandardConventions", "Tdg5.StandardConventions\Tdg5.StandardConventions.csproj", "{2D23A127-07A2-4D42-87B4-68C0A2E82523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tdg5.StandardConventions.Tests", "Tdg5.StandardConventions.Tests\Tdg5.StandardConventions.Tests.csproj", "{20EA03AE-CE1B-4B65-84FE-109FA534569E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D23A127-07A2-4D42-87B4-68C0A2E82523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D23A127-07A2-4D42-87B4-68C0A2E82523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D23A127-07A2-4D42-87B4-68C0A2E82523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D23A127-07A2-4D42-87B4-68C0A2E82523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
