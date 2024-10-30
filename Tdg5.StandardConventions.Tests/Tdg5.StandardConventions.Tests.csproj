@@ -6,9 +6,14 @@
     <IsTestProject>true</IsTestProject>
     <Nullable>enable</Nullable>
     <TargetFramework>net8.0</TargetFramework>
+    <Tdg5StandardConventionsProjectPath>../Tdg5.StandardConventions/Tdg5.StandardConventions.csproj</Tdg5StandardConventionsProjectPath>
+    <Tdg5StandardConventionsTestAnnotationsProjectPath>../Tdg5.StandardConventions.TestAnnotations/Tdg5.StandardConventions.TestAnnotations.csproj</Tdg5StandardConventionsTestAnnotationsProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Build" Version="17.11.4" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.11.4" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.7.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="xunit" Version="2.9.2" />
@@ -20,7 +25,48 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Tdg5.StandardConventions/Tdg5.StandardConventions.csproj" />
+    <ProjectReference Include="$(Tdg5StandardConventionsProjectPath)" />
+    <ProjectReference Include="$(Tdg5StandardConventionsTestAnnotationsProjectPath)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data/**/*" />
+    <Content Include="Data/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!--
+  PackTdg5StandardConventions target is used to build and pack the
+  Tdg5.StandardConventions project before running tests. This allows test
+  projects to better reproduce the environment in which the
+  Tdg5.StandardConventions package is typically run, including handling of props
+  files and other build artifacts.
+  -->
+  <Target Name="PackTdg5StandardConventions" BeforeTargets="RunTests;VSTest">
+    <MSBuild
+      Projects="$(Tdg5StandardConventionsProjectPath)"
+      Properties="Configuration=Release;Version=999.999.999.999-test.999"
+      Targets="Build" />
+    <MSBuild
+      Projects="$(Tdg5StandardConventionsProjectPath)"
+      Properties="Configuration=Release;PackageOutputPath=$(HOME)/.cache/Tdg5.StandardConventions.Tests/test-artifacts;Version=999.999.999.999-test.999"
+      Targets="Pack" />
+  </Target>
+
+  <!--
+  PackTdg5StandardConventionsTestAnnotations target is used to build and pack the
+  Tdg5.StandardConventions.TestAnnotations project before running tests.
+  -->
+  <Target Name="PackTdg5StandardConventionsTestAnnotations" BeforeTargets="RunTests;VSTest">
+    <MSBuild
+      Projects="$(Tdg5StandardConventionsTestAnnotationsProjectPath)"
+      Properties="Configuration=Release;Version=999.999.999.999-test.999"
+      Targets="Build" />
+    <MSBuild
+      Projects="$(Tdg5StandardConventionsTestAnnotationsProjectPath)"
+      Properties="Configuration=Release;PackageOutputPath=$(HOME)/.cache/Tdg5.StandardConventions.Tests/test-artifacts;Version=999.999.999.999-test.999"
+      Targets="Pack" />
+  </Target>
 
 </Project>

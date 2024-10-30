@@ -1,0 +1,16 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)nuget.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tdg5.StandardConventions" Version="999.999.999.999-test.999"/>
+    <PackageReference Include="Tdg5.StandardConventions.TestAnnotations" Version="999.999.999.999-test.999"/>
+  </ItemGroup>
+
+</Project>
