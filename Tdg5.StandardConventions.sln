@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tdg5.StandardConventions", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tdg5.StandardConventions.Tests", "Tdg5.StandardConventions.Tests\Tdg5.StandardConventions.Tests.csproj", "{20EA03AE-CE1B-4B65-84FE-109FA534569E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tdg5.StandardConventions.TestAnnotations", "Tdg5.StandardConventions.TestAnnotations\Tdg5.StandardConventions.TestAnnotations.csproj", "{1B853BBF-16CB-4506-AB8A-10FF5EF000C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20EA03AE-CE1B-4B65-84FE-109FA534569E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B853BBF-16CB-4506-AB8A-10FF5EF000C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B853BBF-16CB-4506-AB8A-10FF5EF000C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B853BBF-16CB-4506-AB8A-10FF5EF000C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B853BBF-16CB-4506-AB8A-10FF5EF000C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

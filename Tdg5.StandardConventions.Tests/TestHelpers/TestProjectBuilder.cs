@@ -39,7 +39,8 @@ public class TestProjectBuilder
     {
         this.globalProperties = globalProperties ?? DefaultGlobalProperties;
         this.testOutputHelper = testOutputHelper;
-        this.testOutputLogger = new MsBuildTestOutputLogger(testOutputHelper);
+        this.testOutputLogger =
+            new MsBuildTestOutputLogger(testOutputHelper, verbose: false);
     }
 
     /// <summary>

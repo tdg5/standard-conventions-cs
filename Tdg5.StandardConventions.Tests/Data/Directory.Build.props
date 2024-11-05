@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Tdg5.StandardConventions" Version="999.999.999.999-test.999"/>
+    <PackageReference Include="Tdg5.StandardConventions.TestAnnotations" Version="999.999.999.999-test.999"/>
   </ItemGroup>
 
 </Project>
