@@ -29,6 +29,12 @@
     <ProjectReference Include="$(Tdg5StandardConventionsTestAnnotationsProjectPath)" />
   </ItemGroup>
 
+  <!--
+  Props from projects referenced by ProjectReference are not imported, but can
+  be imported manually. https://github.com/dotnet/msbuild/issues/5797
+  -->
+  <Import Project="../Tdg5.StandardConventions/build/Tdg5.StandardConventions.props" />
+
   <ItemGroup>
     <Compile Remove="Data/**/*" />
     <Content Include="Data/**/*">
