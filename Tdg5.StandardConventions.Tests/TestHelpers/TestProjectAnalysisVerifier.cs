@@ -45,23 +45,28 @@ public class TestProjectAnalysisVerifier
         var warningsAndErrors = buildResult.WarningsAndErrors;
         var filesRequiringVerification =
             GetPathsOfFilesRequiringVerification(buildResult);
-        var codeAnalysisViolationExpectations =
-            filesRequiringVerification.SelectMany(CodeAnalysisViolationExpectationExtractor.ExtractExpectations).ToList();
+        List<ICodeAnalysisViolationExpectation> codeAnalysisViolationExpectations =
+            filesRequiringVerification.SelectMany(filePath =>
+                ExpectationExtractor
+                    .ExtractExpectations(projectPath, filePath)).ToList();
         List<ICodeAnalysisViolation> codeAnalysisViolations = [
             .. warningsAndErrors.Warnings.Select(warning =>
                 new CodeAnalysisViolation(
                     code: warning.Code,
-                    level: "Warning",
                     filePath: warning.File,
+                    level: "Warning",
                     lineNumber: warning.LineNumber,
-                    message: warning.Message)),
+                    message: warning.Message,
+                    projectPath: projectPath)),
             .. warningsAndErrors.Errors.Select(error =>
                 new CodeAnalysisViolation(
                     code: error.Code,
-                    level: "Error",
                     filePath: error.File,
+                    level: "Error",
                     lineNumber: error.LineNumber,
-                    message: error.Message))];
+                    message: error.Message,
+                    projectPath: projectPath)),
+        ];
 
         List<ICodeAnalysisViolation> unexpectedCodeViolations = [];
 
@@ -115,43 +120,48 @@ public class TestProjectAnalysisVerifier
                 Environment.NewLine,
                 unexpectedCodeViolations.Select(CodeViolationToString));
 
+        var unresolvedExpectations = unmatchedExpectations
+            .Where(expectation => expectation.Enabled)
+            .ToList();
+
         var unresolvedExpectationsFailureMessage =
             $"Expected code analysis violations were not emitted:"
             + $"{Environment.NewLine}  "
             + string.Join(
                 Environment.NewLine,
-                unmatchedExpectations.Select(expectation =>
-                    expectation.ToStringDescription()));
+                unresolvedExpectations
+                    .Select(expectation => expectation.ToStringDescription()));
 
-        if (unexpectedCodeViolations.Count + unmatchedExpectations.Count == 0)
+        if (unexpectedCodeViolations.Count + unresolvedExpectations.Count == 0)
         {
             Assert.True(true);
             return;
         }
 
-        if (unexpectedCodeViolations.Count > 0 && unmatchedExpectations.Count > 0)
+        if (unexpectedCodeViolations.Count > 0 && unresolvedExpectations.Count > 0)
         {
             var fullMessage = Environment.NewLine
                 + unexpectedCodeViolationsFailureMessage
                 + Environment.NewLine
                 + unresolvedExpectationsFailureMessage;
 
+            // This will fail, so no short-circuiting is necessary.
             Assert.True(
-                unexpectedCodeViolations.Count + unmatchedExpectations.Count == 0,
+                unexpectedCodeViolations.Count + unresolvedExpectations.Count == 0,
                 fullMessage);
             return;
         }
 
         if (unexpectedCodeViolations.Count > 0)
         {
+            // This will fail, so no short-circuiting is necessary.
             Assert.True(
                 unexpectedCodeViolations.Count == 0,
                 unexpectedCodeViolationsFailureMessage);
-            return;
         }
 
         Assert.True(
-            unmatchedExpectations.Count == 0,
+            unresolvedExpectations.Count == 0,
             unresolvedExpectationsFailureMessage);
     }
 
@@ -181,6 +191,6 @@ public class TestProjectAnalysisVerifier
             uniqueFilePaths.Add(filePath);
         }
 
-        return [.. uniqueFilePaths];
+        return uniqueFilePaths.Where(filePath => filePath.EndsWith(".cs")).ToArray();
     }
 }

@@ -7,16 +7,19 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// <summary>
 /// Helper class to extract code analysis violations from a C# file.
 /// </summary>
-public static class CodeAnalysisViolationExpectationExtractor
+public static class ExpectationExtractor
 {
     /// <summary>
     /// Extracts the code analysis violation expectations from the specified
     /// file.
     /// </summary>
+    /// <param name="projectPath">The path of the project to extract the
+    /// expectations from.</param>
     /// <param name="filePath">The path of the file to extract the expectations
     /// from.</param>
     /// <returns>The list of code analysis violation expectations.</returns>
     public static List<ICodeAnalysisViolationExpectation> ExtractExpectations(
+        string projectPath,
         string filePath)
     {
         string code = File.ReadAllText(filePath);
@@ -38,7 +41,7 @@ public static class CodeAnalysisViolationExpectationExtractor
             .. descendentNodes.OfType<StructDeclarationSyntax>(),
         ];
 
-        List<AttributeEffectiveRange> candidateAttributes = [];
+        List<AttributeWithEffectiveRange> candidateAttributes = [];
         foreach (var memberDeclaration in memberDeclarations)
         {
             var memberAttributes =
@@ -53,7 +56,8 @@ public static class CodeAnalysisViolationExpectationExtractor
                 var lineSpan = memberDeclaration.GetLocation().GetLineSpan();
                 var startLine = lineSpan.StartLinePosition.Line + 1;
                 var endLine = lineSpan.EndLinePosition.Line + 1;
-                candidateAttributes.Add(new(attribute, filePath, startLine, endLine));
+                candidateAttributes.Add(
+                    new(attribute, projectPath, filePath, startLine, endLine));
             }
         }
 

@@ -29,4 +29,9 @@ public interface ICodeAnalysisViolation
     /// Gets the message of the violation.
     /// </summary>
     string? Message { get; }
+
+    /// <summary>
+    /// Gets the path of the project where the violation occurred.
+    /// </summary>
+    string ProjectPath { get; }
 }

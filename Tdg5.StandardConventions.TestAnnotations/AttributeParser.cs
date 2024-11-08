@@ -29,22 +29,23 @@ public static class AttributeParser
     }
 
     /// <summary>
-    /// Parses the given <see cref="AttributeEffectiveRange"/> into an instance of
+    /// Parses the given <see cref="AttributeWithEffectiveRange"/> into an instance of
     /// <see cref="ICodeAnalysisViolationExpectation"/>.
     /// </summary>
     /// <param name="attributeWithEffectiveRange">The attribute with effective
     /// range.</param>
     /// <returns>An instance of <see
     /// cref="ICodeAnalysisViolationExpectation"/>.</returns>
-    public static ICodeAnalysisViolationExpectation Parse(
-        AttributeEffectiveRange attributeWithEffectiveRange)
+    internal static ICodeAnalysisViolationExpectation Parse(
+        AttributeWithEffectiveRange attributeWithEffectiveRange)
     {
+        var attributeArguments = ParseAttributeArguments(attributeWithEffectiveRange);
         if (TryGetAttributeName(attributeWithEffectiveRange.Attribute, out var attributeName))
         {
             return attributeName switch
             {
                 nameof(CodeAnalysisViolationExpectedAttribute) =>
-                    ParseCodeAnalysisViolationExpectation(attributeWithEffectiveRange),
+                    CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
                 _ => throw new InvalidOperationException(
                     $"Cannot parse {attributeName} attribute."),
             };
@@ -57,39 +58,23 @@ public static class AttributeParser
 
     /// <summary>
     /// Parses the given <see cref="AttributeSyntax"/> into a <see
-    /// cref="BlockScopeCodeAnalysisViolationExpectation"/>.
+    /// cref="CodeAnalysisViolationExpectation"/>.
     /// </summary>
     /// <param name="attributeWithEffectiveRange">An <see
-    /// cref="AttributeEffectiveRange"/> representation of a <see
+    /// cref="AttributeWithEffectiveRange"/> representation of a <see
     /// cref="CodeAnalysisViolationExpectedAttribute"/> to parse.</param>
-    /// <returns>An instance of <see cref="BlockScopeCodeAnalysisViolationExpectation"/>
+    /// <returns>An instance of <see cref="CodeAnalysisViolationExpectation"/>
     /// representing the parsed attribute.</returns>
-    private static BlockScopeCodeAnalysisViolationExpectation ParseCodeAnalysisViolationExpectation(
-        AttributeEffectiveRange attributeWithEffectiveRange)
+    private static AttributeArguments ParseAttributeArguments(
+        AttributeWithEffectiveRange attributeWithEffectiveRange)
     {
         var attribute = attributeWithEffectiveRange.Attribute;
-        if (!TryGetAttributeName(attribute, out var attributeName) ||
-            attributeName != nameof(CodeAnalysisViolationExpectedAttribute))
-        {
-            throw new InvalidOperationException(
-                $"Cannot parse {attributeName} attribute as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)}.");
-        }
-
         var argumentList = attribute.ArgumentList
             ?? throw new InvalidOperationException(
                 $"Cannot parse {attribute}, argument list is missing.");
 
-        if (argumentList.Arguments.Count != 2)
-        {
-            throw new InvalidOperationException(
-                $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)},"
-                + $" expected 2 arguments, found {argumentList.Arguments.Count}.");
-        }
-
-        string[] arguments = new string[2];
-        int argumentIndex = 0;
+        var positionalArguments = new List<object>();
+        var namedArguments = new Dictionary<string, object>();
         foreach (var argument in argumentList.Arguments)
         {
             var expressionLiteral = argument.Expression as LiteralExpressionSyntax
@@ -99,45 +84,18 @@ public static class AttributeParser
                 ?? throw new InvalidOperationException(
                     $"Cannot parse {expressionLiteral.Token} as a literal value.");
 
-            var argumentValueString = (string)expressionValue;
-
             if (argument.NameColon?.Name is IdentifierNameSyntax argumentName)
             {
-                if (argumentName.Identifier.Text == "code")
-                {
-                    arguments[0] = argumentValueString;
-                }
-                else if (argumentName.Identifier.Text == "level")
-                {
-                    arguments[1] = argumentValueString;
-                }
+                namedArguments.Add(
+                    argumentName.Identifier.Text, expressionValue);
             }
             else
             {
-                arguments[argumentIndex] = argumentValueString;
+                positionalArguments.Add(expressionValue);
             }
-
-            argumentIndex++;
         }
 
-        string code = arguments[0] ??
-            throw new InvalidOperationException(
-                $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(code)}"
-                + " argument could not be determined.");
-
-        string level = arguments[1] ??
-            throw new InvalidOperationException(
-                $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(level)}"
-                + " argument could not be determined.");
-
-        return new BlockScopeCodeAnalysisViolationExpectation(
-            code,
-            level,
-            attributeWithEffectiveRange.FilePath,
-            attributeWithEffectiveRange.StartLine,
-            attributeWithEffectiveRange.EndLine);
+        return new(attributeWithEffectiveRange, positionalArguments, namedArguments);
     }
 
     private static bool TryGetAttributeName(

@@ -6,6 +6,11 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 public interface ICodeAnalysisViolationExpectation
 {
     /// <summary>
+    /// Gets a value indicating whether or not the expectation is enabled.
+    /// </summary>
+    public bool Enabled { get; }
+
+    /// <summary>
     /// Checks if the given violation matches the expectation.
     /// </summary>
     /// <param name="violation">The violation to check.</param>

@@ -12,15 +12,23 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
     /// </summary>
     /// <param name="code">The name of the analysis code.</param>
     /// <param name="level">The level of the analysis violation.</param>
+    /// <param name="projectPath">The path of the project where the violation
+    /// occurred.</param>
     /// <param name="filePath">The path of the file where the violation
     /// occurred.</param>
     /// <param name="lineNumber">The line number where the violation
     /// occurred.</param>
     /// <param name="message">The message of the violation.</param>
     public CodeAnalysisViolation(
-        string code, string level, string filePath, int lineNumber, string? message)
+        string code,
+        string level,
+        string projectPath,
+        string filePath,
+        int lineNumber,
+        string? message)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(code, nameof(code));
+        ArgumentException.ThrowIfNullOrWhiteSpace(projectPath, nameof(projectPath));
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath, nameof(filePath));
         ArgumentException.ThrowIfNullOrWhiteSpace(level, nameof(level));
         if (message is not null)
@@ -28,12 +36,12 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
             ArgumentException.ThrowIfNullOrWhiteSpace(message, nameof(message));
         }
 
-        if (lineNumber < 1)
+        if (lineNumber < 0)
         {
             throw new ArgumentOutOfRangeException(
                 nameof(lineNumber),
                 lineNumber,
-                "The line number must be a positive integer.");
+                "The line number must be a non-negative integer.");
         }
 
         this.Code = code;
@@ -41,6 +49,7 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
         this.Level = level;
         this.LineNumber = lineNumber;
         this.Message = message;
+        this.ProjectPath = projectPath;
     }
 
     /// <inheritdoc/>
@@ -57,4 +66,7 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
 
     /// <inheritdoc/>
     public string? Message { get; }
+
+    /// <inheritdoc/>
+    public string ProjectPath { get; }
 }
