@@ -24,6 +24,7 @@ public static class AttributeParser
         return attributeName switch
         {
             nameof(CodeAnalysisViolationExpectedAttribute) => true,
+            nameof(ProjectAnalysisViolationExpectedAttribute) => true,
             _ => false,
         };
     }
@@ -46,6 +47,8 @@ public static class AttributeParser
             {
                 nameof(CodeAnalysisViolationExpectedAttribute) =>
                     CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+                nameof(ProjectAnalysisViolationExpectedAttribute) =>
+                    ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
                 _ => throw new InvalidOperationException(
                     $"Cannot parse {attributeName} attribute."),
             };
