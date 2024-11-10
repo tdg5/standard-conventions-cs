@@ -48,11 +48,6 @@ public static class ExpectationExtractor
                 memberDeclaration.AttributeLists.SelectMany(al => al.Attributes);
             foreach (var attribute in memberAttributes)
             {
-                if (!AttributeParser.IsSupportedAttribute(attribute))
-                {
-                    continue;
-                }
-
                 var lineSpan = memberDeclaration.GetLocation().GetLineSpan();
                 var startLine = lineSpan.StartLinePosition.Line + 1;
                 var endLine = lineSpan.EndLinePosition.Line + 1;
@@ -61,6 +56,9 @@ public static class ExpectationExtractor
             }
         }
 
-        return candidateAttributes.Select(AttributeParser.Parse).ToList();
+        return candidateAttributes
+            .Select(candidate => AttributeParser.TryParse(candidate)!)
+            .Where(_ => _ is not null)
+            .ToList();
     }
 }

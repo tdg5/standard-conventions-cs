@@ -10,56 +10,34 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 public static class AttributeParser
 {
     /// <summary>
-    /// Determines whether the specified attribute is supported.
-    /// </summary>
-    /// <param name="attribute">The attribute.</param>
-    /// <returns>True if the attribute is supported; otherwise, false.</returns>
-    public static bool IsSupportedAttribute(AttributeSyntax attribute)
-    {
-        if (!TryGetAttributeName(attribute, out var attributeName))
-        {
-            return false;
-        }
-
-        return attributeName switch
-        {
-            nameof(CodeAnalysisViolationExpectedAttribute) => true,
-            nameof(FileAnalysisViolationExpectedAttribute) => true,
-            nameof(ProjectAnalysisViolationExpectedAttribute) => true,
-            _ => false,
-        };
-    }
-
-    /// <summary>
     /// Parses the given <see cref="AttributeWithEffectiveRange"/> into an instance of
     /// <see cref="ICodeAnalysisViolationExpectation"/>.
     /// </summary>
     /// <param name="attributeWithEffectiveRange">The attribute with effective
     /// range.</param>
-    /// <returns>An instance of <see
-    /// cref="ICodeAnalysisViolationExpectation"/>.</returns>
-    internal static ICodeAnalysisViolationExpectation Parse(
+    /// <returns>The parsed instance of <see
+    /// cref="ICodeAnalysisViolationExpectation"/> or null if the attribute
+    /// could not be parsed.</returns>
+    internal static ICodeAnalysisViolationExpectation? TryParse(
         AttributeWithEffectiveRange attributeWithEffectiveRange)
     {
         var attributeArguments = ParseAttributeArguments(attributeWithEffectiveRange);
-        if (TryGetAttributeName(attributeWithEffectiveRange.Attribute, out var attributeName))
+        if (!TryGetAttributeName(attributeWithEffectiveRange.Attribute, out var attributeName))
         {
-            return attributeName switch
-            {
-                nameof(CodeAnalysisViolationExpectedAttribute) =>
-                    CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
-                nameof(FileAnalysisViolationExpectedAttribute) =>
-                    FileAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
-                nameof(ProjectAnalysisViolationExpectedAttribute) =>
-                    ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
-                _ => throw new InvalidOperationException(
-                    $"Cannot parse {attributeName} attribute."),
-            };
+            return null;
         }
 
-        var attributeSyntax = attributeWithEffectiveRange.Attribute;
-        throw new InvalidOperationException(
-            $"Cannot parse attribute from syntax {attributeSyntax}.");
+        return attributeName switch
+        {
+            nameof(CodeAnalysisViolationExpectedAttribute) =>
+                CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+            nameof(FileAnalysisViolationExpectedAttribute) =>
+                FileAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+            nameof(ProjectAnalysisViolationExpectedAttribute) =>
+                ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+            _ => throw new InvalidOperationException(
+                $"Cannot parse {attributeName} attribute."),
+        };
     }
 
     /// <summary>
