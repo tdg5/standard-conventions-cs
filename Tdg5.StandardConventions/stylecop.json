@@ -1,16 +1,61 @@
 {
   "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
   "settings": {
-    "documentationRules": {},
+    "documentationRules": {
+      "companyName": "",
+      "copyrightText": "",
+      "documentExposedElements": true,
+      "documentInterfaces": true,
+      "documentInternalElements": true,
+      "documentPrivateElements": false,
+      "documentPrivateFields": false,
+      "documentationCulture": "en-US",
+      "excludeFromPunctuationCheck": ["seealso"],
+      "fileNamingConvention": "stylecop",
+      "headerDecoration": "",
+      "variables": {},
+      "xmlHeader": true
+    },
     "indentation": {
       "indentationSize": 4,
       "tabSize": 4,
       "useTabs": false
     },
+    "layoutRules": {
+      "allowConsecutiveUsings": true,
+      "allowDoWhileOnClosingBrace": false,
+      "newlineAtEndOfFile": "require"
+    },
+    "maintainabilityRules": {
+      "topLevelTypes": [
+        "class",
+        "delegate",
+        "enum",
+        "interface",
+        "struct"
+      ]
+    },
+    "namingRules": {
+      "allowCommonHungarianPrefixes": false,
+      "allowedHungarianPrefixes": [],
+      "allowedNamespaceComponents": [],
+      "includeInferredTupleElementNames": false,
+      "tupleElementNameCasing": "PascalCase"
+    },
     "orderingRules": {
       "blankLinesBetweenUsingGroups": "omit",
+      "elementOrder": [
+        "kind",
+        "accessibility",
+        "constant",
+        "static",
+        "readonly"
+      ],
       "systemUsingDirectivesFirst": false,
       "usingDirectivesPlacement": "outsideNamespace"
+    },
+    "readabilityRules": {
+      "allowBuiltInTypeAliases": false
     }
   }
 }
