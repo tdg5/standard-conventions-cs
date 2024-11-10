@@ -4,12 +4,12 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// Default, block scoped implementation of <see
 /// cref="ICodeAnalysisViolationExpectation"/>.
 /// </summary>
-internal class CodeAnalysisViolationExpectation
+internal class FileAnalysisViolationExpectation
     : ICodeAnalysisViolationExpectation
 {
     /// <summary>
     /// Initializes a new instance of the <see
-    /// cref="CodeAnalysisViolationExpectation"/> class.
+    /// cref="FileAnalysisViolationExpectation"/> class.
     /// </summary>
     /// <param name="code">The name of the the analysis code that is
     /// expected.</param>
@@ -21,26 +21,18 @@ internal class CodeAnalysisViolationExpectation
     /// expected to occur.</param>
     /// <param name="filePath">The file path where the violation is expected to
     /// occur.</param>
-    /// <param name="startLineNumber">The starting line number where the
-    /// violation is expected to occur.</param>
-    /// <param name="endLineNumber">The ending line number where the violation
-    /// is expected to occur.</param>
-    public CodeAnalysisViolationExpectation(
+    public FileAnalysisViolationExpectation(
         string code,
         string level,
         bool enabled,
         string projectPath,
-        string filePath,
-        int startLineNumber,
-        int endLineNumber)
+        string filePath)
     {
         this.Code = code;
         this.Enabled = enabled;
-        this.EndLineNumber = endLineNumber;
         this.FilePath = filePath;
         this.Level = level;
         this.ProjectPath = projectPath;
-        this.StartLineNumber = startLineNumber;
     }
 
     /// <summary>
@@ -52,11 +44,6 @@ internal class CodeAnalysisViolationExpectation
     /// Gets a value indicating whether or not the expectation is enabled.
     /// </summary>
     public bool Enabled { get; }
-
-    /// <summary>
-    /// Gets the ending line number where the violation is expected to occur.
-    /// </summary>
-    public int EndLineNumber { get; }
 
     /// <summary>
     /// Gets the file path where the violation is expected to occur.
@@ -73,19 +60,12 @@ internal class CodeAnalysisViolationExpectation
     /// </summary>
     public string ProjectPath { get; }
 
-    /// <summary>
-    /// Gets the starting line number where the violation is expected to occur.
-    /// </summary>
-    public int StartLineNumber { get; }
-
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
         this.Enabled
             && violation.Code == this.Code
             && violation.ProjectPath == this.ProjectPath
             && violation.FilePath == this.FilePath
-            && violation.LineNumber >= this.StartLineNumber
-            && violation.LineNumber <= this.EndLineNumber
             && string.Equals(
                 violation.Level,
                 this.Level,
@@ -94,8 +74,7 @@ internal class CodeAnalysisViolationExpectation
     /// <inheritdoc/>
     public string ToStringDescription()
     {
-        return $"{this.Level}: {this.Code} -"
-            + $" {this.FilePath}:{this.StartLineNumber}-{this.EndLineNumber}"
+        return $"{this.Level}: {this.Code} - {this.FilePath}"
             + (this.Enabled ? string.Empty : " (disabled)");
     }
 }

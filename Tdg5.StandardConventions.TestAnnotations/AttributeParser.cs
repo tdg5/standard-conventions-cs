@@ -24,6 +24,7 @@ public static class AttributeParser
         return attributeName switch
         {
             nameof(CodeAnalysisViolationExpectedAttribute) => true,
+            nameof(FileAnalysisViolationExpectedAttribute) => true,
             nameof(ProjectAnalysisViolationExpectedAttribute) => true,
             _ => false,
         };
@@ -47,6 +48,8 @@ public static class AttributeParser
             {
                 nameof(CodeAnalysisViolationExpectedAttribute) =>
                     CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+                nameof(FileAnalysisViolationExpectedAttribute) =>
+                    FileAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
                 nameof(ProjectAnalysisViolationExpectedAttribute) =>
                     ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
                 _ => throw new InvalidOperationException(
