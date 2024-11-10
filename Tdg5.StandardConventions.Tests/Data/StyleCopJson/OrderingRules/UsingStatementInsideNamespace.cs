@@ -11,7 +11,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules
         "SA1200",
         "Warning",
         contains: "Using directive should appear outside a namespace declaration")]
-    public class UsingStatementInsideNamespaceTriggersSA1200
+    public class UsingStatementInsideNamespace
     {
     }
 }
