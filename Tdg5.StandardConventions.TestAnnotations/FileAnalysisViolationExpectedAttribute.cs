@@ -12,13 +12,16 @@ public class FileAnalysisViolationExpectedAttribute : Attribute
     /// cref="FileAnalysisViolationExpectedAttribute"/> class.
     /// </summary>
     /// <param name="code">The analysis code that is expected.</param>
+    /// <param name="contains">Optional text that the violation is expected to
+    /// contain.</param>
     /// <param name="level">The level of the analysis code that is expected.</param>
     /// <param name="enabled">Flag indicating whether or not the expectation is
     /// enabled.</param>
     public FileAnalysisViolationExpectedAttribute(
-        string code, string level, bool enabled = true)
+        string code, string level, string? contains = null, bool enabled = true)
     {
         this.Code = code;
+        this.Contains = contains;
         this.Enabled = enabled;
         this.Level = level;
     }
@@ -27,6 +30,11 @@ public class FileAnalysisViolationExpectedAttribute : Attribute
     /// Gets the name of the expected analysis code.
     /// </summary>
     public string Code { get; }
+
+    /// <summary>
+    /// Gets the optional text that the violation is expected to contain.
+    /// </summary>
+    public string? Contains { get; }
 
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
@@ -108,8 +116,20 @@ public class FileAnalysisViolationExpectedAttribute : Attribute
                 + " argument could not be determined.");
         }
 
-        object? enabledArgument = null;
+        object? containsArgument = null;
         if (positionalArguments.Count > 2)
+        {
+            containsArgument = positionalArguments[2];
+        }
+        else if (namedArguments.TryGetValue("contains", out containsArgument))
+        {
+            // Condition does the work.
+        }
+
+        string? contains = containsArgument as string;
+
+        object? enabledArgument = null;
+        if (positionalArguments.Count > 3)
         {
             enabledArgument = positionalArguments[2];
         }
@@ -122,6 +142,7 @@ public class FileAnalysisViolationExpectedAttribute : Attribute
 
         return new FileAnalysisViolationExpectation(
             code: code,
+            contains: contains,
             enabled: enabled,
             filePath: attributeWithEffectiveRange.FilePath,
             level: level,

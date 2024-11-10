@@ -15,6 +15,8 @@ internal class CodeAnalysisViolationExpectation
     /// expected.</param>
     /// <param name="level">The level of the analysis code that is
     /// expected.</param>
+    /// <param name="contains">Optional text that the violation is expected to
+    /// contain.</param>
     /// <param name="enabled">Flag indicating whether or not the expectation is
     /// enabled.</param>
     /// <param name="projectPath">The project path where the violation is
@@ -28,6 +30,7 @@ internal class CodeAnalysisViolationExpectation
     public CodeAnalysisViolationExpectation(
         string code,
         string level,
+        string? contains,
         bool enabled,
         string projectPath,
         string filePath,
@@ -35,6 +38,7 @@ internal class CodeAnalysisViolationExpectation
         int endLineNumber)
     {
         this.Code = code;
+        this.Contains = contains;
         this.Enabled = enabled;
         this.EndLineNumber = endLineNumber;
         this.FilePath = filePath;
@@ -47,6 +51,11 @@ internal class CodeAnalysisViolationExpectation
     /// Gets the name of the expected analysis code.
     /// </summary>
     public string Code { get; }
+
+    /// <summary>
+    /// Gets the optional text that the violation is expected to contain.
+    /// </summary>
+    public string? Contains { get; }
 
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
@@ -89,13 +98,18 @@ internal class CodeAnalysisViolationExpectation
             && string.Equals(
                 violation.Level,
                 this.Level,
-                StringComparison.InvariantCultureIgnoreCase);
+                StringComparison.InvariantCultureIgnoreCase)
+            && (this.Contains is null ||
+                (violation.Message ?? string.Empty).Contains(this.Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
     {
         return $"{this.Level}: {this.Code} -"
             + $" {this.FilePath}:{this.StartLineNumber}-{this.EndLineNumber}"
-            + (this.Enabled ? string.Empty : " (disabled)");
+            + (this.Enabled ? string.Empty : " (disabled)")
+            + (this.Contains is not null
+                ? $"{Environment.NewLine}Message containing: \"{this.Contains}\""
+                : string.Empty);
     }
 }

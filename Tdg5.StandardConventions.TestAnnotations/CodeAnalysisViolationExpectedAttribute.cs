@@ -24,13 +24,16 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     /// cref="CodeAnalysisViolationExpectedAttribute"/> class.
     /// </summary>
     /// <param name="code">The analysis code that is expected.</param>
+    /// <param name="contains">Optional text that the violation is expected to
+    /// contain.</param>
     /// <param name="level">The level of the analysis code that is expected.</param>
     /// <param name="enabled">Flag indicating whether or not the expectation is
     /// enabled.</param>
     public CodeAnalysisViolationExpectedAttribute(
-        string code, string level, bool enabled = true)
+        string code, string level, string? contains = null, bool enabled = true)
     {
         this.Code = code;
+        this.Contains = contains;
         this.Enabled = enabled;
         this.Level = level;
     }
@@ -39,6 +42,11 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     /// Gets the name of the expected analysis code.
     /// </summary>
     public string Code { get; }
+
+    /// <summary>
+    /// Gets the optional text that the violation is expected to contain.
+    /// </summary>
+    public string? Contains { get; }
 
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
@@ -120,8 +128,20 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
                 + " argument could not be determined.");
         }
 
-        object? enabledArgument = null;
+        object? containsArgument = null;
         if (positionalArguments.Count > 2)
+        {
+            containsArgument = positionalArguments[2];
+        }
+        else if (namedArguments.TryGetValue("contains", out containsArgument))
+        {
+            // Condition does the work.
+        }
+
+        string? contains = containsArgument as string;
+
+        object? enabledArgument = null;
+        if (positionalArguments.Count > 3)
         {
             enabledArgument = positionalArguments[2];
         }
@@ -134,6 +154,7 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
 
         return new CodeAnalysisViolationExpectation(
             code: code,
+            contains: contains,
             enabled: enabled,
             endLineNumber: attributeWithEffectiveRange.EndLine.Value,
             filePath: attributeWithEffectiveRange.FilePath,
