@@ -149,7 +149,6 @@ public class TestProjectAnalysisVerifier
             Assert.True(
                 unexpectedCodeViolations.Count + unresolvedExpectations.Count == 0,
                 fullMessage);
-            return;
         }
 
         if (unexpectedCodeViolations.Count > 0)

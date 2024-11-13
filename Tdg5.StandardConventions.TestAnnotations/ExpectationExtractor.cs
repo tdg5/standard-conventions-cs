@@ -31,13 +31,17 @@ public static class ExpectationExtractor
         List<MemberDeclarationSyntax> memberDeclarations = [
             .. descendentNodes.OfType<ClassDeclarationSyntax>(),
             .. descendentNodes.OfType<ConstructorDeclarationSyntax>(),
+            .. descendentNodes.OfType<ConversionOperatorDeclarationSyntax>(),
             .. descendentNodes.OfType<DelegateDeclarationSyntax>(),
+            .. descendentNodes.OfType<DestructorDeclarationSyntax>(),
             .. descendentNodes.OfType<EnumDeclarationSyntax>(),
             .. descendentNodes.OfType<EventDeclarationSyntax>(),
             .. descendentNodes.OfType<FieldDeclarationSyntax>(),
             .. descendentNodes.OfType<InterfaceDeclarationSyntax>(),
             .. descendentNodes.OfType<MethodDeclarationSyntax>(),
+            .. descendentNodes.OfType<OperatorDeclarationSyntax>(),
             .. descendentNodes.OfType<PropertyDeclarationSyntax>(),
+            .. descendentNodes.OfType<RecordDeclarationSyntax>(),
             .. descendentNodes.OfType<StructDeclarationSyntax>(),
         ];
 
