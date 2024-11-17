@@ -1,0 +1,46 @@
+name: Quality Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  quality-check:
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version:
+          - '8.0'
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Install Dependencies
+        run: |
+          dotnet restore --locked-mode
+
+      - name: Run quality checks
+        run: |
+          # Check format
+          dotnet format --verify-no-changes
+
+          # Run tests
+          dotnet test --no-restore
+
+          # Ensure pack works
+          dotnet pack --no-restore
