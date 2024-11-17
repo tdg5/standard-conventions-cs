@@ -35,8 +35,7 @@ public static class AttributeParser
                 FileAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
             nameof(ProjectAnalysisViolationExpectedAttribute) =>
                 ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
-            _ => throw new InvalidOperationException(
-                $"Cannot parse {attributeName} attribute."),
+            _ => null,
         };
     }
 

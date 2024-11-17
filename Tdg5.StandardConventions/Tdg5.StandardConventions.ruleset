@@ -260,7 +260,8 @@
     <Rule Id="SA1207" Action="Warning" />
 
     <!-- SA1208: System using directives should be placed before other using directives. -->
-    <Rule Id="SA1208" Action="Warning" />
+    <!-- Disabled by systemUsingDirectivesFirst config in stylecop.json. -->
+    <Rule Id="SA1208" Action="None" />
 
     <!-- SA1209: Using alias directives should be placed after other using directives. -->
     <Rule Id="SA1209" Action="Warning" />
@@ -294,6 +295,7 @@
     <Rule Id="SA1300" Action="Warning" />
 
     <!-- SA1301: Element should begin with lower-case letter. -->
+    <!-- As of 2024-11-14, there are no situations in which this rule will fire. -->
     <Rule Id="SA1301" Action="None" />
 
     <!-- SA1302: Interface names should begin with I. -->
@@ -390,6 +392,9 @@
     <!-- SA1413: Use trailing comma in multi-line initializers. -->
     <Rule Id="SA1413" Action="Warning" />
 
+    <!-- SA1414: Tuple types in signatures should have element names. -->
+    <Rule Id="SA1414" Action="Warning" />
+
   </Rules>
 
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.LayoutRules">
@@ -471,6 +476,7 @@
     <Rule Id="SA1602" Action="Warning" />
 
     <!-- SA1603: Documentation should contain valid XML. -->
+    <!-- This is a duplicate of CS1570. -->
     <Rule Id="SA1603" Action="None" />
 
     <!-- SA1604: Element documentation should have summary. -->
@@ -561,31 +567,40 @@
     <Rule Id="SA1632" Action="None" />
 
     <!-- SA1633: File should have header. -->
+    <!-- File headers not required. -->
     <Rule Id="SA1633" Action="None" />
 
     <!-- SA1634: File header should show copyright. -->
-    <Rule Id="SA1634" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1634" Action="None" />
 
     <!-- SA1635: File header should have copyright text. -->
-    <Rule Id="SA1635" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1635" Action="None" />
 
     <!-- SA1636: File header copyright text should match. -->
-    <Rule Id="SA1636" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1636" Action="None" />
 
     <!-- SA1637: File header should contain file name. -->
-    <Rule Id="SA1637" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1637" Action="None" />
 
     <!-- SA1638: File header file name documentation should match file name. -->
-    <Rule Id="SA1638" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1638" Action="None" />
 
     <!-- SA1639: File header should have summary. -->
-    <Rule Id="SA1639" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1639" Action="None" />
 
     <!-- SA1640: File header should have valid company text. -->
-    <Rule Id="SA1640" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1640" Action="None" />
 
     <!-- SA1641: File header company name text should match. -->
-    <Rule Id="SA1641" Action="Warning" />
+    <!-- File headers not required. -->
+    <Rule Id="SA1641" Action="None" />
 
     <!-- SA1642: Constructor summary documentation should begin with standard text. -->
     <Rule Id="SA1642" Action="Warning" />
@@ -626,6 +641,7 @@
     <Rule Id="CS1591" Action="None" />
 
     <!-- IDE0290: Use primary constructor. -->
+    <!-- Primary constructors can muddle class documentation. -->
     <Rule Id="IDE0290" Action="None" />
 
   </Rules>
