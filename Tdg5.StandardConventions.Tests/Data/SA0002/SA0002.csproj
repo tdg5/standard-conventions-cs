@@ -3,7 +3,7 @@
   <ItemGroup>
     <!-- Remove upstream stylecop.json, otherwise the local stylecop.json will
     be ignored. -->
-    <AdditionalFiles Remove="$(NuGetPackageRoot)tdg5.standardconventions/999.999.999.999-test.999/build/../stylecop.json" />
+    <AdditionalFiles Remove="$(Tdg5StandardConventionsStylecopJsonPath)" />
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
 

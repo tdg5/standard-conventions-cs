@@ -40,7 +40,7 @@ public class TestProjectBuilder
         this.globalProperties = globalProperties ?? DefaultGlobalProperties;
         this.testOutputHelper = testOutputHelper;
         this.testOutputLogger =
-            new MsBuildTestOutputLogger(testOutputHelper, verbose: false);
+            new MsBuildTestOutputLogger(testOutputHelper, dumpEnv: true, verbose: true);
     }
 
     /// <summary>
