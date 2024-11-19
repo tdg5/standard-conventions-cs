@@ -29,10 +29,11 @@ jobs:
             --output $OUTPUT_DIR \
             -p:PackageVersion='${{ github.event.inputs.version }}'
 
+          # Explicitly push Tdg5.StandardConventions to avoid pushing test packages.
           dotnet nuget push \
             --api-key '${{ secrets.NUGET_PUSH_API_KEY }}' \
             --source '${{ secrets.NUGET_PUSH_SOURCE }}' \
-            $OUTPUT_DIR/*.nupkg
+            "$OUTPUT_DIR/Tdg5.StandardConventions.${{ github.event.inputs.version }}.nupkg"
 
       - name: Configure git actor
         run: |
