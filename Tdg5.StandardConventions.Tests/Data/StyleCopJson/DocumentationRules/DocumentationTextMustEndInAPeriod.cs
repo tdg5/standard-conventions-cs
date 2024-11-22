@@ -40,7 +40,10 @@ public class DocumentationTextMustEndInAPeriod
         public bool Method() => true;
     }
 
-    [CodeAnalysisViolationExpected("SA1629", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1629",
+        "Warning",
+        disabledReason: "Seealso tags are not required to end in a period")]
     private class SeeAlsoWithoutPeriod
     {
         /// <summary>

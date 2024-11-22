@@ -11,7 +11,7 @@ public class TupleElementNameCasing
     [CodeAnalysisViolationExpected("SA1316", "Warning")]
     private (int firstElement, int secondElement) CamelCaseTupleMethod() => (0, 0);
 
-    [CodeAnalysisViolationExpected("SA1316", "Warning", enabled: false)]
-    [CodeAnalysisViolationExpected("SA1316", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected("SA1316", "Warning", disabledReason: "Pascal case tuple element names are required.")]
+    [CodeAnalysisViolationExpected("SA1316", "Warning", disabledReason: "Pascal case tuple element names are required.")]
     private (int FirstElement, int SecondElement) PascalCaseTupleMethod() => (0, 0);
 }

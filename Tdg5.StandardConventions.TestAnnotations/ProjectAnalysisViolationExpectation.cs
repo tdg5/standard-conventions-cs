@@ -17,20 +17,20 @@ internal class ProjectAnalysisViolationExpectation
     /// contain.</param>
     /// <param name="level">The level of the analysis code that is
     /// expected.</param>
-    /// <param name="enabled">Flag indicating whether or not the expectation is
-    /// enabled.</param>
+    /// <param name="disabledReason">Description indicating why the expectation is
+    /// disabled.</param>
     /// <param name="projectPath">The project path where the violation is
     /// expected to occur.</param>
     public ProjectAnalysisViolationExpectation(
         string code,
         string? contains,
         string level,
-        bool enabled,
+        string? disabledReason,
         string projectPath)
     {
         this.Code = code;
         this.Contains = contains;
-        this.Enabled = enabled;
+        this.DisabledReason = disabledReason;
         this.Level = level;
         this.ProjectPath = projectPath;
     }
@@ -46,9 +46,14 @@ internal class ProjectAnalysisViolationExpectation
     public string? Contains { get; }
 
     /// <summary>
+    /// Gets the optional text that explains why the expectation is disabled.
+    /// </summary>
+    public string? DisabledReason { get; }
+
+    /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
     /// </summary>
-    public bool Enabled { get; }
+    public bool Enabled => this.DisabledReason is null;
 
     /// <summary>
     /// Gets the expected level of the analysis code.
@@ -76,7 +81,7 @@ internal class ProjectAnalysisViolationExpectation
     public string ToStringDescription()
     {
         return $"{this.Level}: {this.Code} - {this.ProjectPath}"
-            + (this.Enabled ? string.Empty : " (disabled)")
+            + (this.Enabled ? string.Empty : $" (disabled: {this.DisabledReason})")
             + (this.Contains is not null
                 ? $"{Environment.NewLine}Message containing: \"{this.Contains}\""
                 : string.Empty);

@@ -25,8 +25,14 @@ internal partial class UndocumentedPublicPartialClassWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
-    [CodeAnalysisViolationExpected("SA1601", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private partial methods don't require documentation.")]
+    [CodeAnalysisViolationExpected(
+        "SA1601",
+        "Warning",
+        disabledReason: "Private partial methods don't require documentation.")]
     private partial void PrivatePartialMethod()
     {
     }

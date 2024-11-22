@@ -73,7 +73,7 @@ public class BlockScopedExpectations
     /// <remarks>
     /// SA1123 triggers in all the same cases as SA1109 and SA1123 is prefered.
     /// </remarks>
-    [CodeAnalysisViolationExpected("SA1109", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected("SA1109", "Warning", disabledReason: "SA1109 is disabled")]
     [CodeAnalysisViolationExpected("SA1123", "Warning")]
     public void SA1109_BlockStatementsMustNotContainEmbeddedRegions()
     {
@@ -322,7 +322,8 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1133", "Warning")]
     [
         Obsolete("Not actually obsolete."),
-        CodeAnalysisViolationExpected("Another attribute", "Warning", enabled: false)
+        CodeAnalysisViolationExpected(
+            "Another attribute", "Warning", disabledReason: "Not a real attribute.")
     ]
     public void SA1133_DoNotCombineAttributes()
     {
@@ -743,7 +744,8 @@ public class BlockScopedExpectations
         /// <summary>
         /// A method that calls an instance member without using this.
         /// </summary>
-        [CodeAnalysisViolationExpected("SX1101", "Warning", enabled: false)]
+        [CodeAnalysisViolationExpected(
+            "SX1101", "Warning", disabledReason: "SX1101 is disabled.")]
         public void SX1101_DoNotPrefixLocalMembersWithThis() => this.Method();
 
         private int Method() => 0;
@@ -847,7 +849,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a field that appears to use Hungarian notation.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1305", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1305", "Warning", disabledReason: "SA1305 is disabled.")]
     public class SA1305_FieldNamesMustNotUseHungarianNotation
     {
         /// <summary>
@@ -903,7 +906,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a field that starts with an underscore.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1309", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1309", "Warning", disabledReason: "SA1309 is disabled.")]
     public class SA1309_FieldNamesMustNotBeginWithUnderscore
     {
         private int _int = 0;
@@ -1085,7 +1089,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a property that doesn't have value documentation.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1609", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1609", "Warning", disabledReason: "SA1609 is disabled.")]
     public class SA1609_PropertyDocumentationMustHaveValue()
     {
         /// <summary>
@@ -1362,7 +1367,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a field that starts with an underscore.
     /// </summary>
-    [CodeAnalysisViolationExpected("SX1309", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SX1309", "Warning", disabledReason: "SX1309 is disabled.")]
     public class SX1309_FieldNamesMustBeginWithUnderscore
     {
         private int field = 0;
@@ -1373,7 +1379,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a field that starts with an underscore.
     /// </summary>
-    [CodeAnalysisViolationExpected("SX1309S", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SX1309S", "Warning", disabledReason: "SX1309S is disabled.")]
     public class SX1309S_StaticFieldNamesMustBeginWithUnderscore
     {
         private static int field = 0;

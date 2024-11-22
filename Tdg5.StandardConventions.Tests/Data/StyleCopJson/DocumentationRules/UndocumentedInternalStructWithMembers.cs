@@ -21,12 +21,18 @@ internal struct UndocumentedInternalStructWithMembers
 
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static fields don't require documentation.")]
     private static bool undocumentedPrivateStaticField = false;
 
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private fields don't require documentation.")]
     private bool undocumentedPrivateField = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -39,7 +45,10 @@ internal struct UndocumentedInternalStructWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private constructors don't require documentation.")]
     private UndocumentedInternalStructWithMembers(bool ignored)
     {
     }
@@ -56,10 +65,16 @@ internal struct UndocumentedInternalStructWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal bool UndocumentedInternalProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static properties don't require documentation.")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private properties don't require documentation.")]
     private bool UndocumentedPrivateProperty { get; set; } = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -82,12 +97,18 @@ internal struct UndocumentedInternalStructWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static methods don't require documentation.")]
     private static void UndocumentedPrivateStaticMethod()
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private methods don't require documentation.")]
     private void UndocumentedPrivateMethod()
     {
     }

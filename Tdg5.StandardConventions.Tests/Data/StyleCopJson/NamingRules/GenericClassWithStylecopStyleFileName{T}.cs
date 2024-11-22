@@ -7,7 +7,10 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.NamingRules;
 /// violation warning.
 /// </summary>
 /// <typeparam name="T">The type of the generic class.</typeparam>
-[FileAnalysisViolationExpected("SA1649", "Warning", enabled: false)]
+[FileAnalysisViolationExpected(
+    "SA1649",
+    "Warning",
+    disabledReason: "Metadata style file names are not enforced.")]
 public class GenericClassWithStylecopStyleFileName<T>
 {
 }

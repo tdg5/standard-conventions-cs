@@ -27,14 +27,14 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     /// <param name="contains">Optional text that the violation is expected to
     /// contain.</param>
     /// <param name="level">The level of the analysis code that is expected.</param>
-    /// <param name="enabled">Flag indicating whether or not the expectation is
-    /// enabled.</param>
+    /// <param name="disabledReason">Optional description explaining why the
+    /// expectation is disabled.</param>
     public CodeAnalysisViolationExpectedAttribute(
-        string code, string level, string? contains = null, bool enabled = true)
+        string code, string level, string? contains = null, string? disabledReason = null)
     {
         this.Code = code;
         this.Contains = contains;
-        this.Enabled = enabled;
+        this.DisabledReason = disabledReason;
         this.Level = level;
     }
 
@@ -49,9 +49,9 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     public string? Contains { get; }
 
     /// <summary>
-    /// Gets a value indicating whether or not the expectation is enabled.
+    /// Gets an optional description explaining why the expectation is disabled.
     /// </summary>
-    public bool Enabled { get; }
+    public string? DisabledReason { get; }
 
     /// <summary>
     /// Gets the expected level of the analysis code.
@@ -140,22 +140,22 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
 
         string? contains = containsArgument as string;
 
-        object? enabledArgument = null;
+        object? disabledReasonArgument = null;
         if (positionalArguments.Count > 3)
         {
-            enabledArgument = positionalArguments[2];
+            disabledReasonArgument = positionalArguments[2];
         }
-        else if (namedArguments.TryGetValue("enabled", out enabledArgument))
+        else if (namedArguments.TryGetValue("disabledReason", out disabledReasonArgument))
         {
             // Condition does the work.
         }
 
-        bool enabled = enabledArgument is not bool enabledValue || enabledValue;
+        string? disabledReason = disabledReasonArgument as string;
 
         return new CodeAnalysisViolationExpectation(
             code: code,
             contains: contains,
-            enabled: enabled,
+            disabledReason: disabledReason,
             endLineNumber: attributeWithEffectiveRange.EndLine.Value,
             filePath: attributeWithEffectiveRange.FilePath,
             level: level,

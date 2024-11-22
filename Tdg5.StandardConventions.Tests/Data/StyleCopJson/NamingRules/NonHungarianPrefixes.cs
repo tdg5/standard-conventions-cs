@@ -12,7 +12,7 @@ public class NonHungarianPrefixes
     /// </summary>
     /// <returns>The sum of all variables.</returns>
     /// true
-    [CodeAnalysisViolationExpected("SA1305", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected("SA1305", "Warning", disabledReason: "SA1305 is disabled.")]
     public int MethodWithNonHungarianPrefixes()
     {
         var asVariable = 0;

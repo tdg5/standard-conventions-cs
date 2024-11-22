@@ -315,7 +315,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// A method annotated with two attributes placed on the same line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1134", "Warning")]
-    [Obsolete("Not obsolete.")][CodeAnalysisViolationExpected("Ignore", "Warning", enabled: false)]
+    [Obsolete("Not obsolete.")][CodeAnalysisViolationExpected("Ignore", "Warning", disabledReason: "Not a real attribute.")]
     public void SA1134_AttributesMustNotShareLine()
     {
     }

@@ -28,11 +28,17 @@ internal class UndocumentedInternalClassWithMembers
     internal bool UndocumentedInternalField = false;
 
     [CodeAnalysisViolationExpected("CS0414", "Warning")]
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static fields don't require documentation.")]
     private static bool undocumentedPrivateStaticField = false;
 
     [CodeAnalysisViolationExpected("CS0414", "Warning")]
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private fields don't require documentation.")]
     private bool undocumentedPrivateField = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -45,7 +51,10 @@ internal class UndocumentedInternalClassWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private constructors don't require documentation.")]
     private UndocumentedInternalClassWithMembers(int ignored)
     {
     }
@@ -62,10 +71,16 @@ internal class UndocumentedInternalClassWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal bool UndocumentedInternalProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static properties don't require documentation.")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private properties don't require documentation.")]
     private bool UndocumentedPrivateProperty { get; set; } = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -88,12 +103,18 @@ internal class UndocumentedInternalClassWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private static methods don't require documentation.")]
     private static void UndocumentedPrivateStaticMethod()
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning", enabled: false)]
+    [CodeAnalysisViolationExpected(
+        "SA1600",
+        "Warning",
+        disabledReason: "Private methods don't require documentation.")]
     private void UndocumentedPrivateMethod()
     {
     }
