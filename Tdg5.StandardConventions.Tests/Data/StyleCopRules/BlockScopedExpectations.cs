@@ -297,8 +297,12 @@ public class BlockScopedExpectations
     public void SA1130_UseLambdaSyntax()
     {
         int x = 0;
-        Action a = delegate { x++; };
+        Action a = delegate { ++x; };
         a();
+        if (x == 0)
+        {
+            return;
+        }
     }
 
     /// <summary>
@@ -332,6 +336,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that uses a cast instead of literal syntax.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0004.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0004", "Warning")]
     [CodeAnalysisViolationExpected("SA1139", "Warning")]
     public void SA1139_UseLiteralsSuffixNotationInsteadOfCasting()
     {
@@ -354,6 +362,10 @@ public class BlockScopedExpectations
     /// A method that refers to a tuple element by its metadata name instead of
     /// its element name.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0033.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0033", "Warning")]
     [CodeAnalysisViolationExpected("SA1142", "Warning")]
     public void SA1142_ReferToTupleElementsByName()
     {
@@ -425,6 +437,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a <see cref="Debug.Fail(string)"/> without a message.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0004.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0004", "Warning")]
     [CodeAnalysisViolationExpected("SA1406", "Warning")]
     public void SA1406_DebugFailMustProvideMessageText()
     {
@@ -462,16 +478,21 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1413", "Warning")]
     public void SA1413_UseTrailingCommasInMultiLineInitializers()
     {
-        int[] array = new int[]
+        static int[] Method() => new int[]
         {
             1,
             2
         };
+        Method();
     }
 
     /// <summary>
     /// A method that contains a statement that should use braces, but does not.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0011.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1503", "Warning")]
     public void SA1503_BracesMustNotBeOmitted()
     {
@@ -585,6 +606,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a multi-line child statement without braces.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0011.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1519", "Warning")]
     public void SA1519_BracesMustNotBeOmittedFromMultiLineChildStatement()
     {
@@ -598,6 +623,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that makes inconsistent use of braces.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0011.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1520", "Warning")]
     public void SA1520_UseBracesConsistently()
     {
@@ -635,6 +664,11 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that is missing an access modifier.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0040 and IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
+    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
     [CodeAnalysisViolationExpected("SA1400", "Warning")]
     void SA1400_AccessModifierMustBeDeclared()
     {
@@ -704,7 +738,13 @@ public class BlockScopedExpectations
 
         private SA1128_ConstructorInitializerMustBeOnOwnLine(int a)
         {
+            Value = a;
         }
+
+        /// <summary>
+        /// Gets the value of the field.
+        /// </summary>
+        public int Value { get; }
     }
 
     /// <summary>
@@ -713,7 +753,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1132", "Warning")]
     public class SA1132_DoNotCombineFields
     {
-        private int field1, field2;
+        private readonly int field1, field2;
 
         private SA1132_DoNotCombineFields()
         {
@@ -721,7 +761,11 @@ public class BlockScopedExpectations
             field2 = 2;
         }
 
-        private int Method() => field1 + field2;
+        /// <summary>
+        /// A method that uses the two fields.
+        /// </summary>
+        /// <returns>The sum of the two fields.</returns>
+        public int Method() => field1 + field2;
     }
 
     /// <summary>
@@ -753,10 +797,18 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a declaration with incorrectly ordered keywords.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0036 and IDE0051.
+    /// </remarks>
     public class SA1206_DeclarationKeywordsMustFollowOrder
     {
+        /// <summary>
+        /// A method that is decalred with incorrectly ordered keywords.
+        /// </summary>
+        /// <returns>Always zero.</returns>
         [CodeAnalysisViolationExpected("SA1206", "Warning")]
-        static private int Method() => 0;
+        [CodeAnalysisViolationExpected("IDE0036", "Warning")]
+        static public int Method() => 0;
     }
 
     /// <summary>
@@ -769,7 +821,11 @@ public class BlockScopedExpectations
         /// protected keyword.
         /// </summary>
         /// <returns>Always zero.</returns>
+        /// <remarks>
+        /// Also triggers IDE0036.
+        /// </remarks>
         [CodeAnalysisViolationExpected("SA1207", "Warning")]
+        [CodeAnalysisViolationExpected("IDE0036", "Warning")]
         internal protected int Method() => 0;
     }
 
@@ -778,8 +834,11 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1212_PropertyAccessorsMustFollowOrder
     {
+        /// <summary>
+        /// Gets or sets the property.
+        /// </summary>
         [CodeAnalysisViolationExpected("SA1212", "Warning")]
-        private int Property
+        public int Property
         {
             set;
             get;
@@ -791,8 +850,11 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1213_EventAccessorsMustFollowOrder_Wrapper
     {
+        /// <summary>
+        /// An event with accessors out of order.
+        /// </summary>
         [CodeAnalysisViolationExpected("SA1213", "Warning")]
-        private event EventHandler SA1213_EventAccessorsMustFollowOrder
+        public event EventHandler SA1213_EventAccessorsMustFollowOrder
         {
             remove
             {
@@ -807,14 +869,22 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a readonly field after a non-readonly field.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0044.
+    /// </remarks>
     [CodeAnalysisViolationExpected("SA1214", "Warning")]
+    [CodeAnalysisViolationExpected("IDE0044", "Warning")]
     public class SA1214_ReadonlyElementsMustAppearBeforeNonReadonlyElements
     {
         private int field2 = 0;
 
         private readonly int field1 = 0;
 
-        private int Method() => field1 + field2;
+        /// <summary>
+        /// A method that uses the two fields.
+        /// </summary>
+        /// <returns>The sum of the two fields.</returns>
+        public int Method() => field1 + field2;
     }
 
     /// <summary>
@@ -824,7 +894,10 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1303", "Warning")]
     public class SA1303_ConstFieldNamesMustBeginWithUpperCaseLetter
     {
-        private const int constField = 0;
+        /// <summary>
+        /// A const field that doesn't begin with an uppercase letter.
+        /// </summary>
+        public const int constField = 0;
     }
 
     /// <summary>
@@ -855,9 +928,13 @@ public class BlockScopedExpectations
         /// <summary>
         /// A field that appears to use Hungarian notation.
         /// </summary>
-        private int stVariable = 0;
+        private readonly int stVariable = 0;
 
-        private int Method() => stVariable;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => stVariable;
     }
 
     /// <summary>
@@ -869,9 +946,13 @@ public class BlockScopedExpectations
         /// <summary>
         /// A field that does not start with a lower case letter.
         /// </summary>
-        private int Variable = 0;
+        private readonly int Variable = 0;
 
-        private int Method() => Variable;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => Variable;
     }
 
     /// <summary>
@@ -897,9 +978,13 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1308", "Warning")]
     public class SA1308_VariableNamesMustNotBePrefixed
     {
-        private int m_int = 0;
+        private readonly int m_int = 0;
 
-        private int Method() => m_int;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => m_int;
     }
 
     /// <summary>
@@ -909,9 +994,13 @@ public class BlockScopedExpectations
         "SA1309", "Warning", disabledReason: "SA1309 is disabled.")]
     public class SA1309_FieldNamesMustNotBeginWithUnderscore
     {
-        private int _int = 0;
+        private readonly int _int = 0;
 
-        private int Method() => _int;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => _int;
     }
 
     /// <summary>
@@ -920,9 +1009,13 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1310", "Warning")]
     public class SA1310_FieldNamesMustNotContainUnderscore
     {
-        private int my_int = 0;
+        private readonly int my_int = 0;
 
-        private int Method() => my_int;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => my_int;
     }
 
     /// <summary>
@@ -934,7 +1027,11 @@ public class BlockScopedExpectations
     {
         private static readonly int field = 0;
 
-        private int Method() => field;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => field;
     }
 
     /// <summary>
@@ -947,8 +1044,6 @@ public class BlockScopedExpectations
         /// A field that is not private.
         /// </summary>
         public int Field = 0;
-
-        private int Method() => Field;
     }
 
     /// <summary>
@@ -967,7 +1062,11 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1414", "Warning")]
     public class SA1414_UseTrailingCommasInMultiLineInitializers()
     {
-        private (int, int) Method() => (1, 2);
+        /// <summary>
+        /// A method that returns a tuple without element names.
+        /// </summary>
+        /// <returns>A tuple with 1 and 2.</returns>
+        public (int, int) Method() => (1, 2);
     }
 
     /// <summary>
@@ -977,7 +1076,10 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1504", "Warning")]
     public class SA1504_AllAccessorsMustBeSingleLineOrMultiLine
     {
-        private bool Enabled
+        /// <summary>
+        /// Gets or sets a value indicating whether the property is enabled.
+        /// </summary>
+        public bool Enabled
         {
             get { return true; }
 
@@ -995,7 +1097,10 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1505", "Warning")]
     public class SA1505_OpeningBracesMustNotBeFollowedByBlankLine
     {
-        private bool Enabled
+        /// <summary>
+        /// Gets a value indicating whether the property is enabled.
+        /// </summary>
+        public bool Enabled
         {
             get
             {
@@ -1024,6 +1129,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a two methods that aren't separated by a blank line.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected("SA1516", "Warning")]
     public class SA1516_ElementsMustBeSeparatedByBlankLine()
     {
@@ -1038,11 +1147,15 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1514", "Warning")]
     public class SA1514_ElementDocumentationHeaderMustBePrecededByBlankLine()
     {
-        private int Method() => 0;
+        /// <summary>
+        /// Dummy method.
+        /// </summary>
+        /// <returns>Always zero.</returns>
+        public int Method() => 0;
         /// <summary>
         /// There should be a blank line before this documentation.
         /// </summary>
-        private void OtherMethod()
+        public void OtherMethod()
         {
         }
     }
@@ -1366,13 +1479,20 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a field that starts with an underscore.
     /// </summary>
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
     [CodeAnalysisViolationExpected(
         "SX1309", "Warning", disabledReason: "SX1309 is disabled.")]
     public class SX1309_FieldNamesMustBeginWithUnderscore
     {
-        private int field = 0;
+        private readonly int field = 0;
 
-        private int Method() => field;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => field;
     }
 
     /// <summary>
@@ -1382,14 +1502,22 @@ public class BlockScopedExpectations
         "SX1309S", "Warning", disabledReason: "SX1309S is disabled.")]
     public class SX1309S_StaticFieldNamesMustBeginWithUnderscore
     {
-        private static int field = 0;
+        private static readonly int Field = 0;
 
-        private int Method() => field;
+        /// <summary>
+        /// A method that uses the field.
+        /// </summary>
+        /// <returns>The value of the field.</returns>
+        public int Method() => Field;
     }
 
     /// <summary>
     /// A partial class that doesn't declare access.
     /// </summary>
+    /// <remarks>
+    /// Also triggers IDE0040.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
     [CodeAnalysisViolationExpected("SA1205", "Warning")]
     partial class SA1205_PartialElementsMustDeclareAccess
     {

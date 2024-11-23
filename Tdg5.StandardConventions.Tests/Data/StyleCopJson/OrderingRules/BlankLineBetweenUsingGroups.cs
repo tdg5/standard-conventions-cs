@@ -8,6 +8,10 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 /// The empty line before the "using TypeAlias = ..." statement above should cause an
 /// SA1516 violation because "blankLinesBetweenUsingGroups" is set to "omit".
 /// </summary>
+/// <remarks>
+/// Also triggers a violation for IDE0005.
+/// </remarks>
+[FileAnalysisViolationExpected("IDE0005", "Warning")]
 [FileAnalysisViolationExpected(
     "SA1516",
     "Warning",

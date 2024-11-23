@@ -7,6 +7,10 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 /// </summary>
 public class ClassWithElementsNotOrderedByAccessibility
 {
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     private void PrivateMethod()
     {
     }

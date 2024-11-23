@@ -19,32 +19,46 @@ internal struct UndocumentedInternalStructWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal bool UndocumentedInternalField = false;
 
+    /// <remarks>
+    /// Also triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static fields don't require documentation.")]
-    private static bool undocumentedPrivateStaticField = false;
+    private static readonly bool UndocumentedPrivateStaticField = false;
 
+    /// <remarks>
+    /// Also triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private fields don't require documentation.")]
-    private bool undocumentedPrivateField = false;
+    private readonly bool undocumentedPrivateField = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     public UndocumentedInternalStructWithMembers()
     {
     }
 
+    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal UndocumentedInternalStructWithMembers(long ignored)
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
+    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -65,12 +79,20 @@ internal struct UndocumentedInternalStructWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal bool UndocumentedInternalProperty { get; set; } = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static properties don't require documentation.")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -97,6 +119,10 @@ internal struct UndocumentedInternalStructWithMembers
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -105,6 +131,10 @@ internal struct UndocumentedInternalStructWithMembers
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",

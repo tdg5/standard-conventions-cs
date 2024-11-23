@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Tdg5.StandardConventions.TestAnnotations;
 
 namespace Tdg5.StandardConventions.Tests.TestHelpers;

@@ -19,6 +19,10 @@ public class ClassWithElementsNotOrderedByKind
     {
     }
 
+    /// <remarks>
+    /// Also triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1201",
         "Warning",
@@ -27,6 +31,10 @@ public class ClassWithElementsNotOrderedByKind
     {
     }
 
+    /// <remarks>
+    /// Also triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1201",
         "Warning",
@@ -66,5 +74,5 @@ public class ClassWithElementsNotOrderedByKind
         "SA1201",
         "Warning",
         contains: "A field should not follow a constructor")]
-    private int field;
+    private readonly int field;
 }

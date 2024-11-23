@@ -18,6 +18,10 @@ public class DocumentationTextMustEndInAPeriod
         }
     }
 
+    /// <remarks>
+    /// Also triggers IDE0060.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected("SA1629", "Warning")]
     private class ParamWithoutPeriod
     {

@@ -8,11 +8,14 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.LayoutRules;
 /// </summary>
 public class ConsecutiveUsings
 {
+    /// <summary>
+    /// A method with consecutive using statements.
+    /// </summary>
     [CodeAnalysisViolationExpected(
         "SA1519",
         "Warning",
         disabledReason: "Multiple using statements don't require brackets.")]
-    private void Method()
+    public void Method()
     {
         using (StreamReader textReader = File.OpenText("does-not-exist.txt"))
         using (StreamReader csvReader = File.OpenText("does-not-exist.csv"))

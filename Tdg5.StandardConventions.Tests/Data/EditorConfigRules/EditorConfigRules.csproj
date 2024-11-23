@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>Tdg5.StandardConventions.Tests.Data.EditorConfigRules</RootNamespace>
+    </PropertyGroup>
+</Project>

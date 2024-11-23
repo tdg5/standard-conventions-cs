@@ -37,27 +37,36 @@ public class UndocumentedPublicClassWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     protected bool undocumentedProtectedField = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static fields don't require documentation.")]
-    private static bool undocumentedPrivateStaticField = false;
+    private static readonly bool UndocumentedPrivateStaticField = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "CS0414", "Warning", contains: "its value is never used")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private fields don't require documentation.")]
-    private bool undocumentedPrivateField = false;
+    private readonly bool undocumentedPrivateField = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     public UndocumentedPublicClassWithMembers()
     {
     }
 
+    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal UndocumentedPublicClassWithMembers(int ignored)
     {
@@ -68,6 +77,11 @@ public class UndocumentedPublicClassWithMembers
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051 and IDE0060.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
+    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -88,12 +102,20 @@ public class UndocumentedPublicClassWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     protected bool UndocumentedProtectedProperty { get; set; } = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static property don't require documentation.")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -130,6 +152,10 @@ public class UndocumentedPublicClassWithMembers
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -138,6 +164,10 @@ public class UndocumentedPublicClassWithMembers
     {
     }
 
+    /// <remarks>
+    /// Triggers IDE0051.
+    /// </remarks>
+    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",

@@ -87,6 +87,11 @@
           "System.Reflection.Metadata": "8.0.0"
         }
       },
+      "Microsoft.CodeAnalysis.CSharp.CodeStyle": {
+        "type": "Transitive",
+        "resolved": "4.10.0",
+        "contentHash": "FT2cd56bvaxX9umrBq04zImhlVemFBirkMj5w6lkmpGvjNBHItgfwF9sATQqCIZjtpSG3bGAsbAtm1WDTHJKVA=="
+      },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
         "resolved": "17.11.1",
@@ -208,6 +213,7 @@
       "tdg5.standardconventions": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.CodeStyle": "[4.10.0, )",
           "StyleCop.Analyzers.Unstable": "[1.2.0.*, )"
         }
       },

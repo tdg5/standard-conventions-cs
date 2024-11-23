@@ -7,6 +7,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 /// </summary>
 public class ClassWithElementsNotOrderedByReadability
 {
+    [CodeAnalysisViolationExpected("IDE0044", "Warning")]
     private string writableProperty = "writable";
 
     [CodeAnalysisViolationExpected(

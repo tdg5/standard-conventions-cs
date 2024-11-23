@@ -1,2 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>Tdg5.StandardConventions.Tests.Data.StyleCopJson</RootNamespace>
+    </PropertyGroup>
 </Project>

@@ -7,7 +7,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 /// </summary>
 public class ClassWithElementsNotOrderedByConstance
 {
-    private string nonConstantField = "public";
+    private readonly string nonConstantField = "public";
 
     [CodeAnalysisViolationExpected(
         "SA1203",
