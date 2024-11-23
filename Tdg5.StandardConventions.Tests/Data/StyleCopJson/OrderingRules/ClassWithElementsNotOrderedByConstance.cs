@@ -17,7 +17,7 @@ public class ClassWithElementsNotOrderedByConstance
 
     private ClassWithElementsNotOrderedByConstance()
     {
-        this.nonConstantField =
-            ConstantField == "public const" ? this.nonConstantField : "other";
+        nonConstantField =
+            ConstantField == "public const" ? nonConstantField : "other";
     }
 }

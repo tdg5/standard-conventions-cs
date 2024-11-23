@@ -37,14 +37,14 @@ internal class CodeAnalysisViolationExpectation
         int startLineNumber,
         int endLineNumber)
     {
-        this.Code = code;
-        this.Contains = contains;
-        this.DisabledReason = disabledReason;
-        this.EndLineNumber = endLineNumber;
-        this.FilePath = filePath;
-        this.Level = level;
-        this.ProjectPath = projectPath;
-        this.StartLineNumber = startLineNumber;
+        Code = code;
+        Contains = contains;
+        DisabledReason = disabledReason;
+        EndLineNumber = endLineNumber;
+        FilePath = filePath;
+        Level = level;
+        ProjectPath = projectPath;
+        StartLineNumber = startLineNumber;
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ internal class CodeAnalysisViolationExpectation
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
     /// </summary>
-    public bool Enabled => this.DisabledReason is null;
+    public bool Enabled => DisabledReason is null;
 
     /// <summary>
     /// Gets the ending line number where the violation is expected to occur.
@@ -94,27 +94,27 @@ internal class CodeAnalysisViolationExpectation
 
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
-        this.Enabled
-            && violation.Code == this.Code
-            && violation.ProjectPath == this.ProjectPath
-            && violation.FilePath == this.FilePath
-            && violation.LineNumber >= this.StartLineNumber
-            && violation.LineNumber <= this.EndLineNumber
+        Enabled
+            && violation.Code == Code
+            && violation.ProjectPath == ProjectPath
+            && violation.FilePath == FilePath
+            && violation.LineNumber >= StartLineNumber
+            && violation.LineNumber <= EndLineNumber
             && string.Equals(
                 violation.Level,
-                this.Level,
+                Level,
                 StringComparison.InvariantCultureIgnoreCase)
-            && (this.Contains is null ||
-                (violation.Message ?? string.Empty).Contains(this.Contains));
+            && (Contains is null ||
+                (violation.Message ?? string.Empty).Contains(Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
     {
-        return $"{this.Level}: {this.Code} -"
-            + $" {this.FilePath}:{this.StartLineNumber}-{this.EndLineNumber}"
-            + (this.Enabled ? string.Empty : $" (disabled: {this.DisabledReason})")
-            + (this.Contains is not null
-                ? $"{Environment.NewLine}Message containing: \"{this.Contains}\""
+        return $"{Level}: {Code} -"
+            + $" {FilePath}:{StartLineNumber}-{EndLineNumber}"
+            + (Enabled ? string.Empty : $" (disabled: {DisabledReason})")
+            + (Contains is not null
+                ? $"{Environment.NewLine}Message containing: \"{Contains}\""
                 : string.Empty);
     }
 }

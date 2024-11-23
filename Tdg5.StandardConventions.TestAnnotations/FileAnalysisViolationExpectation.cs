@@ -31,12 +31,12 @@ internal class FileAnalysisViolationExpectation
         string projectPath,
         string filePath)
     {
-        this.Code = code;
-        this.Contains = contains;
-        this.DisabledReason = disabledReason;
-        this.FilePath = filePath;
-        this.Level = level;
-        this.ProjectPath = projectPath;
+        Code = code;
+        Contains = contains;
+        DisabledReason = disabledReason;
+        FilePath = filePath;
+        Level = level;
+        ProjectPath = projectPath;
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ internal class FileAnalysisViolationExpectation
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
     /// </summary>
-    public bool Enabled => this.DisabledReason is null;
+    public bool Enabled => DisabledReason is null;
 
     /// <summary>
     /// Gets the file path where the violation is expected to occur.
@@ -76,24 +76,24 @@ internal class FileAnalysisViolationExpectation
 
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
-        this.Enabled
-            && violation.Code == this.Code
-            && violation.ProjectPath == this.ProjectPath
-            && violation.FilePath == this.FilePath
+        Enabled
+            && violation.Code == Code
+            && violation.ProjectPath == ProjectPath
+            && violation.FilePath == FilePath
             && string.Equals(
                 violation.Level,
-                this.Level,
+                Level,
                 StringComparison.InvariantCultureIgnoreCase)
-            && (this.Contains is null ||
-                (violation.Message ?? string.Empty).Contains(this.Contains));
+            && (Contains is null ||
+                (violation.Message ?? string.Empty).Contains(Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
     {
-        return $"{this.Level}: {this.Code} - {this.FilePath}"
-            + (this.Enabled ? string.Empty : $" (disabled: {this.DisabledReason})")
-            + (this.Contains is not null
-                ? $"{Environment.NewLine}Message containing: \"{this.Contains}\""
+        return $"{Level}: {Code} - {FilePath}"
+            + (Enabled ? string.Empty : $" (disabled: {DisabledReason})")
+            + (Contains is not null
+                ? $"{Environment.NewLine}Message containing: \"{Contains}\""
                 : string.Empty);
     }
 }

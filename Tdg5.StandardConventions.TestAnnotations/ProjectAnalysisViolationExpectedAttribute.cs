@@ -23,10 +23,10 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
         string? contains = null,
         string? disabledReason = null)
     {
-        this.Code = code;
-        this.Contains = contains;
-        this.DisabledReason = disabledReason;
-        this.Level = level;
+        Code = code;
+        Contains = contains;
+        DisabledReason = disabledReason;
+        Level = level;
     }
 
     /// <summary>

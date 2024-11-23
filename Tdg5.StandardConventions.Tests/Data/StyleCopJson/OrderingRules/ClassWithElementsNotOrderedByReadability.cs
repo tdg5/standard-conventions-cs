@@ -17,7 +17,7 @@ public class ClassWithElementsNotOrderedByReadability
 
     private ClassWithElementsNotOrderedByReadability()
     {
-        this.writableProperty =
-            this.readOnlyProperty == "read-only" ? this.writableProperty : "other";
+        writableProperty =
+            readOnlyProperty == "read-only" ? writableProperty : "other";
     }
 }

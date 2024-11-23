@@ -188,7 +188,11 @@ public class ExpectationsRequiringWeirdFormatting
     /// <summary>
     /// Method with a space following the member access symbol (.).
     /// </summary>
+    /// <remarks>
+    /// Also triggers SX1101.
+    /// </remarks>
     [CodeAnalysisViolationExpected("SA1019", "Warning")]
+    [CodeAnalysisViolationExpected("SX1101", "Warning")]
     public void SA1019_MemberAccessSymbolsMustBeSpacedCorrectly()
     {
         this. SA1013_ClosingBracesMustBeSpacedCorrectly();

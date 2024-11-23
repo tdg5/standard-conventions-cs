@@ -26,11 +26,11 @@ internal class AttributeWithEffectiveRange
         int? startLine,
         int? endLine)
     {
-        this.Attribute = attribute;
-        this.EndLine = endLine;
-        this.FilePath = filePath;
-        this.ProjectPath = projectPath;
-        this.StartLine = startLine;
+        Attribute = attribute;
+        EndLine = endLine;
+        FilePath = filePath;
+        ProjectPath = projectPath;
+        StartLine = startLine;
     }
 
     /// <summary>

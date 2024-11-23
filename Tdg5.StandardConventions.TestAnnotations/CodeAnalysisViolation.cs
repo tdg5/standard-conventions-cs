@@ -44,12 +44,12 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
                 "The line number must be a non-negative integer.");
         }
 
-        this.Code = code;
-        this.FilePath = filePath;
-        this.Level = level;
-        this.LineNumber = lineNumber;
-        this.Message = message;
-        this.ProjectPath = projectPath;
+        Code = code;
+        FilePath = filePath;
+        Level = level;
+        LineNumber = lineNumber;
+        Message = message;
+        ProjectPath = projectPath;
     }
 
     /// <inheritdoc/>

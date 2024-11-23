@@ -41,7 +41,7 @@ public class TestProjectAnalysisVerifier
     /// </remarks>
     public void VerifyProject(string projectPath)
     {
-        var buildResult = this.testProjectBuilder.BuildProject(projectPath);
+        var buildResult = testProjectBuilder.BuildProject(projectPath);
         var warningsAndErrors = buildResult.WarningsAndErrors;
         var filesRequiringVerification =
             GetPathsOfFilesRequiringVerification(buildResult);

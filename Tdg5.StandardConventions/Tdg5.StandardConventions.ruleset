@@ -112,7 +112,7 @@
     <Rule Id="SA1100" Action="Warning" />
 
     <!-- SA1101: Prefix local calls with this. -->
-    <Rule Id="SA1101" Action="Warning" />
+    <Rule Id="SA1101" Action="None" />
 
     <!-- SA1102: Query clause should follow previous clause. -->
     <Rule Id="SA1102" Action="Warning" />
@@ -229,7 +229,7 @@
     <Rule Id="SA1142" Action="Warning" />
 
     <!-- SX1101: Do not prefix local calls with 'this.'. -->
-    <Rule Id="SX1101" Action="None" />
+    <Rule Id="SX1101" Action="Warning" />
 
   </Rules>
 

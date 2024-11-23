@@ -43,16 +43,16 @@ internal class MsBuildTestOutputLogger : ILogger
     /// <summary>
     /// Gets an error message composed from any accumulated errors.
     /// </summary>
-    public string ErrorMessage => string.Join(Environment.NewLine, this.errors);
+    public string ErrorMessage => string.Join(Environment.NewLine, errors);
 
     /// <inheritdoc/>
     public void Initialize(IEventSource eventSource)
     {
-        eventSource.AnyEventRaised += this.OnAnyEventRaised;
-        eventSource.BuildStarted += this.OnBuildStarted;
-        eventSource.ErrorRaised += this.OnErrorRaised;
-        eventSource.MessageRaised += this.OnMessageRaised;
-        eventSource.ProjectStarted += this.OnProjectStarted;
+        eventSource.AnyEventRaised += OnAnyEventRaised;
+        eventSource.BuildStarted += OnBuildStarted;
+        eventSource.ErrorRaised += OnErrorRaised;
+        eventSource.MessageRaised += OnMessageRaised;
+        eventSource.ProjectStarted += OnProjectStarted;
     }
 
     /// <inheritdoc/>
@@ -62,23 +62,23 @@ internal class MsBuildTestOutputLogger : ILogger
 
     private void OnAnyEventRaised(object sender, BuildEventArgs eventArgs)
     {
-        if (this.verbose)
+        if (verbose)
         {
-            this.testOutputHelper.WriteLine(eventArgs.Message);
+            testOutputHelper.WriteLine(eventArgs.Message);
         }
     }
 
     private void OnBuildStarted(object sender, BuildStartedEventArgs eventArgs)
     {
-        if (!this.dumpEnv || eventArgs.BuildEnvironment is null)
+        if (!dumpEnv || eventArgs.BuildEnvironment is null)
         {
             return;
         }
 
-        this.testOutputHelper.WriteLine("Environment:");
+        testOutputHelper.WriteLine("Environment:");
         foreach (var keyValuePair in eventArgs.BuildEnvironment)
         {
-            this.testOutputHelper.WriteLine($"{keyValuePair.Key}: {keyValuePair.Value}");
+            testOutputHelper.WriteLine($"{keyValuePair.Key}: {keyValuePair.Value}");
         }
     }
 
@@ -90,29 +90,29 @@ internal class MsBuildTestOutputLogger : ILogger
             eventArgs.File,
             eventArgs.LineNumber,
             eventArgs.ColumnNumber);
-        this.testOutputHelper.WriteLine(message);
-        this.errors.Add(message);
+        testOutputHelper.WriteLine(message);
+        errors.Add(message);
     }
 
     private void OnMessageRaised(object sender, BuildMessageEventArgs eventArgs)
     {
         if (eventArgs?.Message?.StartsWith("DEBUG:") ?? false)
         {
-            this.testOutputHelper.WriteLine(eventArgs.Message);
+            testOutputHelper.WriteLine(eventArgs.Message);
         }
     }
 
     private void OnProjectStarted(object sender, ProjectStartedEventArgs eventArgs)
     {
-        if (!this.dumpEnv || eventArgs.Properties is null)
+        if (!dumpEnv || eventArgs.Properties is null)
         {
             return;
         }
 
-        this.testOutputHelper.WriteLine("Initial Properties:");
+        testOutputHelper.WriteLine("Initial Properties:");
         foreach (DictionaryEntry keyValuePair in eventArgs.Properties)
         {
-            this.testOutputHelper
+            testOutputHelper
                 .WriteLine("{0}: {1}", keyValuePair.Key, keyValuePair.Value);
         }
     }

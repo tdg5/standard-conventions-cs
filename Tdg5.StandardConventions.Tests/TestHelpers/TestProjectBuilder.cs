@@ -39,7 +39,7 @@ public class TestProjectBuilder
     {
         this.globalProperties = globalProperties ?? DefaultGlobalProperties;
         this.testOutputHelper = testOutputHelper;
-        this.testOutputLogger =
+        testOutputLogger =
             new MsBuildTestOutputLogger(testOutputHelper, verbose: false);
     }
 
@@ -52,13 +52,13 @@ public class TestProjectBuilder
     public TestProjectBuildResult BuildProject(string projectPath)
     {
         MsBuildWarningAndErrorLogger warningAndErrorLogger = new();
-        List<ILogger> allLoggers = [warningAndErrorLogger, this.testOutputLogger];
-        var projectCollection = new ProjectCollection(this.globalProperties);
+        List<ILogger> allLoggers = [warningAndErrorLogger, testOutputLogger];
+        var projectCollection = new ProjectCollection(globalProperties);
         var project = projectCollection.LoadProject(projectPath);
         var restored = project.Build("restore", allLoggers);
         if (!restored)
         {
-            this.LogEnvironmentAndProperties(project);
+            LogEnvironmentAndProperties(project);
         }
 
         // Force the project to be reevaluated so it will notice props from
@@ -71,7 +71,7 @@ public class TestProjectBuilder
 
         Assert.True(
             result,
-            $"Build failed: {this.testOutputLogger.ErrorMessage}");
+            $"Build failed: {testOutputLogger.ErrorMessage}");
 
         return new(
             compileFilePaths: GetCompileFilesFullPaths(project),
@@ -113,12 +113,12 @@ public class TestProjectBuilder
 
         foreach (var keyValuePair in environmentVariables)
         {
-            this.testOutputHelper.WriteLine($"{keyValuePair.Key}:{keyValuePair.Value}");
+            testOutputHelper.WriteLine($"{keyValuePair.Key}:{keyValuePair.Value}");
         }
 
         foreach (var property in project.AllEvaluatedProperties.OrderBy(_ => _.Name))
         {
-            this.testOutputHelper.WriteLine(
+            testOutputHelper.WriteLine(
                 $"{property.Name}:{property.EvaluatedValue}({property.UnevaluatedValue})");
         }
     }

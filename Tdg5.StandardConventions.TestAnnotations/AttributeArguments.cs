@@ -18,9 +18,9 @@ internal class AttributeArguments
         List<object> positionalArguments,
         Dictionary<string, object> namedArguments)
     {
-        this.AttributeWithEffectiveRange = attributeWithEffectiveRange;
-        this.NamedArguments = namedArguments;
-        this.PositionalArguments = positionalArguments;
+        AttributeWithEffectiveRange = attributeWithEffectiveRange;
+        NamedArguments = namedArguments;
+        PositionalArguments = positionalArguments;
     }
 
     /// <summary>

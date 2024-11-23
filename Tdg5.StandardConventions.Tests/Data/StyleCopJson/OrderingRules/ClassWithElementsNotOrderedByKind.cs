@@ -59,7 +59,7 @@ public class ClassWithElementsNotOrderedByKind
     private ClassWithElementsNotOrderedByKind()
     {
         // Prevent CS0169 warning.
-        this.field = this.field == 1 ? 0 : 1;
+        field = field == 1 ? 0 : 1;
     }
 
     [CodeAnalysisViolationExpected(

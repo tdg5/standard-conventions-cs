@@ -18,7 +18,7 @@ public abstract class BaseTestProjectAnalysisVerifierTest
     /// <param name="testOutputHelper">The test output helper.</param>
     public BaseTestProjectAnalysisVerifierTest(ITestOutputHelper testOutputHelper)
     {
-        this.analysisVerifier = new TestProjectAnalysisVerifier(
+        analysisVerifier = new TestProjectAnalysisVerifier(
             testProjectBuilder: new TestProjectBuilder(testOutputHelper));
     }
 
@@ -33,6 +33,6 @@ public abstract class BaseTestProjectAnalysisVerifierTest
     [Fact]
     public void ExpectedCodeAnalysisViolationsAreEmittedDuringBuild()
     {
-        this.analysisVerifier.VerifyProject(this.ProjectPath);
+        analysisVerifier.VerifyProject(ProjectPath);
     }
 }

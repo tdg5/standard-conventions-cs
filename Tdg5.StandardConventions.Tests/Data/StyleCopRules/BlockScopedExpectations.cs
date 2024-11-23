@@ -676,7 +676,7 @@ public class BlockScopedExpectations
         /// <summary>
         /// A method that calls an instance member without using this.
         /// </summary>
-        [CodeAnalysisViolationExpected("SA1101", "Warning")]
+        [CodeAnalysisViolationExpected("SA1101", "Warning", disabledReason: "SA1101 is disabled.")]
         public void SA1101_PrefixLocalCallsWithThis() => Method();
 
         private int Method() => 0;
@@ -717,11 +717,11 @@ public class BlockScopedExpectations
 
         private SA1132_DoNotCombineFields()
         {
-            this.field1 = 1;
-            this.field2 = 2;
+            field1 = 1;
+            field2 = 2;
         }
 
-        private int Method() => this.field1 + this.field2;
+        private int Method() => field1 + field2;
     }
 
     /// <summary>
@@ -737,15 +737,14 @@ public class BlockScopedExpectations
     }
 
     /// <summary>
-    /// A class containing a method that calls an instance member without this.
+    /// A class containing a method that calls an instance member using this.
     /// </summary>
     public class SX1101_DoNotPrefixLocalMembersWithThis_Wrapper
     {
         /// <summary>
-        /// A method that calls an instance member without using this.
+        /// A method that calls an instance member using this.
         /// </summary>
-        [CodeAnalysisViolationExpected(
-            "SX1101", "Warning", disabledReason: "SX1101 is disabled.")]
+        [CodeAnalysisViolationExpected("SX1101", "Warning")]
         public void SX1101_DoNotPrefixLocalMembersWithThis() => this.Method();
 
         private int Method() => 0;
@@ -815,7 +814,7 @@ public class BlockScopedExpectations
 
         private readonly int field1 = 0;
 
-        private int Method() => this.field1 + this.field2;
+        private int Method() => field1 + field2;
     }
 
     /// <summary>
@@ -858,7 +857,7 @@ public class BlockScopedExpectations
         /// </summary>
         private int stVariable = 0;
 
-        private int Method() => this.stVariable;
+        private int Method() => stVariable;
     }
 
     /// <summary>
@@ -872,7 +871,7 @@ public class BlockScopedExpectations
         /// </summary>
         private int Variable = 0;
 
-        private int Method() => this.Variable;
+        private int Method() => Variable;
     }
 
     /// <summary>
@@ -900,7 +899,7 @@ public class BlockScopedExpectations
     {
         private int m_int = 0;
 
-        private int Method() => this.m_int;
+        private int Method() => m_int;
     }
 
     /// <summary>
@@ -912,7 +911,7 @@ public class BlockScopedExpectations
     {
         private int _int = 0;
 
-        private int Method() => this._int;
+        private int Method() => _int;
     }
 
     /// <summary>
@@ -923,7 +922,7 @@ public class BlockScopedExpectations
     {
         private int my_int = 0;
 
-        private int Method() => this.my_int;
+        private int Method() => my_int;
     }
 
     /// <summary>
@@ -949,7 +948,7 @@ public class BlockScopedExpectations
         /// </summary>
         public int Field = 0;
 
-        private int Method() => this.Field;
+        private int Method() => Field;
     }
 
     /// <summary>
@@ -1373,7 +1372,7 @@ public class BlockScopedExpectations
     {
         private int field = 0;
 
-        private int Method() => this.field;
+        private int Method() => field;
     }
 
     /// <summary>

@@ -36,8 +36,8 @@ internal class MsBuildWarningAndErrorLogger : ILogger, IMsBuildWarningAndErrorCo
     /// <inheritdoc/>
     public void Initialize(IEventSource eventSource)
     {
-        eventSource.WarningRaised += this.OnWarningRaised;
-        eventSource.ErrorRaised += this.OnErrorRaised;
+        eventSource.WarningRaised += OnWarningRaised;
+        eventSource.ErrorRaised += OnErrorRaised;
     }
 
     /// <inheritdoc/>
@@ -47,11 +47,11 @@ internal class MsBuildWarningAndErrorLogger : ILogger, IMsBuildWarningAndErrorCo
 
     private void OnErrorRaised(object sender, BuildErrorEventArgs eventArgs)
     {
-        this.Errors.Add(eventArgs);
+        Errors.Add(eventArgs);
     }
 
     private void OnWarningRaised(object sender, BuildWarningEventArgs eventArgs)
     {
-        this.Warnings.Add(eventArgs);
+        Warnings.Add(eventArgs);
     }
 }

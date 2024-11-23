@@ -20,9 +20,9 @@ public class TestProjectBuildResult
         string outputPath,
         IMsBuildWarningAndErrorCollection warningsAndErrors)
     {
-        this.CompileFilePaths = compileFilePaths;
-        this.OutputPath = outputPath;
-        this.WarningsAndErrors = warningsAndErrors;
+        CompileFilePaths = compileFilePaths;
+        OutputPath = outputPath;
+        WarningsAndErrors = warningsAndErrors;
     }
 
     /// <summary>
