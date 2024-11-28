@@ -10,11 +10,11 @@ namespace System.Mxyzptlk
     /// cref="System.IO"/>.
     /// </summary>
     /// <remarks>
-    /// Also triggers IDE00005 and SA1200.
+    /// Also triggers IDE00005 and IDE0065.
     /// </remarks>
     [FileAnalysisViolationExpected("IDE0005", "Warning")]
+    [FileAnalysisViolationExpected("IDE0065", "Warning")]
     [FileAnalysisViolationExpected("SA1135", "Warning")]
-    [FileAnalysisViolationExpected("SA1200", "Warning")]
     public class SA1135_UsingDirectivesMustBeQualified
     {
     }

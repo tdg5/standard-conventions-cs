@@ -40,7 +40,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1106", "Warning")]
     public void SA1106_CodeMustNotContainEmptyStatements()
     {
-        int Method() => 0;
+        static int Method() => 0;
         Method();
         ;
     }
@@ -125,7 +125,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1112", "Warning")]
     public void SA1112_ClosingParenthesisMustBeOnLineOfOpeningParenthesis()
     {
-        int Method() => 0;
+        static int Method() => 0;
         Method(
         );
     }
@@ -141,7 +141,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1113", "Warning")]
     public void SA1113_CommaMustBeOnSameLineAsPreviousParameter()
     {
-        int Method(int a, int b) => 0;
+        static int Method(int a, int b) => 0;
         Method(
             1
             , 2);
@@ -154,7 +154,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1114", "Warning")]
     public void SA1114_ParameterListMustFollowDeclaration()
     {
-        int Method(
+        static int Method(
 
             int a, int b) => 0;
         Method(1, 2);
@@ -167,7 +167,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1115", "Warning")]
     public void SA1115_ParameterMustFollowComma()
     {
-        int Method(
+        static int Method(
             int a,
 
             int b) => 0;
@@ -181,7 +181,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1116", "Warning")]
     public void SA1116_SplitParametersMustStartOnLineAfterDeclaration()
     {
-        int Method(int a,
+        static int Method(int a,
             int b) => 0;
         Method(1, 2);
     }
@@ -193,7 +193,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1117", "Warning")]
     public void SA1117_ParametersMustBeOnSameLineOrSeparateLines()
     {
-        int Method(int a, int b,
+        static int Method(int a, int b,
             int c) => 0;
         Method(1, 2, 3);
     }
@@ -205,7 +205,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1118", "Warning")]
     public void SA1118_ParameterMustNotSpanMultipleLines()
     {
-        int Method(int a, int b) => 0;
+        static int Method(int a, int b) => 0;
         Method(1, 2
             + 2);
     }
@@ -216,7 +216,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1119", "Warning")]
     public void SA1119_StatementMustNotUseUnnecessaryParenthesis()
     {
-        int Method() => 1 + (2);
+        static int Method() => 1 + (2);
         Method();
     }
 
@@ -236,7 +236,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1121", "Warning")]
     public void SA1121_UseBuiltInTypeAlias()
     {
-        System.Int32 Method() => 1;
+        static System.Int32 Method() => 1;
         Method();
     }
 
@@ -246,7 +246,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1122", "Warning")]
     public void SA1122_UseStringEmptyForEmptyStrings()
     {
-        string Method() => "";
+        static string Method() => "";
         Method();
     }
 
@@ -267,7 +267,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1125", "Warning")]
     public void SA1125_UseShorthandForNullableTypes()
     {
-        Nullable<int> Method() => 1;
+        static Nullable<int> Method() => 1;
         Method();
     }
 
@@ -286,7 +286,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1129", "Warning")]
     public void SA1129_DoNotUseDefaultValueTypeConstructor()
     {
-        ImmutableArray<int> Method() => new ImmutableArray<int>();
+        static ImmutableArray<int> Method() => new ImmutableArray<int>();
         Method();
     }
 
@@ -343,7 +343,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1139", "Warning")]
     public void SA1139_UseLiteralsSuffixNotationInsteadOfCasting()
     {
-        long Method() => (long)1;
+        static long Method() => (long)1;
         Method();
     }
 
@@ -354,7 +354,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1141", "Warning")]
     public void SA1141_UseTupleSyntax()
     {
-        (int, int) Method() => ValueTuple.Create(1, 1);
+        static (int, int) Method() => ValueTuple.Create(1, 1);
         Method();
     }
 
@@ -506,7 +506,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1507", "Warning")]
     public void SA1507_CodeMustNotContainMultipleBlankLinesInARow()
     {
-        int Method() => 0;
+        static int Method() => 0;
 
 
         Method();
@@ -518,7 +518,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1508", "Warning")]
     public void SA1508_ClosingBracesMustNotBePrecededByBlankLine()
     {
-        int Method() => 0;
+        static int Method() => 0;
         Method();
 
     }
@@ -530,7 +530,7 @@ public class BlockScopedExpectations
     public void SA1509_OpeningBracesMustNotBePrecededByBlankLine()
 
     {
-        int Method() => 0;
+        static int Method() => 0;
         Method();
     }
 
@@ -573,7 +573,7 @@ public class BlockScopedExpectations
     {
         // Single line comment
 
-        int Method() => 0;
+        static int Method() => 0;
         Method();
     }
 
@@ -584,7 +584,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1515", "Warning")]
     public void SA1515_SingleLineCommentMustBePrecededByBlankLine()
     {
-        int Method() => 0;
+        static int Method() => 0;
         // Single line comment
         Method();
     }
@@ -596,7 +596,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1513", "Warning")]
     public void SA1513_ClosingBraceMustBeFollowedByBlankLine()
     {
-        int Method() => 0;
+        static int Method() => 0;
         if (Method() == 0)
         {
         }
@@ -613,7 +613,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1519", "Warning")]
     public void SA1519_BracesMustNotBeOmittedFromMultiLineChildStatement()
     {
-        int Method(int value) => value;
+        static int Method(int value) => value;
 
         if (true)
             Method(
@@ -630,7 +630,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1520", "Warning")]
     public void SA1520_UseBracesConsistently()
     {
-        int Method(int value) => value;
+        static int Method(int value) => value;
 
         if (Method(1) == 1)
         {
@@ -656,7 +656,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("SA1626", "Warning")]
     public void SA1626_SingleLineCommentsMustNotUseDocumentationStyleSlashes()
     {
-        int Method() => 0;
+        static int Method() => 0;
         /// Single line comment
         Method();
     }

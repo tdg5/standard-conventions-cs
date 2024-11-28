@@ -262,6 +262,67 @@ public class BlockScopedExpectations
     }
 
     /// <summary>
+    /// A method that contains a local function that could be made static.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0062", "Warning")]
+    public static void IDE0062_MakeLocalFunctionStatic()
+    {
+        int Method() => 5;
+        Method();
+    }
+
+    /// <summary>
+    /// A method that contains a using statement with and without a block.
+    /// </summary>
+    [CodeAnalysisViolationExpected(
+        "IDE0063", "Warning", disabledReason: "IDE0063 has a severity of silent.")]
+    public static void IDE0063_UseSimpleUsingStatement()
+    {
+        IDisposable? disposable = null;
+        using (disposable)
+        {
+            Console.WriteLine("Hello");
+        }
+
+        using var thing = disposable;
+        Console.WriteLine("World");
+    }
+
+    /// <summary>
+    /// A method that contains an interpolated string that can be simplified.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0071", "Warning")]
+    public static void IDE0071_SimplifyInterpolation()
+    {
+        var someValue = "some-value";
+        var message = $"prefix {someValue.ToString()} suffix";
+        Console.WriteLine(message);
+    }
+
+    /// <summary>
+    /// A method that contains an assignment that doesn't use compound coalesce assignment.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0074", "Warning")]
+    public static void IDE0074_UseCoalesceCompoundAssignment()
+    {
+        string? value = null;
+        _ = value ?? (value = "default");
+        string? Method() => value;
+        Method();
+    }
+
+    /// <summary>
+    /// A method that contains a conditional expression that can be simplified.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0075", "Warning")]
+    public static void IDE0075_SimplifyConditionalExpression()
+    {
+        static bool TrueMethod() => true;
+        static bool Method() => TrueMethod() && TrueMethod() ? true : false;
+        Method();
+    }
+
+    /// <summary>
     /// A method that does not declare an accessibility modifier.
     /// </summary>
     /// <remarks>
@@ -292,6 +353,37 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     private static void IDE0060_RemoveUnusedParameter(int unusedParameter)
     {
+    }
+
+    /// <summary>
+    /// A struct that contains a method that changes the struct in such a way
+    /// that readonly fields are modified.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0064", "Warning")]
+    public struct IDE0064_MakeStructFieldsWritable
+    {
+        /// <summary>
+        /// The value of the struct.
+        /// </summary>
+        public readonly int Value;
+
+        /// <summary>
+        /// Initializes a new instance of the <see
+        /// cref="IDE0064_MakeStructFieldsWritable"/> struct.
+        /// </summary>
+        /// <param name="value">The integer value.</param>
+        public IDE0064_MakeStructFieldsWritable(int value)
+        {
+            Value = value;
+        }
+
+        /// <summary>
+        /// Violates the expectations by changing the struct.
+        /// </summary>
+        public void ViolateExpectations()
+        {
+            this = new IDE0064_MakeStructFieldsWritable(5);
+        }
     }
 
     /// <summary>

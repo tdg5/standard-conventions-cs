@@ -5,6 +5,9 @@ indent_style = space
 insert_final_newline = true
 is_global = true
 
+# Preferred modifier order.
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
+
 # Prefer expression bodies for lambdas.
 csharp_style_expression_bodied_lambdas = true:warning
 
@@ -14,8 +17,8 @@ csharp_style_pattern_matching_over_is_with_cast_check = true
 # Prefer pattern matching to determine if something is of a particular type.
 csharp_style_pattern_matching_over_as_with_null_check = true
 
-# Preferred modifier order.
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
+# Prefer switch expressions over switch statements.
+csharp_style_prefer_switch_expression = true:suggestion
 
 # Flag only non-public methods that contain unused parameters.
 dotnet_code_quality_unused_parameters = non_public
@@ -32,11 +35,18 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
 # Use built-in type aliases for member access, e.g. int.MaxValue not Int32.MaxValue.
 dotnet_style_predefined_type_for_member_access = true:suggestion
 
+# Prefer compound assignment expressions.
+dotnet_style_prefer_compound_assignment = true:warning
+
 # Don't requrie this when accessing member event, field, method, or property.
 dotnet_style_qualification_for_event = false:suggestion
 dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion
+
+# CS1591: Missing documentation for public type.
+# Motivation: Prefer SA1600 instead.
+dotnet_diagnostic.CS1591.severity = none
 
 # IDE0001: Simplify name.
 dotnet_diagnostic.IDE0001.severity = warning
@@ -65,8 +75,7 @@ dotnet_diagnostic.IDE0018.severity = warning
 # IDE0019: Use pattern matching to avoid null check.
 dotnet_diagnostic.IDE0019.severity = warning
 
-# IDE0020: Use pattern matching to avoid is check followed by cast (with
-# variable).
+# IDE0020: Use pattern matching to avoid is check followed by cast (with # variable).
 dotnet_diagnostic.IDE0020.severity = warning
 
 # IDE0021: Prefer block bodies for constructors.
@@ -91,16 +100,15 @@ dotnet_diagnostic.IDE0035.severity = warning
 dotnet_diagnostic.IDE0036.severity = warning
 
 # IDE0037: Use inferred member names.
-# Allow explicit member names since they are less likely to be broken
-# accidentally by renaming a variable.
+# Motivation: Allow explicit member names since they are less likely to be
+# broken accidentally by renaming a variable.
 dotnet_diagnostic.IDE0037.severity = none
 
-# IDE0038: Use pattern matching to avoid is check followed by cast (without
-# variable).
+# IDE0038: Use pattern matching to avoid is check followed by cast (without variable).
 dotnet_diagnostic.IDE0038.severity = warning
 
 # IDE0039: Use local function instead of lambda.
-dotnet_diagnostic.IDE0039.severity = silent
+dotnet_diagnostic.IDE0039.severity = suggestion
 
 # IDE0040: Add accessibility modifiers.
 dotnet_diagnostic.IDE0040.severity = warning
@@ -165,10 +173,60 @@ dotnet_diagnostic.IDE0060.severity = warning
 # IDE0061: Use expression body for local functions.
 dotnet_diagnostic.IDE0061.severity = silent
 
-# SA0001: XML comment analysis disabled.
+# IDE0062: Make local function static.
+dotnet_diagnostic.IDE0062.severity = warning
+
+# IDE0063: Use simple 'using' statement.
+# Motivation: The braced using statement provides a strong visual indicator of
+# when the value is being released and should encourage releasing the value as
+# soon as possible.
+dotnet_diagnostic.IDE0063.severity = silent
+
+# IDE0064: Make struct fields writable.
+# Motivation: This rule is enabled to bring attention to weirdness, not to
+# prescribe the fix for that weirdness. Not reassigning the struct should be
+# preferred over making struct fields writable.
+dotnet_diagnostic.IDE0064.severity = warning
+
+# IDE0065: 'using' directive placement.
+# Motivaiton: Preferred over SA1200 because IDE0065 has an associated quick fix action.
+dotnet_diagnostic.IDE0065.severity = warning
+
+# IDE0066: Use switch expression.
+dotnet_diagnostic.IDE0066.severity = suggestion
+
+# IDE0070: Use 'System.HashCode.Combine'.
+dotnet_diagnostic.IDE0070.severity = suggestion
+
+# IDE0071: Simplify interpolation.
+dotnet_diagnostic.IDE0071.severity = warning
+
+# IDE0072: Add missing cases to switch expression.
+dotnet_diagnostic.IDE0072.severity = suggestion
+
+# IDE0074: Use coalesce compound assignment.
+dotnet_diagnostic.IDE0074.severity = warning
+
+# IDE0075: Simplify conditional expression.
+dotnet_diagnostic.IDE0075.severity = warning
+
+# IDE0076: Remove or fix global 'SuppressMessageAttribute'.
+dotnet_diagnostic.IDE0076.severity = warning
+
+# IDE0077: Avoid legacy format target in global 'SuppressMessageAttribute'.
+dotnet_diagnostic.IDE0077.severity = warning
+
+# IDE0078: Use pattern matching.
+dotnet_diagnostic.IDE0078.severity = suggestion
+
+# IDE0290: Use primary constructor.
+# Motivation: Primary constructors can muddle class documentation.
+dotnet_diagnostic.IDE0290.severity = silent
+
+# SA0001: XML comment analysis should be enabled.
 dotnet_diagnostic.SA0001.severity = warning
 
-# SA0002: Invalid settings file.
+# SA0002: Invalid settings file detected.
 dotnet_diagnostic.SA0002.severity = warning
 
 # SA1000: Keywords should be spaced correctly.
@@ -249,7 +307,8 @@ dotnet_diagnostic.SA1024.severity = warning
 # SA1025: Code should not contain multiple whitespace in a row.
 dotnet_diagnostic.SA1025.severity = warning
 
-# SA1026: Code should not contain space after new or stackalloc keyword in implicitly typed array allocation.
+# SA1026: Code should not contain space after new or stackalloc keyword in
+# implicitly typed array allocation.
 dotnet_diagnostic.SA1026.severity = warning
 
 # SA1027 Use tabs correctly.
@@ -270,7 +329,8 @@ dotnet_diagnostic.SA1102.severity = warning
 # SA1103: Query clauses should be on separate lines or all on one line.
 dotnet_diagnostic.SA1103.severity = warning
 
-# SA1104: Query clause should begin on new line when previous clause spans multiple lines.
+# SA1104: Query clause should begin on new line when previous clause spans
+# multiple lines.
 dotnet_diagnostic.SA1104.severity = warning
 
 # SA1105: Query clauses spanning multiple lines should begin on own line.
@@ -382,7 +442,8 @@ dotnet_diagnostic.SA1142.severity = warning
 dotnet_diagnostic.SX1101.severity = warning
 
 # SA1200: Using directives should be placed correctly.
-dotnet_diagnostic.SA1200.severity = warning
+# Motivation: Prefer IDE0065 because it has an associated quick fix action.
+dotnet_diagnostic.SA1200.severity = none
 
 # SA1201: Elements should appear in the correct order.
 dotnet_diagnostic.SA1201.severity = warning
@@ -406,7 +467,7 @@ dotnet_diagnostic.SA1206.severity = warning
 dotnet_diagnostic.SA1207.severity = warning
 
 # SA1208: System using directives should be placed before other using directives.
-# Disabled by systemUsingDirectivesFirst config in stylecop.json.
+# Remarks: Disabled by systemUsingDirectivesFirst config in stylecop.json.
 dotnet_diagnostic.SA1208.severity = none
 
 # SA1209: Using alias directives should be placed after other using directives.
@@ -437,7 +498,8 @@ dotnet_diagnostic.SA1217.severity = warning
 dotnet_diagnostic.SA1300.severity = warning
 
 # SA1301: Element should begin with lower-case letter.
-# As of 2024-11-14, there are no situations in which this rule will fire.
+# Motivation: As of 2024-11-14, there are no situations in which this rule will
+# fire.
 dotnet_diagnostic.SA1301.severity = none
 
 # SA1302: Interface names should begin with I.
@@ -697,39 +759,48 @@ dotnet_diagnostic.SA1631.severity = none
 dotnet_diagnostic.SA1632.severity = none
 
 # SA1633: File should have header.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1633.severity = none
 
 # SA1634: File header should show copyright.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1634.severity = none
 
 # SA1635: File header should have copyright text.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1635.severity = none
 
 # SA1636: File header copyright text should match.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1636.severity = none
 
 # SA1637: File header should contain file name.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1637.severity = none
 
 # SA1638: File header file name documentation should match file name.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1638.severity = none
 
 # SA1639: File header should have summary.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1639.severity = none
 
 # SA1640: File header should have valid company text.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1640.severity = none
 
 # SA1641: File header company name text should match.
-# File headers not required.
+# Motivation: File headers not required. When desired, file headers should be
+# using IDE0073 which is more configurable.
 dotnet_diagnostic.SA1641.severity = none
 
 # SA1642: Constructor summary documentation should begin with standard text.
@@ -761,11 +832,3 @@ dotnet_diagnostic.SA1650.severity = none
 
 # SA1651: Do not use placeholder elements.
 dotnet_diagnostic.SA1651.severity = warning
-
-# CS1591: Missing documentation for public type.
-# Prefer SA1600 instead.
-dotnet_diagnostic.CS1591.severity = none
-
-# IDE0290: Use primary constructor.
-# Primary constructors can muddle class documentation.
-dotnet_diagnostic.IDE0290.severity = none

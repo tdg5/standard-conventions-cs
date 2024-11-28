@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyleCopJson", "StyleCopJso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyleCopRules", "StyleCopRules\StyleCopRules.csproj", "{5CC613E9-162D-4E7F-BB98-C05F93A0F415}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDE0076", "IDE0076\IDE0076.csproj", "{24B0BD94-A851-40D4-B667-1F7D48ECFFE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDE0077", "IDE0077\IDE0077.csproj", "{0A5F5E49-A5AE-4088-B0A3-1839208C788A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,13 @@ Global
 		{5CC613E9-162D-4E7F-BB98-C05F93A0F415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CC613E9-162D-4E7F-BB98-C05F93A0F415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CC613E9-162D-4E7F-BB98-C05F93A0F415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B0BD94-A851-40D4-B667-1F7D48ECFFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B0BD94-A851-40D4-B667-1F7D48ECFFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B0BD94-A851-40D4-B667-1F7D48ECFFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B0BD94-A851-40D4-B667-1F7D48ECFFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A5F5E49-A5AE-4088-B0A3-1839208C788A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A5F5E49-A5AE-4088-B0A3-1839208C788A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A5F5E49-A5AE-4088-B0A3-1839208C788A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A5F5E49-A5AE-4088-B0A3-1839208C788A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

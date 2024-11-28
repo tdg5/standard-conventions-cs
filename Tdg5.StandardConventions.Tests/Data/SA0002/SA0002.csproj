@@ -7,4 +7,8 @@
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <RootNamespace>Tdg5.StandardConventions.Tests.Data.SA0002</RootNamespace>
+  </PropertyGroup>
+
 </Project>

@@ -66,7 +66,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1003", "Warning")]
     public void IDE0055_SymbolsMustBeSpacedCorrectly()
     {
-        bool Method() => ! true;
+        static bool Method() => ! true;
         Method();
     }
 
@@ -80,7 +80,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1008", "Warning")]
     public void IDE0055_OpeningParenthesisMustBeSpacedCorrectly()
     {
-        (int, string) Method() => ( 0, "zero");
+        static (int, string) Method() => ( 0, "zero");
         Method();
     }
 
@@ -94,7 +94,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1009", "Warning")]
     public void IDE0055_ClosingParenthesisMustBeSpacedCorrectly()
     {
-        (int, string) Method() => (0, "zero" );
+        static (int, string) Method() => (0, "zero" );
         Method();
     }
 
@@ -312,7 +312,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1025", "Warning")]
     public void IDE0055_CodeMustNotContainMultipleWhitespaceInARow()
     {
-        int Method() =>  1;
+        static int Method() =>  1;
         Method();
     }
 
@@ -340,7 +340,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1027", "Warning")]
     public void IDE0055_UseTabsCorrectly()
     {
-    	int Method() => 1;
+    	static int Method() => 1;
     	Method();
     }
 
@@ -354,7 +354,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1028", "Warning")]
     public void IDE0055_CodeMustNotContainTrailingWhitespace()
     {
-        int Method() => 1;
+        static int Method() => 1;
         Method(); 
     }
 
@@ -400,7 +400,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1105", "Warning")]
     public void IDE0055_QueryClausesSpanningMultipleLinesShouldBeginOnOwnLine()
     {
-        int GenerateItem(int element) => element;
+        static int GenerateItem(int element) => element;
 
         List<int> elements = [1];
         var items =
@@ -431,7 +431,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1137", "Warning")]
     public void IDE0055_ElementsShouldHaveTheSameIndentation()
     {
-        int Method() => 1;
+        static int Method() => 1;
           Method();
     }
 
@@ -446,7 +446,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1410", "Warning")]
     public void IDE0055_RemoveDelegateParenthesisWhenPossible()
     {
-        int Method(Func<int> func) => func();
+        static int Method(Func<int> func) => func();
         Method(delegate() { return 2; });
     }
 

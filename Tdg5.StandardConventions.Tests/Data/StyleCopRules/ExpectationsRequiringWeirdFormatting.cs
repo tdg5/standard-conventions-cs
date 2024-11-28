@@ -32,7 +32,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1001", "Warning")]
     public void SA1001_CommasMustBeSpacedCorrectly()
     {
-        bool[] Method() => [true,false];
+        static bool[] Method() => [true,false];
         Method();
     }
 
@@ -54,7 +54,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1003", "Warning")]
     public void SA1003_SymbolsMustBeSpacedCorrectly()
     {
-        bool Method() => ! true;
+        static bool Method() => ! true;
         Method();
     }
 
@@ -83,7 +83,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1008", "Warning")]
     public void SA1008_OpeningParenthesisMustBeSpacedCorrectly()
     {
-        (int, string) Method() => ( 0, "zero");
+        static (int, string) Method() => ( 0, "zero");
         Method();
     }
 
@@ -93,7 +93,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1009", "Warning")]
     public void SA1009_ClosingParenthesisMustBeSpacedCorrectly()
     {
-        (int, string) Method() => (0, "zero" );
+        static (int, string) Method() => (0, "zero" );
         Method();
     }
 
@@ -210,7 +210,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1020", "Warning")]
     public void SA1020_IncrementDecrementSymbolsMustBeSpacedCorrectly()
     {
-        int Method(int value) => ++ value;
+        static int Method(int value) => ++ value;
         Method(0);
     }
 
@@ -253,7 +253,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1025", "Warning")]
     public void SA1025_CodeMustNotContainMultipleWhitespaceInARow()
     {
-        int Method() =>  1;
+        static int Method() =>  1;
         Method();
     }
 
@@ -273,7 +273,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1027", "Warning")]
     public void SA1027_UseTabsCorrectly()
     {
-    	int Method() => 1;
+    	static int Method() => 1;
     	Method();
     }
 
@@ -283,7 +283,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1028", "Warning")]
     public void SA1028_CodeMustNotContainTrailingWhitespace()
     {
-        int Method() => 1;
+        static int Method() => 1;
         Method(); 
     }
 
@@ -322,7 +322,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1105", "Warning")]
     public void SA1105_QueryClausesSpanningMultipleLinesShouldBeginOnOwnLine()
     {
-        int GenerateItem(int element) => element;
+        static int GenerateItem(int element) => element;
 
         List<int> elements = [1];
         var items =
@@ -345,7 +345,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1137", "Warning")]
     public void SA1137_ElementsShouldHaveTheSameIndentation()
     {
-        int Method() => 1;
+        static int Method() => 1;
           Method();
     }
 
@@ -359,7 +359,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1410", "Warning")]
     public void SA1410_RemoveDelegateParenthesisWhenPossible()
     {
-        int Method(Func<int> func) => func();
+        static int Method(Func<int> func) => func();
         Method(delegate() { return 2; });
     }
 
@@ -394,7 +394,7 @@ public class ExpectationsRequiringWeirdFormatting
     [CodeAnalysisViolationExpected("SA1502", "Warning")]
     public void SA1502_ElementMustNotBeOnSingleLine()
     {
-        int Method() { return 1; }
+        static int Method() { return 1; }
         Method();
     }
 

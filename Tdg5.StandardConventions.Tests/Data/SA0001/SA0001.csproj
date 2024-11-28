@@ -2,5 +2,6 @@
     <PropertyGroup>
         <!-- Setting GenerateDocumentationFile to false should trigger SA0001. -->
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <RootNamespace>Tdg5.StandardConventions.Tests.Data.SA0001</RootNamespace>
     </PropertyGroup>
 </Project>

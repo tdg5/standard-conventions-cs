@@ -22,8 +22,8 @@ public class VisualStudioOnlyExpectations
         "IDE0001", "Warning", disabledReason: "Only shows up in Visual Studio")]
     public static void IDE0001_SimplifyName()
     {
+        /* ----↓↓↓↓↓↓----- IDE0001 */
         static System.AppContext? Method() => null;
-        /* ----^^^^^^----- IDE0001 */
 
         // Method2 is used to avoid IDE0005 for 'using System' import.
         static AppContext? Method2() => Method();
@@ -38,8 +38,9 @@ public class VisualStudioOnlyExpectations
         "IDE0002", "Warning", disabledReason: "Only shows up in Visual Studio")]
     public static void IDE0002_SimplifyMemberAccess()
     {
+        /*
+        ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓---- IDE0002 */
         VisualStudioOnlyExpectations.IDE0001_SimplifyName();
-        /*^^^^^^^^^^^^^^^^^^^^^^^^^^---- IDE0002 */
     }
 
     /// <summary>
@@ -54,8 +55,9 @@ public class VisualStudioOnlyExpectations
     public static void IDE0035_RemoveUnreachableCode()
     {
         return;
+        /*
+        ↓↓↓↓↓↓---- IDE0035 */
         return;
-        /* ^^^---- IDE0035 */
     }
 
     /// <summary>
@@ -68,8 +70,8 @@ public class VisualStudioOnlyExpectations
     {
         static string Method(string value) => value;
         object value = "value";
+        /* ----↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓--- IDE0038 */
         Method(value is string ? (string)value : string.Empty);
-        /* ----^^^^^^^^^^^^^^^--- IDE0038 */
     }
 
     /// <summary>
@@ -82,8 +84,8 @@ public class VisualStudioOnlyExpectations
     [CodeAnalysisViolationExpected("SA1121", "Warning")]
     public static void IDE0049_UseBuiltInTypeAliases()
     {
+        /* ----↓↓↓↓↓--- IDE0049 */
         static Int32 Method() => 0;
-        /* ----^^^^^--- IDE0049 */
         Method();
     }
 
@@ -98,20 +100,20 @@ public class VisualStudioOnlyExpectations
     [CodeAnalysisViolationExpected("SX1101", "Warning")]
     public void IDE0003_RemoveThisQualificationWhereUnnecessary()
     {
+        /* --------------↓↓↓↓---- IDE0003 for field */
         bool Method() => this.fieldForIde0003;
-        /* --------------^^^^---- IDE0003 for field */
 
         bool result = false;
+        /* ------------------↓↓↓↓---- IDE0003 for property */
         var propertyIsTrue = this.PropertyForIde0003;
-        /* ------------------^^^^---- IDE0003 for property */
         if (propertyIsTrue)
         {
+            /* ------↓↓↓↓---- IDE0003 for property */
             result = this.MethodForIde0003();
-            /* ------^^^^---- IDE0003 for property */
         }
 
+        /* ---------↓↓↓↓---- IDE0003 for event */
         var clone = this.EventForIde0003?.Clone();
-        /* ---------^^^^---- IDE0003 for event */
 
         // Extra logic to silence some unused variable warnings.
         if (result && clone is null)
