@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>Tdg5.StandardConventions.ruleset</CodeAnalysisRuleSet>
     <DevelopmentDependency>true</DevelopmentDependency>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
@@ -38,7 +37,6 @@
   <ItemGroup>
     <Content Include="Tdg5.StandardConventions.globalconfig" PackagePath=""/>
     <Content Include="build/Tdg5.StandardConventions.props" PackagePath="build/"/>
-    <Content Include="Tdg5.StandardConventions.ruleset" PackagePath=""/>
     <Content Include="stylecop.json" PackagePath=""/>
   </ItemGroup>
 

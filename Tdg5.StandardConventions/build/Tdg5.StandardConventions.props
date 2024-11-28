@@ -2,7 +2,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../Tdg5.StandardConventions.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Tdg5StandardConventionsStylecopJsonPath>$(MSBuildThisFileDirectory)../stylecop.json</Tdg5StandardConventionsStylecopJsonPath>
   </PropertyGroup>
