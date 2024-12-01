@@ -559,7 +559,7 @@ dotnet_diagnostic.SA1401.severity = warning
 # SA1402: File may only contain a single type.
 dotnet_diagnostic.SA1402.severity = warning
 
-# SA4032: File may only contain a single namespace.
+# SA1403: File may only contain a single namespace.
 dotnet_diagnostic.SA1403.severity = warning
 
 # SA1404: Code analysis suppression should have justification.

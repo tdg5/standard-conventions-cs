@@ -33,6 +33,8 @@ public static class AttributeParser
                 CodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
             nameof(FileAnalysisViolationExpectedAttribute) =>
                 FileAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
+            nameof(IncidentalCodeAnalysisViolationExpectedAttribute) =>
+                IncidentalCodeAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
             nameof(ProjectAnalysisViolationExpectedAttribute) =>
                 ProjectAnalysisViolationExpectedAttribute.GetExpecation(attributeArguments),
             _ => null,

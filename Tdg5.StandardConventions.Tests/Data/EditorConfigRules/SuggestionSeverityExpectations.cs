@@ -82,13 +82,10 @@ public class SuggestionSeverityExpectations
     /// <summary>
     /// A method that could use some helpful, though unnecessary parentheses.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1407 and SA1408.
-    /// </remarks>
     [CodeAnalysisViolationExpected(
         "IDE0048", "Warning", disabledReason: "IDE0048 has a severity of suggestion.")]
-    [CodeAnalysisViolationExpected("SA1407", "Warning")]
-    [CodeAnalysisViolationExpected("SA1408", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1407")]
+    [IncidentalCodeAnalysisViolationExpected("SA1408")]
     public static void IDE0048_AddParenthesesForClarity()
     {
         /* -------------------------------------------------↓↓↓↓↓↓---- IDE0048 */

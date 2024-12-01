@@ -7,12 +7,11 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 /// </summary>
 public class ClassWithElementsNotOrderedByAccessibility
 {
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
+    private readonly int field = 0;
+
     private void PrivateMethod()
     {
+        NoopHelper.NoopMemberReference(field);
     }
 
     /// <summary>
@@ -24,6 +23,8 @@ public class ClassWithElementsNotOrderedByAccessibility
         contains: "'protected' members should come before 'private' members")]
     protected void ProtectedMethod()
     {
+        PrivateMethod();
+        NoopHelper.NoopMemberReference(field);
     }
 
     /// <summary>
@@ -35,6 +36,7 @@ public class ClassWithElementsNotOrderedByAccessibility
         contains: "'internal' members should come before 'protected' members")]
     internal void InternalMethod()
     {
+        NoopHelper.NoopMemberReference(field);
     }
 
     /// <summary>
@@ -46,5 +48,6 @@ public class ClassWithElementsNotOrderedByAccessibility
         contains: "'public' members should come before 'internal' members")]
     public void PublicMethod()
     {
+        NoopHelper.NoopMemberReference(field);
     }
 }

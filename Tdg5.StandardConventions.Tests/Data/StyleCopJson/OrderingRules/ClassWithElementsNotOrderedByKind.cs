@@ -19,22 +19,16 @@ public class ClassWithElementsNotOrderedByKind
     {
     }
 
-    /// <remarks>
-    /// Also triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1201",
         "Warning",
         contains: "A method should not follow a struct")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private void Method()
     {
+        NoopHelper.NoopMemberReference(Property);
     }
 
-    /// <remarks>
-    /// Also triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1201",
         "Warning",
@@ -66,13 +60,12 @@ public class ClassWithElementsNotOrderedByKind
         contains: "A constructor should not follow a enum")]
     private ClassWithElementsNotOrderedByKind()
     {
-        // Prevent CS0169 warning.
-        field = field == 1 ? 0 : 1;
+        NoopHelper.NoopMemberReference(field);
     }
 
     [CodeAnalysisViolationExpected(
         "SA1201",
         "Warning",
         contains: "A field should not follow a constructor")]
-    private readonly int field;
+    private readonly int field = 0;
 }

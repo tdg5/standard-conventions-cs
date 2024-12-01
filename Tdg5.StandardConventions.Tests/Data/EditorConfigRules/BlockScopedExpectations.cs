@@ -38,11 +38,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a statement that should use braces, but does not.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1503.
-    /// </remarks>
     [CodeAnalysisViolationExpected("IDE0011", "Warning")]
-    [CodeAnalysisViolationExpected("SA1503", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1503")]
     public static void IDE0011_SurroundBlocksOfCodeWithCurlyBraces()
     {
         if (true)
@@ -108,11 +105,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that uses implicit ItemX names for tuple elements.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1142.
-    /// </remarks>
     [CodeAnalysisViolationExpected("IDE0033", "Warning")]
-    [CodeAnalysisViolationExpected("SA1142", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1142")]
     public static void IDE0033_UseExplicitlyProvidedTupleNames()
     {
         static (int FirstElement, int SecondElement) Method() => (0, 0);
@@ -236,11 +230,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that assigns a value to a variable that is never used.
     /// </summary>
-    /// <remarks>
-    /// Also triggers CS0219.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("CS0219", "Warning")]
     [CodeAnalysisViolationExpected("IDE0059", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("CS0219")]
     public static void IDE0059_UnnecessaryAssignmentToAValue()
     {
         int value = 5;
@@ -325,12 +316,9 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that does not declare an accessibility modifier.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0051 and SA1400.
-    /// </remarks>
     [CodeAnalysisViolationExpected("IDE0040", "Warning")]
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    [CodeAnalysisViolationExpected("SA1400", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
+    [IncidentalCodeAnalysisViolationExpected("SA1400")]
     static void IDE0040_AddAccessibilityModifiers()
     {
     }
@@ -346,11 +334,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a private method with an unused parameter.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0051 and SA1400.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected("IDE0060", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private static void IDE0060_RemoveUnusedParameter(int unusedParameter)
     {
     }
@@ -426,28 +411,22 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a declaration with incorrectly ordered modifiers.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1206.
-    /// </remarks>
     public class IDE0036_EnforceModifierOrder
     {
         /// <summary>
         /// Always returns zero.
         /// </summary>
         /// <returns>Always zero.</returns>
-        [CodeAnalysisViolationExpected("SA1206", "Warning")]
         [CodeAnalysisViolationExpected("IDE0036", "Warning")]
+        [IncidentalCodeAnalysisViolationExpected("SA1206")]
         static public int Method() => 0;
     }
 
     /// <summary>
     /// A class that contains a private field that can be made readonly.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0032.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0032", "Warning")]
     [CodeAnalysisViolationExpected("IDE0044", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0032")]
     public class IDE0044_AddReadonlyModifier
     {
         private int value;

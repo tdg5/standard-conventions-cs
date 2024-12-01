@@ -17,36 +17,30 @@ internal class UndocumentedInternalClassWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     public bool UndocumentedPublicField = false;
 
-    [CodeAnalysisViolationExpected(
-        "SA1401", "Warning", contains: "Field should be private")]
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected(
+        "SA1401", contains: "Field should be private")]
     internal static bool UndocumentedInternalStaticField = false;
 
-    [CodeAnalysisViolationExpected(
-        "SA1401", "Warning", contains: "Field should be private")]
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected(
+        "SA1401", contains: "Field should be private")]
     internal bool UndocumentedInternalField = false;
 
-    /// <remarks>
-    /// Also triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    [CodeAnalysisViolationExpected("CS0414", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static fields don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("CS0414")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private static readonly bool UndocumentedPrivateStaticField = false;
 
-    /// <remarks>
-    /// Also triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    [CodeAnalysisViolationExpected("CS0414", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private fields don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("CS0414")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private readonly bool undocumentedPrivateField = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -54,21 +48,18 @@ internal class UndocumentedInternalClassWithMembers
     {
     }
 
-    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0060")]
     internal UndocumentedInternalClassWithMembers(long ignored)
     {
     }
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private constructors don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0060")]
     private UndocumentedInternalClassWithMembers(int ignored)
     {
     }
@@ -85,24 +76,18 @@ internal class UndocumentedInternalClassWithMembers
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     internal bool UndocumentedInternalProperty { get; set; } = false;
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static properties don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private properties don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private bool UndocumentedPrivateProperty { get; set; } = false;
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
@@ -125,26 +110,20 @@ internal class UndocumentedInternalClassWithMembers
     {
     }
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private static methods don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private static void UndocumentedPrivateStaticMethod()
     {
     }
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
         disabledReason: "Private methods don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private void UndocumentedPrivateMethod()
     {
     }

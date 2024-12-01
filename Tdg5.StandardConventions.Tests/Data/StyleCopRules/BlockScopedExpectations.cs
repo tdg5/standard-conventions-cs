@@ -26,7 +26,7 @@ public class BlockScopedExpectations
     /// previous clause.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1102", "Warning")]
-    public void SA1102_QueryClauseShouldFollowPreviousClause()
+    public static void SA1102_QueryClauseShouldFollowPreviousClause()
     {
         List<int> numbers = [1];
         var x = from number in numbers
@@ -38,7 +38,7 @@ public class BlockScopedExpectations
     /// A method containing an empty statement.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1106", "Warning")]
-    public void SA1106_CodeMustNotContainEmptyStatements()
+    public static void SA1106_CodeMustNotContainEmptyStatements()
     {
         static int Method() => 0;
         Method();
@@ -49,7 +49,7 @@ public class BlockScopedExpectations
     /// A method containing multiple statements on the same line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1107", "Warning")]
-    public void SA1107_CodeMustNotContainMultipleStatementsOnOneLine()
+    public static void SA1107_CodeMustNotContainMultipleStatementsOnOneLine()
     {
         List<int> thing = [1]; thing.Add(2);
     }
@@ -58,7 +58,7 @@ public class BlockScopedExpectations
     /// A method containing a block statement with an embedded comment.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1108", "Warning")]
-    public void SA1108_BlockStatementsMustNotContainEmbeddedComments()
+    public static void SA1108_BlockStatementsMustNotContainEmbeddedComments()
     {
         if (0 != 1)
 
@@ -74,8 +74,8 @@ public class BlockScopedExpectations
     /// SA1123 triggers in all the same cases as SA1109 and SA1123 is prefered.
     /// </remarks>
     [CodeAnalysisViolationExpected("SA1109", "Warning", disabledReason: "SA1109 is disabled")]
-    [CodeAnalysisViolationExpected("SA1123", "Warning")]
-    public void SA1109_BlockStatementsMustNotContainEmbeddedRegions()
+    [IncidentalCodeAnalysisViolationExpected("SA1123")]
+    public static void SA1109_BlockStatementsMustNotContainEmbeddedRegions()
     {
         if (0 != 1)
         #region
@@ -89,7 +89,7 @@ public class BlockScopedExpectations
     /// method it relates to.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1110", "Warning")]
-    public void SA1110_OpeningParenthesisMustBeOnDeclarationLine()
+    public static void SA1110_OpeningParenthesisMustBeOnDeclarationLine()
     {
         List<int> thing = [];
         thing.Add
@@ -100,12 +100,9 @@ public class BlockScopedExpectations
     /// A method containing a parenthesis that is not on the same line as the
     /// last parameter.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1009.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("SA1009", "Warning")]
     [CodeAnalysisViolationExpected("SA1111", "Warning")]
-    public void SA1111_ClosingParenthesisMustBeOnLineOfLastParameter()
+    [IncidentalCodeAnalysisViolationExpected("SA1009")]
+    public static void SA1111_ClosingParenthesisMustBeOnLineOfLastParameter()
     {
         List<int> thing = [];
         thing.Add(
@@ -118,12 +115,9 @@ public class BlockScopedExpectations
     /// closing parenthesis that is not on the same line as the opening
     /// parenthesis.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1009.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("SA1009", "Warning")]
     [CodeAnalysisViolationExpected("SA1112", "Warning")]
-    public void SA1112_ClosingParenthesisMustBeOnLineOfOpeningParenthesis()
+    [IncidentalCodeAnalysisViolationExpected("SA1009")]
+    public static void SA1112_ClosingParenthesisMustBeOnLineOfOpeningParenthesis()
     {
         static int Method() => 0;
         Method(
@@ -134,14 +128,11 @@ public class BlockScopedExpectations
     /// A method containing a method call including a comma that is
     /// not on the same line as the previous parameter.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1001.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("SA1001", "Warning")]
     [CodeAnalysisViolationExpected("SA1113", "Warning")]
-    public void SA1113_CommaMustBeOnSameLineAsPreviousParameter()
+    [IncidentalCodeAnalysisViolationExpected("SA1001")]
+    public static void SA1113_CommaMustBeOnSameLineAsPreviousParameter()
     {
-        static int Method(int a, int b) => 0;
+        static int Method(int a, int b) => a + b;
         Method(
             1
             , 2);
@@ -152,11 +143,11 @@ public class BlockScopedExpectations
     /// immediately follow the declaration.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1114", "Warning")]
-    public void SA1114_ParameterListMustFollowDeclaration()
+    public static void SA1114_ParameterListMustFollowDeclaration()
     {
         static int Method(
 
-            int a, int b) => 0;
+            int a, int b) => a + b;
         Method(1, 2);
     }
 
@@ -165,12 +156,12 @@ public class BlockScopedExpectations
     /// arguments.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1115", "Warning")]
-    public void SA1115_ParameterMustFollowComma()
+    public static void SA1115_ParameterMustFollowComma()
     {
         static int Method(
             int a,
 
-            int b) => 0;
+            int b) => a + b;
         Method(1, 2);
     }
 
@@ -179,22 +170,22 @@ public class BlockScopedExpectations
     /// lines but the first argument doesn't appear on a new line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1116", "Warning")]
-    public void SA1116_SplitParametersMustStartOnLineAfterDeclaration()
+    public static void SA1116_SplitParametersMustStartOnLineAfterDeclaration()
     {
         static int Method(int a,
-            int b) => 0;
+            int b) => a + b;
         Method(1, 2);
     }
 
     /// <summary>
-    /// A method containing a method where the arguments are  not all on the
+    /// A method containing a method where the arguments are not all on the
     /// same line or each on its own line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1117", "Warning")]
-    public void SA1117_ParametersMustBeOnSameLineOrSeparateLines()
+    public static void SA1117_ParametersMustBeOnSameLineOrSeparateLines()
     {
         static int Method(int a, int b,
-            int c) => 0;
+            int c) => a + b + c;
         Method(1, 2, 3);
     }
 
@@ -203,9 +194,9 @@ public class BlockScopedExpectations
     /// is broken across multiple lines.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1118", "Warning")]
-    public void SA1118_ParameterMustNotSpanMultipleLines()
+    public static void SA1118_ParameterMustNotSpanMultipleLines()
     {
-        static int Method(int a, int b) => 0;
+        static int Method(int a, int b) => a + b;
         Method(1, 2
             + 2);
     }
@@ -214,7 +205,7 @@ public class BlockScopedExpectations
     /// A method containing unnecessary parenthesis.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1119", "Warning")]
-    public void SA1119_StatementMustNotUseUnnecessaryParenthesis()
+    public static void SA1119_StatementMustNotUseUnnecessaryParenthesis()
     {
         static int Method() => 1 + (2);
         Method();
@@ -224,7 +215,7 @@ public class BlockScopedExpectations
     /// A method containing a comment with no content.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1120", "Warning")]
-    public void SA1120_CommentsMustContainText()
+    public static void SA1120_CommentsMustContainText()
     {
         //
     }
@@ -234,7 +225,7 @@ public class BlockScopedExpectations
     /// built-in alias.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1121", "Warning")]
-    public void SA1121_UseBuiltInTypeAlias()
+    public static void SA1121_UseBuiltInTypeAlias()
     {
         static System.Int32 Method() => 1;
         Method();
@@ -244,7 +235,7 @@ public class BlockScopedExpectations
     /// A method containing a an empty string that is not string.Empty.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1122", "Warning")]
-    public void SA1122_UseStringEmptyForEmptyStrings()
+    public static void SA1122_UseStringEmptyForEmptyStrings()
     {
         static string Method() => "";
         Method();
@@ -254,7 +245,7 @@ public class BlockScopedExpectations
     /// A method containing a region within an element.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1123", "Warning")]
-    public void SA1123_DoNotPlaceRegionsWithinElements()
+    public static void SA1123_DoNotPlaceRegionsWithinElements()
     {
         #region
         #endregion
@@ -265,7 +256,7 @@ public class BlockScopedExpectations
     /// short form name.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1125", "Warning")]
-    public void SA1125_UseShorthandForNullableTypes()
+    public static void SA1125_UseShorthandForNullableTypes()
     {
         static Nullable<int> Method() => 1;
         Method();
@@ -276,7 +267,7 @@ public class BlockScopedExpectations
     /// </summary>
     /// <typeparam name="T">A type parameter.</typeparam>
     [CodeAnalysisViolationExpected("SA1127", "Warning")]
-    public void SA1127_GenericTypeConstraintsMustBeOnOwnLine<T>() where T : class
+    public static void SA1127_GenericTypeConstraintsMustBeOnOwnLine<T>() where T : class
     {
     }
 
@@ -284,7 +275,7 @@ public class BlockScopedExpectations
     /// A method that uses a default constructor for a value type.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1129", "Warning")]
-    public void SA1129_DoNotUseDefaultValueTypeConstructor()
+    public static void SA1129_DoNotUseDefaultValueTypeConstructor()
     {
         static ImmutableArray<int> Method() => new ImmutableArray<int>();
         Method();
@@ -294,7 +285,7 @@ public class BlockScopedExpectations
     /// A method that uses a delegate instead of a lambda.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1130", "Warning")]
-    public void SA1130_UseLambdaSyntax()
+    public static void SA1130_UseLambdaSyntax()
     {
         int x = 0;
         Action a = delegate { ++x; };
@@ -311,7 +302,7 @@ public class BlockScopedExpectations
     /// the expression.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1131", "Warning")]
-    public void SA1131_UseReadableConditions()
+    public static void SA1131_UseReadableConditions()
     {
         int x = 0;
         if (0 == x)
@@ -329,19 +320,16 @@ public class BlockScopedExpectations
         CodeAnalysisViolationExpected(
             "Another attribute", "Warning", disabledReason: "Not a real attribute.")
     ]
-    public void SA1133_DoNotCombineAttributes()
+    public static void SA1133_DoNotCombineAttributes()
     {
     }
 
     /// <summary>
     /// A method that uses a cast instead of literal syntax.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0004.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0004", "Warning")]
     [CodeAnalysisViolationExpected("SA1139", "Warning")]
-    public void SA1139_UseLiteralsSuffixNotationInsteadOfCasting()
+    [IncidentalCodeAnalysisViolationExpected("IDE0004")]
+    public static void SA1139_UseLiteralsSuffixNotationInsteadOfCasting()
     {
         static long Method() => (long)1;
         Method();
@@ -352,7 +340,7 @@ public class BlockScopedExpectations
     /// language construct.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1141", "Warning")]
-    public void SA1141_UseTupleSyntax()
+    public static void SA1141_UseTupleSyntax()
     {
         static (int, int) Method() => ValueTuple.Create(1, 1);
         Method();
@@ -362,12 +350,9 @@ public class BlockScopedExpectations
     /// A method that refers to a tuple element by its metadata name instead of
     /// its element name.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0033.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0033", "Warning")]
     [CodeAnalysisViolationExpected("SA1142", "Warning")]
-    public void SA1142_ReferToTupleElementsByName()
+    [IncidentalCodeAnalysisViolationExpected("IDE0033")]
+    public static void SA1142_ReferToTupleElementsByName()
     {
         (int ValueA, int ValueB) Method() => (1, 1);
         int Method2() => Method().Item1;
@@ -378,7 +363,7 @@ public class BlockScopedExpectations
     /// A method that starts with a lowercase letter.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1300", "Warning")]
-    public void a_SA1300_ElementMustBeginWithUpperCaseLetter()
+    public static void a_SA1300_ElementMustBeginWithUpperCaseLetter()
     {
     }
 
@@ -386,7 +371,7 @@ public class BlockScopedExpectations
     /// A method that contains a variable that starts with an uppercase letter.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1312", "Warning")]
-    public void SA1312_VariableNamesMustBeginWithLowerCaseLetter()
+    public static void SA1312_VariableNamesMustBeginWithLowerCaseLetter()
     {
         int Variable = 0;
         int Method() => Variable;
@@ -398,7 +383,7 @@ public class BlockScopedExpectations
     /// </summary>
     /// <param name="Variable">A parameter.</param>
     [CodeAnalysisViolationExpected("SA1313", "Warning")]
-    public void SA1313_ParameterNamesMustBeginWithLowerCaseLetter(int Variable)
+    public static void SA1313_ParameterNamesMustBeginWithLowerCaseLetter(int Variable)
     {
         int Method() => Variable;
         Method();
@@ -410,7 +395,7 @@ public class BlockScopedExpectations
     /// <param name="variable">A parameter.</param>
     /// <typeparam name="Var">A badly named type parameter.</typeparam>
     [CodeAnalysisViolationExpected("SA1314", "Warning")]
-    public void SA1314_TypeParameterNamesMustBeginWithT<Var>(Var variable)
+    public static void SA1314_TypeParameterNamesMustBeginWithT<Var>(Var variable)
     {
         Var Method() => variable;
         Method();
@@ -421,7 +406,7 @@ public class BlockScopedExpectations
     /// </summary>
     [CodeAnalysisViolationExpected("SA1404", "Warning")]
     [SuppressMessage("Style", "CS0219")]
-    public void SA1404_CodeAnalysisSuppressionMustHaveJustification()
+    public static void SA1404_CodeAnalysisSuppressionMustHaveJustification()
     {
     }
 
@@ -429,7 +414,7 @@ public class BlockScopedExpectations
     /// A method that contains a Debug.Assert without a message.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1405", "Warning")]
-    public void SA1405_DebugAssertMustProvideMessageText()
+    public static void SA1405_DebugAssertMustProvideMessageText()
     {
         Debug.Assert(true);
     }
@@ -437,12 +422,9 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a <see cref="Debug.Fail(string)"/> without a message.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0004.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0004", "Warning")]
     [CodeAnalysisViolationExpected("SA1406", "Warning")]
-    public void SA1406_DebugFailMustProvideMessageText()
+    [IncidentalCodeAnalysisViolationExpected("IDE0004")]
+    public static void SA1406_DebugFailMustProvideMessageText()
     {
         Debug.Fail((string?)null);
     }
@@ -452,7 +434,7 @@ public class BlockScopedExpectations
     /// precedence.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1407", "Warning")]
-    public void SA1407_ArithmeticExpressionsMustDeclarePrecedence()
+    public static void SA1407_ArithmeticExpressionsMustDeclarePrecedence()
     {
         int x = 1 + 2 * 3;
         int Method() => x;
@@ -464,7 +446,7 @@ public class BlockScopedExpectations
     /// precedence.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1408", "Warning")]
-    public void SA1408_ConditionalExpressionsMustDeclarePrecedence()
+    public static void SA1408_ConditionalExpressionsMustDeclarePrecedence()
     {
         bool x = false || true && true && false || true;
         bool Method() => x;
@@ -476,7 +458,7 @@ public class BlockScopedExpectations
     /// trailing comma.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1413", "Warning")]
-    public void SA1413_UseTrailingCommasInMultiLineInitializers()
+    public static void SA1413_UseTrailingCommasInMultiLineInitializers()
     {
         static int[] Method() => new int[]
         {
@@ -489,12 +471,9 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a statement that should use braces, but does not.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0011.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1503", "Warning")]
-    public void SA1503_BracesMustNotBeOmitted()
+    [IncidentalCodeAnalysisViolationExpected("IDE0011")]
+    public static void SA1503_BracesMustNotBeOmitted()
     {
         if (true)
             return;
@@ -504,7 +483,7 @@ public class BlockScopedExpectations
     /// A method tha contains multiple blank lines in a row.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1507", "Warning")]
-    public void SA1507_CodeMustNotContainMultipleBlankLinesInARow()
+    public static void SA1507_CodeMustNotContainMultipleBlankLinesInARow()
     {
         static int Method() => 0;
 
@@ -516,7 +495,7 @@ public class BlockScopedExpectations
     /// A method tha contains a closing brace that is preceded by a blank line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1508", "Warning")]
-    public void SA1508_ClosingBracesMustNotBePrecededByBlankLine()
+    public static void SA1508_ClosingBracesMustNotBePrecededByBlankLine()
     {
         static int Method() => 0;
         Method();
@@ -527,7 +506,7 @@ public class BlockScopedExpectations
     /// A method tha contains an opening brace that is prededed by a blank line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1509", "Warning")]
-    public void SA1509_OpeningBracesMustNotBePrecededByBlankLine()
+    public static void SA1509_OpeningBracesMustNotBePrecededByBlankLine()
 
     {
         static int Method() => 0;
@@ -539,7 +518,7 @@ public class BlockScopedExpectations
     /// blank line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1510", "Warning")]
-    public void SA1510_ChainedStatementBlocksMustNotBePrecededByBlankLine()
+    public static void SA1510_ChainedStatementBlocksMustNotBePrecededByBlankLine()
     {
         try
         {
@@ -555,7 +534,7 @@ public class BlockScopedExpectations
     /// blank line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1511", "Warning")]
-    public void SA1511_WhileDoFooterMustNotBePrecededByBlankLine()
+    public static void SA1511_WhileDoFooterMustNotBePrecededByBlankLine()
     {
         do
         {
@@ -569,7 +548,7 @@ public class BlockScopedExpectations
     /// line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1512", "Warning")]
-    public void SA1512_SingleLineCommentsMustNotBeFollowedByBlankLine()
+    public static void SA1512_SingleLineCommentsMustNotBeFollowedByBlankLine()
     {
         // Single line comment
 
@@ -582,7 +561,7 @@ public class BlockScopedExpectations
     /// blank line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1515", "Warning")]
-    public void SA1515_SingleLineCommentMustBePrecededByBlankLine()
+    public static void SA1515_SingleLineCommentMustBePrecededByBlankLine()
     {
         static int Method() => 0;
         // Single line comment
@@ -594,7 +573,7 @@ public class BlockScopedExpectations
     /// line.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1513", "Warning")]
-    public void SA1513_ClosingBraceMustBeFollowedByBlankLine()
+    public static void SA1513_ClosingBraceMustBeFollowedByBlankLine()
     {
         static int Method() => 0;
         if (Method() == 0)
@@ -606,12 +585,9 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a multi-line child statement without braces.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0011.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1519", "Warning")]
-    public void SA1519_BracesMustNotBeOmittedFromMultiLineChildStatement()
+    [IncidentalCodeAnalysisViolationExpected("IDE0011")]
+    public static void SA1519_BracesMustNotBeOmittedFromMultiLineChildStatement()
     {
         static int Method(int value) => value;
 
@@ -623,12 +599,9 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that makes inconsistent use of braces.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0011.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0011", "Warning")]
     [CodeAnalysisViolationExpected("SA1520", "Warning")]
-    public void SA1520_UseBracesConsistently()
+    [IncidentalCodeAnalysisViolationExpected("IDE0011")]
+    public static void SA1520_UseBracesConsistently()
     {
         static int Method(int value) => value;
 
@@ -641,7 +614,7 @@ public class BlockScopedExpectations
     }
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
-    public void SA1600_ElementsMustBeDocumented()
+    public static void SA1600_ElementsMustBeDocumented()
     {
     }
 
@@ -649,12 +622,9 @@ public class BlockScopedExpectations
     /// A method that contains a single line comment that uses three slashes
     /// like a documentation comment.
     /// </summary>
-    /// <remarks>
-    /// Also triggers CS1587.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("CS1587", "Warning")]
     [CodeAnalysisViolationExpected("SA1626", "Warning")]
-    public void SA1626_SingleLineCommentsMustNotUseDocumentationStyleSlashes()
+    [IncidentalCodeAnalysisViolationExpected("CS1587")]
+    public static void SA1626_SingleLineCommentsMustNotUseDocumentationStyleSlashes()
     {
         static int Method() => 0;
         /// Single line comment
@@ -664,13 +634,10 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that is missing an access modifier.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0040 and IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
     [CodeAnalysisViolationExpected("SA1400", "Warning")]
-    void SA1400_AccessModifierMustBeDeclared()
+    [IncidentalCodeAnalysisViolationExpected("IDE0040")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
+    static void SA1400_AccessModifierMustBeDeclared()
     {
     }
 
@@ -679,11 +646,15 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1100_BaseClass
     {
+        private readonly int field = 0;
+
         /// <summary>
         /// A method.
         /// </summary>
-        public void Method()
+        /// <returns>The value of field.</returns>
+        public int Method()
         {
+            return field;
         }
     }
 
@@ -707,13 +678,15 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1101_PrefixLocalCallsWithThis_Wrapper
     {
+        private readonly int field = 0;
+
         /// <summary>
         /// A method that calls an instance member without using this.
         /// </summary>
         [CodeAnalysisViolationExpected("SA1101", "Warning", disabledReason: "SA1101 is disabled.")]
         public void SA1101_PrefixLocalCallsWithThis() => Method();
 
-        private int Method() => 0;
+        private int Method() => field;
     }
 
     /// <summary>
@@ -785,21 +758,20 @@ public class BlockScopedExpectations
     /// </summary>
     public class SX1101_DoNotPrefixLocalMembersWithThis_Wrapper
     {
+        private readonly int field = 0;
+
         /// <summary>
         /// A method that calls an instance member using this.
         /// </summary>
         [CodeAnalysisViolationExpected("SX1101", "Warning")]
         public void SX1101_DoNotPrefixLocalMembersWithThis() => this.Method();
 
-        private int Method() => 0;
+        private int Method() => field;
     }
 
     /// <summary>
     /// A class containing a declaration with incorrectly ordered keywords.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0036 and IDE0051.
-    /// </remarks>
     public class SA1206_DeclarationKeywordsMustFollowOrder
     {
         /// <summary>
@@ -807,7 +779,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <returns>Always zero.</returns>
         [CodeAnalysisViolationExpected("SA1206", "Warning")]
-        [CodeAnalysisViolationExpected("IDE0036", "Warning")]
+        [IncidentalCodeAnalysisViolationExpected("IDE0036")]
         static public int Method() => 0;
     }
 
@@ -816,17 +788,16 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1207_ProtectedMustComeBeforeInternal
     {
+        private readonly int field = 0;
+
         /// <summary>
         /// A method that is declared with the internal keyword proceeding the
         /// protected keyword.
         /// </summary>
         /// <returns>Always zero.</returns>
-        /// <remarks>
-        /// Also triggers IDE0036.
-        /// </remarks>
         [CodeAnalysisViolationExpected("SA1207", "Warning")]
-        [CodeAnalysisViolationExpected("IDE0036", "Warning")]
-        internal protected int Method() => 0;
+        [IncidentalCodeAnalysisViolationExpected("IDE0036")]
+        internal protected int Method() => field;
     }
 
     /// <summary>
@@ -854,7 +825,7 @@ public class BlockScopedExpectations
         /// An event with accessors out of order.
         /// </summary>
         [CodeAnalysisViolationExpected("SA1213", "Warning")]
-        public event EventHandler SA1213_EventAccessorsMustFollowOrder
+        public static event EventHandler SA1213_EventAccessorsMustFollowOrder
         {
             remove
             {
@@ -869,11 +840,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a readonly field after a non-readonly field.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0044.
-    /// </remarks>
     [CodeAnalysisViolationExpected("SA1214", "Warning")]
-    [CodeAnalysisViolationExpected("IDE0044", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0044")]
     public class SA1214_ReadonlyElementsMustAppearBeforeNonReadonlyElements
     {
         private int field2 = 0;
@@ -904,12 +872,9 @@ public class BlockScopedExpectations
     /// A class containing a public readonly field that doesn't begin with an
     /// uppercase letter.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1307 and SA1401.
-    /// </remarks>
     [CodeAnalysisViolationExpected("SA1304", "Warning")]
-    [CodeAnalysisViolationExpected("SA1307", "Warning")]
-    [CodeAnalysisViolationExpected("SA1401", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1307")]
+    [IncidentalCodeAnalysisViolationExpected("SA1401")]
     public class SA1304_NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter
     {
         /// <summary>
@@ -958,11 +923,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a field that doesn't begin with an uppercase letter.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1307 and SA1401.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("SA1307", "Warning")]
-    [CodeAnalysisViolationExpected("SA1401", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1307")]
+    [IncidentalCodeAnalysisViolationExpected("SA1401")]
     public class SA1307_AccessibleFieldsMustBeginWithUpperCaseLetter
     {
         /// <summary>
@@ -1031,7 +993,7 @@ public class BlockScopedExpectations
         /// A method that uses the field.
         /// </summary>
         /// <returns>The value of the field.</returns>
-        public int Method() => field;
+        public static int Method() => field;
     }
 
     /// <summary>
@@ -1066,7 +1028,7 @@ public class BlockScopedExpectations
         /// A method that returns a tuple without element names.
         /// </summary>
         /// <returns>A tuple with 1 and 2.</returns>
-        public (int, int) Method() => (1, 2);
+        public static (int, int) Method() => (1, 2);
     }
 
     /// <summary>
@@ -1079,7 +1041,7 @@ public class BlockScopedExpectations
         /// <summary>
         /// Gets or sets a value indicating whether the property is enabled.
         /// </summary>
-        public bool Enabled
+        public static bool Enabled
         {
             get { return true; }
 
@@ -1100,7 +1062,7 @@ public class BlockScopedExpectations
         /// <summary>
         /// Gets a value indicating whether the property is enabled.
         /// </summary>
-        public bool Enabled
+        public static bool Enabled
         {
             get
             {
@@ -1121,7 +1083,7 @@ public class BlockScopedExpectations
         /// A method that contains a blank line after the summary tag.
         /// </summary>
 
-        public void Method()
+        public static void Method()
         {
         }
     }
@@ -1129,15 +1091,12 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a two methods that aren't separated by a blank line.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected("SA1516", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     public class SA1516_ElementsMustBeSeparatedByBlankLine()
     {
-        private int Method() => 0;
-        private int OtherMethod() => 1;
+        private static int Method() => 0;
+        private static int OtherMethod() => 1;
     }
 
     /// <summary>
@@ -1151,11 +1110,11 @@ public class BlockScopedExpectations
         /// Dummy method.
         /// </summary>
         /// <returns>Always zero.</returns>
-        public int Method() => 0;
+        public static int Method() => 0;
         /// <summary>
         /// There should be a blank line before this documentation.
         /// </summary>
-        public void OtherMethod()
+        public static void OtherMethod()
         {
         }
     }
@@ -1169,7 +1128,7 @@ public class BlockScopedExpectations
     {
         /// <param name="value">The value to return.</param>
         /// <returns>The given value.</returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1182,7 +1141,7 @@ public class BlockScopedExpectations
         /// <summary> </summary>
         /// <param name="value">The value to return.</param>
         /// <returns>The given value.</returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1195,7 +1154,7 @@ public class BlockScopedExpectations
         /// Summary description for the Method method.
         /// </summary>
         /// <returns>Always returns one.</returns>
-        public int Method() => 1;
+        public static int Method() => 1;
     }
 
     /// <summary>
@@ -1234,7 +1193,7 @@ public class BlockScopedExpectations
         /// Returns the given value.
         /// </summary>
         /// <returns>The given value.</returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1249,7 +1208,7 @@ public class BlockScopedExpectations
         /// <param name="other">No such parameter.</param>
         /// <param name="value">The value to return.</param>
         /// <returns>The sum of value and other.</returns>
-        public int Method(int value, int other) => value + other;
+        public static int Method(int value, int other) => value + other;
     }
 
     /// <summary>
@@ -1265,7 +1224,7 @@ public class BlockScopedExpectations
         /// <param name="value">The value to return.</param>
         /// <param>The unnamed parameter.</param>
         /// <returns>The given value.</returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1280,7 +1239,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <param name="value"></param>
         /// <returns>The given value.</returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1294,7 +1253,7 @@ public class BlockScopedExpectations
         /// Returns the given value.
         /// </summary>
         /// <param name="value">The value to return.</param>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1309,7 +1268,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <param name="value">The value to return.</param>
         /// <returns></returns>
-        public int Method(int value) => value;
+        public static int Method(int value) => value;
     }
 
     /// <summary>
@@ -1324,7 +1283,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <param name="value">The given value.</param>
         /// <returns>/dev/null.</returns>
-        public void Method(int value)
+        public static void Method(int value)
         {
         }
     }
@@ -1340,7 +1299,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <param name="value">The value to return.</param>
         /// <returns>The given value.</returns>
-        public T Method<T>(T value) => value;
+        public static T Method<T>(T value) => value;
     }
 
     /// <summary>
@@ -1354,7 +1313,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <typeparam name="TSecond">The other type parameter.</typeparam>
         /// <typeparam name="TFirst">The type parameter.</typeparam>
-        public void Method<TFirst, TSecond>()
+        public static void Method<TFirst, TSecond>()
         {
         }
     }
@@ -1371,7 +1330,7 @@ public class BlockScopedExpectations
         /// </summary>
         /// <typeparam name="TFirst">The type parameter.</typeparam>
         /// <typeparam>The other type parameter.</typeparam>
-        public void Method<TFirst>()
+        public static void Method<TFirst>()
         {
         }
     }
@@ -1387,7 +1346,7 @@ public class BlockScopedExpectations
         /// A method that does nothing.
         /// </summary>
         /// <typeparam name="TFirst"></typeparam>
-        public void Method<TFirst>()
+        public static void Method<TFirst>()
         {
         }
     }
@@ -1403,8 +1362,10 @@ public class BlockScopedExpectations
         /// </summary>
         /// <param name="firstName">Part of the name.</param>
         /// <param name="lastName">Part of the name.</param>
-        public void Method(string firstName, string lastName)
+        /// <returns>The full name.</returns>
+        public static string Method(string firstName, string lastName)
         {
+            return $"{firstName} {lastName}";
         }
     }
 
@@ -1419,7 +1380,7 @@ public class BlockScopedExpectations
         /// A method that does nothing.
         /// </summary>
         /// <remarks></remarks>
-        public void Method()
+        public static void Method()
         {
         }
     }
@@ -1462,7 +1423,7 @@ public class BlockScopedExpectations
         /// This method <placeholder>performs some operation</placeholder>.
         /// </summary>
         /// <returns>Always zero.</returns>
-        public int Method() => 0;
+        public static int Method() => 0;
     }
 
     /// <summary>
@@ -1473,15 +1434,12 @@ public class BlockScopedExpectations
     public class SA1648_InheritDocMustBeUsedWithInheritingClass
     {
         /// <inheritdoc/>
-        public int Method() => 0;
+        public static int Method() => 0;
     }
 
     /// <summary>
     /// A class that contains a field that starts with an underscore.
     /// </summary>
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
     [CodeAnalysisViolationExpected(
         "SX1309", "Warning", disabledReason: "SX1309 is disabled.")]
     public class SX1309_FieldNamesMustBeginWithUnderscore
@@ -1508,17 +1466,14 @@ public class BlockScopedExpectations
         /// A method that uses the field.
         /// </summary>
         /// <returns>The value of the field.</returns>
-        public int Method() => Field;
+        public static int Method() => Field;
     }
 
     /// <summary>
     /// A partial class that doesn't declare access.
     /// </summary>
-    /// <remarks>
-    /// Also triggers IDE0040.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
     [CodeAnalysisViolationExpected("SA1205", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0040")]
     partial class SA1205_PartialElementsMustDeclareAccess
     {
     }

@@ -19,10 +19,6 @@ internal partial class UndocumentedInternalPartialClassWithMembers
     [CodeAnalysisViolationExpected("SA1601", "Warning")]
     protected partial void ProtectedPartialMethod();
 
-    /// <remarks>
-    /// Triggers IDE0051.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
     [CodeAnalysisViolationExpected(
         "SA1600",
         "Warning",
@@ -31,5 +27,6 @@ internal partial class UndocumentedInternalPartialClassWithMembers
         "SA1601",
         "Warning",
         disabledReason: "Private partial methods don't require documentation.")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private partial void PrivatePartialMethod();
 }

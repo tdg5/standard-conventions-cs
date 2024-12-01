@@ -13,7 +13,7 @@ public class VisualStudioOnlyExpectations
 
     private event EventHandler? EventForIde0003;
 
-    private bool PropertyForIde0003 => true;
+    private bool PropertyForIde0003 => !fieldForIde0003;
 
     /// <summary>
     /// A method that contains a member reference using this that can be simplified.
@@ -46,12 +46,9 @@ public class VisualStudioOnlyExpectations
     /// <summary>
     /// A method that contains unreachable code.
     /// </summary>
-    /// <remarks>
-    /// Also triggers CS0162.
-    /// </remarks>
     [CodeAnalysisViolationExpected(
         "IDE0035", "Warning", disabledReason: "Only shows up in Visual Studio")]
-    [CodeAnalysisViolationExpected("CS0162", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("CS0162")]
     public static void IDE0035_RemoveUnreachableCode()
     {
         return;
@@ -77,11 +74,8 @@ public class VisualStudioOnlyExpectations
     /// <summary>
     /// A method that doesn't use a built-in type alias.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SA1121.
-    /// </remarks>
     [CodeAnalysisViolationExpected("IDE0049", "Warning", disabledReason: "Only shows up in Visual Studio")]
-    [CodeAnalysisViolationExpected("SA1121", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1121")]
     public static void IDE0049_UseBuiltInTypeAliases()
     {
         /* ----↓↓↓↓↓--- IDE0049 */
@@ -92,12 +86,9 @@ public class VisualStudioOnlyExpectations
     /// <summary>
     /// A method that contains a member reference using this that can be simplified.
     /// </summary>
-    /// <remarks>
-    /// Also triggers SX1101.
-    /// </remarks>
     [CodeAnalysisViolationExpected(
         "IDE0003", "Warning", disabledReason: "Only shows up in Visual Studio")]
-    [CodeAnalysisViolationExpected("SX1101", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SX1101")]
     public void IDE0003_RemoveThisQualificationWhereUnnecessary()
     {
         /* --------------↓↓↓↓---- IDE0003 for field */
@@ -122,5 +113,5 @@ public class VisualStudioOnlyExpectations
         }
     }
 
-    private bool MethodForIde0003() => true;
+    private bool MethodForIde0003() => fieldForIde0003;
 }

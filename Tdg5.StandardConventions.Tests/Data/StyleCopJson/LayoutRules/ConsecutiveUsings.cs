@@ -15,7 +15,7 @@ public class ConsecutiveUsings
         "SA1519",
         "Warning",
         disabledReason: "Multiple using statements don't require brackets.")]
-    public void Method()
+    public static void Method()
     {
         using (StreamReader textReader = File.OpenText("does-not-exist.txt"))
         using (StreamReader csvReader = File.OpenText("does-not-exist.csv"))

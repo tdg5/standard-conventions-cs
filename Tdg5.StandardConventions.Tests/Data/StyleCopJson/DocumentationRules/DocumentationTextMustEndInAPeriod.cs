@@ -13,23 +13,20 @@ public class DocumentationTextMustEndInAPeriod
         /// <summary>
         /// This is a summary without a period
         /// </summary>
-        public void Method()
+        public static void Method()
         {
         }
     }
 
-    /// <remarks>
-    /// Also triggers IDE0060.
-    /// </remarks>
-    [CodeAnalysisViolationExpected("IDE0060", "Warning")]
     [CodeAnalysisViolationExpected("SA1629", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0060")]
     private class ParamWithoutPeriod
     {
         /// <summary>
         /// This is a summary.
         /// </summary>
         /// <param name="ignored">This is a param without a period</param>
-        public void Method(bool ignored)
+        public static void Method(bool ignored)
         {
         }
     }
@@ -41,7 +38,7 @@ public class DocumentationTextMustEndInAPeriod
         /// This is a summary.
         /// </summary>
         /// <returns>This is a returns without a period</returns>
-        public bool Method() => true;
+        public static bool Method() => true;
     }
 
     [CodeAnalysisViolationExpected(
@@ -54,7 +51,7 @@ public class DocumentationTextMustEndInAPeriod
         /// This is a summary.
         /// </summary>
         /// <seealso cref="SeeAlsoWithoutPeriod">This is a seealso without a period</seealso>
-        public void Method()
+        public static void Method()
         {
         }
     }

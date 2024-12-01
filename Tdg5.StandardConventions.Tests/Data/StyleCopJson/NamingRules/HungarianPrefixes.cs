@@ -11,8 +11,9 @@ public class HungarianPrefixes
     /// A method with a variable with a Hungarian prefix.
     /// </summary>
     /// <returns>The value of the variable.</returns>
-    [CodeAnalysisViolationExpected("SA1305", "Warning", disabledReason: "SA1305 is disabled.")]
-    public int MethodWithHungarianPrefix()
+    [CodeAnalysisViolationExpected(
+        "SA1305", "Warning", disabledReason: "SA1305 is disabled.")]
+    public static int MethodWithHungarianPrefix()
     {
         int stVariable = 0;
         return stVariable;
