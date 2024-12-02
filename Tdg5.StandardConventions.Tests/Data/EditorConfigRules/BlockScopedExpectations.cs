@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Tdg5.StandardConventions.TestAnnotations;
 
 namespace Tdg5.StandardConventions.Tests.Data.EditorConfigRules;
@@ -55,10 +56,7 @@ public class BlockScopedExpectations
         static void Method(out int number) => number = 0;
         int value;
         Method(out value);
-        if (value == 0)
-        {
-            throw new InvalidOperationException("Value is 0.");
-        }
+        NoopHelper.Noop(value);
     }
 
     /// <summary>
@@ -69,10 +67,7 @@ public class BlockScopedExpectations
     {
         object value = "value";
         var stringValue = value as string;
-        if (stringValue == null)
-        {
-            throw new InvalidOperationException("Value is not a string.");
-        }
+        NoopHelper.Noop(stringValue is null ? "null" : stringValue);
     }
 
     /// <summary>
@@ -110,10 +105,7 @@ public class BlockScopedExpectations
     public static void IDE0033_UseExplicitlyProvidedTupleNames()
     {
         static (int FirstElement, int SecondElement) Method() => (0, 0);
-        if (Method().Item1 == 1)
-        {
-            throw new InvalidOperationException("First element is 1.");
-        }
+        NoopHelper.Noop(Method().Item1);
     }
 
     /// <summary>
@@ -122,7 +114,7 @@ public class BlockScopedExpectations
     [CodeAnalysisViolationExpected("IDE0034", "Warning")]
     public static void IDE0034_SimplifyDefaultExpression()
     {
-        static int Method(int token = default(int)) => 0;
+        static int Method(int token = default(int)) => token;
         Method();
     }
 
@@ -139,10 +131,7 @@ public class BlockScopedExpectations
         // This style is preferred, but IDE0037 can't be used to enforce it.
         var tuple = (age: age, name: name);
         var otherTuple = (age, name);
-        if (tuple.age == 31 || otherTuple.age == 31)
-        {
-            throw new InvalidOperationException("Age is 31.");
-        }
+        NoopHelper.Noop(tuple.age, otherTuple.age);
     }
 
     /// <summary>
@@ -158,10 +147,17 @@ public class BlockScopedExpectations
         // This style is preferred, but IDE0037 can't be used to enforce it.
         var anon = new { age = age, name = name };
         var otherAnon = new { age, name };
-        if (anon.age == 31 || otherAnon.age == 31)
-        {
-            throw new InvalidOperationException("Age is 31.");
-        }
+        NoopHelper.Noop(anon.age, otherAnon.age);
+    }
+
+    /// <summary>
+    /// A method that contains an anonymous function instead of a lambda.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0039", "Info")]
+    public static void IDE0039_UseLocalFunctionInsteadOfLambda()
+    {
+        Func<int, bool> isEven = (int n) => n % 2 == 0;
+        isEven(5);
     }
 
     /// <summary>
@@ -171,9 +167,55 @@ public class BlockScopedExpectations
     public static void IDE0041_UseIsNullCheck()
     {
         string? value = "not null";
-        if ((object)value == null)
+        NoopHelper.Noop((object)value == null);
+    }
+
+    /// <summary>
+    /// A method that does not use deconstruction for variable declaration.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0042", "Info")]
+    public static void IDE0042_DeconstructVariableDeclaration()
+    {
+        static (int, int) Method() => (1, 2);
+        (int X, int Y) result = Method();
+        NoopHelper.Noop(result.X, result.Y);
+    }
+
+    /// <summary>
+    /// A method that makes an assignment using an if-else statement.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0045", "Info")]
+    public static void IDE0045_UseConditionalExpressionForAssignment()
+    {
+        static bool Method() => true;
+        string value;
+        if (Method())
         {
-            throw new InvalidOperationException("Value is null.");
+            value = "hello";
+        }
+        else
+        {
+            value = "world";
+        }
+
+        NoopHelper.Noop(value);
+    }
+
+    /// <summary>
+    /// A method using an if-else statement to decide what to return.
+    /// </summary>
+    /// <returns>Arbitrary string.</returns>
+    [CodeAnalysisViolationExpected("IDE0046", "Info")]
+    public static string IDE0046_UseConditionalExpressionForReturn()
+    {
+        static bool Method() => true;
+        if (Method())
+        {
+            return "hello";
+        }
+        else
+        {
+            return "world";
         }
     }
 
@@ -193,9 +235,24 @@ public class BlockScopedExpectations
     }
 
     /// <summary>
+    /// A method that could use some helpful, though unnecessary parentheses.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0048", "Info")]
+    [IncidentalCodeAnalysisViolationExpected("SA1407")]
+    [IncidentalCodeAnalysisViolationExpected("SA1408")]
+    public static void IDE0048_AddParenthesesForClarity()
+    {
+        static int ArithmeticBinaryOperatorsMethod() => 1 + 2 * 3;
+        ArithmeticBinaryOperatorsMethod();
+        static bool OtherBinaryOperatorsMethod() => false || true && true;
+        OtherBinaryOperatorsMethod();
+    }
+
+    /// <summary>
     /// A method that contains a lambda with a block body.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0053", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0039")]
     public static void IDE0053_UseExpressionBodyForLambdas()
     {
         Func<int, int> square = x =>
@@ -213,7 +270,31 @@ public class BlockScopedExpectations
     {
         int value = 5;
         value = value + 1;
-        Console.WriteLine(value);
+        NoopHelper.Noop(value);
+    }
+
+    /// <summary>
+    /// A method that does not use the ^ operator when calculating an index from
+    /// the end of a collection.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0056", "Info")]
+    public static void IDE0056_UseIndexOperator()
+    {
+        List<string> list = [];
+        var last = list[list.Count - 1];
+        NoopHelper.Noop(last);
+    }
+
+    /// <summary>
+    /// A method that does not use the range operator .. when extracting a
+    /// slice of a collection.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0057", "Info")]
+    public static void IDE0057_UseRangeOperator()
+    {
+        var message = "Hello, world!";
+        var substring = message.Substring(0, message.Length - 5);
+        NoopHelper.Noop(substring);
     }
 
     /// <summary>
@@ -272,11 +353,28 @@ public class BlockScopedExpectations
         IDisposable? disposable = null;
         using (disposable)
         {
-            Console.WriteLine("Hello");
+            NoopHelper.Noop("Hello");
         }
 
         using var thing = disposable;
-        Console.WriteLine("World");
+        NoopHelper.Noop("World");
+    }
+
+    /// <summary>
+    /// A method that uses a switch statement instead of a switch expression.
+    /// </summary>
+    /// <returns>True if the value is 1, false otherwise.</returns>
+    [CodeAnalysisViolationExpected("IDE0066", "Info")]
+    public static bool IDE0066_UseSwitchExpression()
+    {
+        int value = 3;
+        switch (value)
+        {
+            case 1:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /// <summary>
@@ -287,7 +385,7 @@ public class BlockScopedExpectations
     {
         var someValue = "some-value";
         var message = $"prefix {someValue.ToString()} suffix";
-        Console.WriteLine(message);
+        NoopHelper.Noop(message);
     }
 
     /// <summary>
@@ -311,6 +409,17 @@ public class BlockScopedExpectations
         static bool TrueMethod() => true;
         static bool Method() => TrueMethod() && TrueMethod() ? true : false;
         Method();
+    }
+
+    /// <summary>
+    /// A method that doesn't use pattern matching where it could.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0078", "Info")]
+    public static void IDE0078_UsePatternMatching()
+    {
+        int number = 0;
+        bool nonNegative = number == default || number > default(int);
+        NoopHelper.Noop(nonNegative);
     }
 
     /// <summary>
@@ -374,6 +483,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class containing a constructor that uses an expression body.
     /// </summary>
+    [CodeAnalysisViolationExpected("IDE0021", "Warning")]
     public class IDE0021_PreferBlockBodiesForConstructors
     {
         /// <summary>
@@ -381,7 +491,6 @@ public class BlockScopedExpectations
         /// cref="IDE0021_PreferBlockBodiesForConstructors"/> class.
         /// </summary>
         /// <param name="value">The integer value.</param>
-        [CodeAnalysisViolationExpected("IDE0021", "Warning")]
         public IDE0021_PreferBlockBodiesForConstructors(int value) => Value = value;
 
         /// <summary>
@@ -463,6 +572,74 @@ public class BlockScopedExpectations
         public IDE0052_RemoveUnreadPrivateMember(int value)
         {
             this.value = value;
+        }
+    }
+
+    /// <summary>
+    /// A class containing a GetHashCode method that can be simplified.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0070", "Info")]
+    public class IDE0070_UseSystemHashCodeCombine
+    {
+        private readonly int value;
+
+        /// <summary>
+        /// Initializes a new instance of the <see
+        /// cref="IDE0070_UseSystemHashCodeCombine"/> class.
+        /// </summary>
+        /// <param name="value">Arbitrary integer value.</param>
+        public IDE0070_UseSystemHashCodeCombine(int value)
+        {
+            this.value = value;
+        }
+
+        /// <summary>
+        /// Gets the hash code for this instance.
+        /// </summary>
+        /// <returns>Integer hashode.</returns>
+        public override int GetHashCode()
+        {
+            var hashCode = 339610899;
+            hashCode = (hashCode * -1521134295) + value.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    /// <summary>
+    /// A class that includes a method that does not include all cases in a
+    /// switch expression.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0072", "Info")]
+    public class IDE0072_AddMissingCasesToSwitchExpression
+    {
+        /// <summary>
+        /// An enumeration of various colors.
+        /// </summary>
+        public enum Color
+        {
+            /// <summary>
+            /// Blue color.
+            /// </summary>
+            Blue,
+
+            /// <summary>
+            /// Green color.
+            /// </summary>
+            Green,
+        }
+
+        /// <summary>
+        /// Gets the color as a string.
+        /// </summary>
+        /// <param name="color">Color to convert.</param>
+        /// <returns>String representation of the color.</returns>
+        public static string GetColor(Color color)
+        {
+            return color switch
+            {
+                Color.Blue => "Blue",
+                _ => "Unknown",
+            };
         }
     }
 }

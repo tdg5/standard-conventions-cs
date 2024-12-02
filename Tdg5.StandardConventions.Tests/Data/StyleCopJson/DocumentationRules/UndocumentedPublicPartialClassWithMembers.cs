@@ -27,6 +27,5 @@ internal partial class UndocumentedPublicPartialClassWithMembers
         "SA1601",
         "Warning",
         disabledReason: "Private partial methods don't require documentation.")]
-    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private partial void PrivatePartialMethod();
 }

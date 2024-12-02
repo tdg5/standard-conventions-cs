@@ -1,3 +1,4 @@
+using Microsoft.CodeAnalysis;
 using Tdg5.StandardConventions.TestAnnotations;
 
 namespace Tdg5.StandardConventions.Tests.TestHelpers;
@@ -65,6 +66,26 @@ public class TestProjectAnalysisVerifier
                     lineNumber: error.LineNumber,
                     message: error.Message,
                     projectPath: projectPath)),
+            .. buildResult.Diagnostics
+                .Where(diagnostic =>
+                    diagnostic.Severity != DiagnosticSeverity.Hidden
+                    && diagnostic.Severity != DiagnosticSeverity.Warning
+                    && diagnostic.Severity != DiagnosticSeverity.Error
+                    && !diagnostic.IsSuppressed)
+                .Select(diagnostic =>
+                {
+                    var title = (string?)diagnostic.Descriptor.Title;
+                    var message = string.IsNullOrWhiteSpace(title)
+                        ? $"{diagnostic.Id} (Diagnostic with no message)"
+                        : title;
+                    return new CodeAnalysisViolation(
+                        code: diagnostic.Id,
+                        filePath: diagnostic.Location.SourceTree?.FilePath ?? "<Diagnostic without file path>",
+                        level: diagnostic.Severity.ToString(),
+                        lineNumber: diagnostic.Location.GetLineSpan().StartLinePosition.Line,
+                        message: message,
+                        projectPath: projectPath);
+                }),
         ];
 
         List<ICodeAnalysisViolation> unexpectedCodeViolations = [];

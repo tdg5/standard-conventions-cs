@@ -106,6 +106,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with an opening brace that is not followed by a space.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0055", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0028")]
     [IncidentalCodeAnalysisViolationExpected("SA1012")]
     public static void IDE0055_OpeningBracesMustBeSpacedCorrectly()
     {
@@ -117,6 +118,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with a closing brace that is not preceded by a space.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0055", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0028")]
     [IncidentalCodeAnalysisViolationExpected("SA1013")]
     public static void IDE0055_ClosingBracesMustBeSpacedCorrectly()
     {
@@ -185,6 +187,7 @@ public class ExpectationsRequiringWeirdFormatting
     [IncidentalCodeAnalysisViolationExpected("SA1018")]
     public static void IDE0055_NullableTypeSymbolsMustNotBePrecededBySpace(string ? maybe)
     {
+        NoopHelper.Noop(maybe ?? "null");
     }
 
     /// <summary>
@@ -206,10 +209,7 @@ public class ExpectationsRequiringWeirdFormatting
     {
         int i = 0;
         int[] thing = [++ i];
-        if (thing[0] == 0)
-        {
-            throw new InvalidOperationException("i is 0.");
-        }
+        NoopHelper.Noop(thing[0]);
     }
 
     /// <summary>
@@ -263,6 +263,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with a space after new keyword in implicitly typed array allocation.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0055", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0300")]
     [IncidentalCodeAnalysisViolationExpected("SA1026")]
     public static void IDE0055_CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation()
     {
@@ -396,7 +397,7 @@ public class ExpectationsRequiringWeirdFormatting
             IDE0055_OperatorKeywordMustBeFollowedBySpace_Wrapper a,
             IDE0055_OperatorKeywordMustBeFollowedBySpace_Wrapper b)
         {
-            return a;
+            return a == b ? a : b;
         }
     }
 

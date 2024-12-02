@@ -6,6 +6,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.DocumentationRules;
 /// Test that a destructor with a non-standard summary triggers violation codes.
 /// </summary>
 [CodeAnalysisViolationExpected("SA1643", "Warning")]
+[IncidentalCodeAnalysisViolationExpected("CA1821")]
 public class DestructorWithNonStandardSummary
 {
     /// <summary>

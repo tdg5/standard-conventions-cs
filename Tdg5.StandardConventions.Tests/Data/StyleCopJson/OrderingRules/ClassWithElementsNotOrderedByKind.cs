@@ -23,10 +23,13 @@ public class ClassWithElementsNotOrderedByKind
         "SA1201",
         "Warning",
         contains: "A method should not follow a struct")]
-    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private void Method()
     {
         NoopHelper.NoopMemberReference(Property);
+        if (Property == -1)
+        {
+            Method();
+        }
     }
 
     [CodeAnalysisViolationExpected(
@@ -36,7 +39,7 @@ public class ClassWithElementsNotOrderedByKind
     private int Property { get; } = 0;
 
     /// <summary>
-    /// An interface.
+    /// Private interfaces should be documented.
     /// </summary>
     [CodeAnalysisViolationExpected(
         "SA1201",

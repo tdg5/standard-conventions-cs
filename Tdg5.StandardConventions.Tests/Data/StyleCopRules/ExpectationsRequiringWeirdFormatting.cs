@@ -118,6 +118,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with an opening brace that is not followed by a space.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1012", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0028")]
     public static void SA1012_OpeningBracesMustBeSpacedCorrectly()
     {
         static List<int> Method() => new() {1, 2 };
@@ -128,6 +129,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with a closing brace that is not preceded by a space.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1013", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0028")]
     public static void SA1013_ClosingBracesMustBeSpacedCorrectly()
     {
         static List<int> Method() => new() { 1, 2};
@@ -260,6 +262,7 @@ public class ExpectationsRequiringWeirdFormatting
     /// Method with a space after new keyword in implicitly typed array allocation.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1026", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0300")]
     public static void SA1026_CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation()
     {
         static int[] Method() => new [] { 1 };
@@ -423,7 +426,7 @@ public class ExpectationsRequiringWeirdFormatting
             SA1007_OperatorKeywordMustBeFollowedBySpace_Wrapper a,
             SA1007_OperatorKeywordMustBeFollowedBySpace_Wrapper b)
         {
-            return a;
+            return a == b ? a : b;
         }
     }
 

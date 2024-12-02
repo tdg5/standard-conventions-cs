@@ -7,22 +7,27 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.DocumentationRules;
 /// </summary>
 internal partial class UndocumentedPublicPartialClassWithMembers
 {
+    private readonly bool field = true;
+
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     [CodeAnalysisViolationExpected("SA1601", "Warning")]
     public partial void PublicPartialMethod()
     {
+        InternalPartialMethod();
     }
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     [CodeAnalysisViolationExpected("SA1601", "Warning")]
     internal partial void InternalPartialMethod()
     {
+        ProtectedPartialMethod();
     }
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
     [CodeAnalysisViolationExpected("SA1601", "Warning")]
     protected partial void ProtectedPartialMethod()
     {
+        PrivatePartialMethod();
     }
 
     [CodeAnalysisViolationExpected(
@@ -35,5 +40,6 @@ internal partial class UndocumentedPublicPartialClassWithMembers
         disabledReason: "Private partial methods don't require documentation.")]
     private partial void PrivatePartialMethod()
     {
+        NoopHelper.Noop(field);
     }
 }

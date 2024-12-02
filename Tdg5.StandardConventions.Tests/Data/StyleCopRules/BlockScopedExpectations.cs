@@ -17,6 +17,7 @@ public class BlockScopedExpectations
     /// An interface that does not begin with the letter I.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1302", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE1006")]
     public interface SA1302_InterfaceNamesMustBeginWithI
     {
     }
@@ -275,6 +276,8 @@ public class BlockScopedExpectations
     /// A method that uses a default constructor for a value type.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1129", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0028")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0090")]
     public static void SA1129_DoNotUseDefaultValueTypeConstructor()
     {
         static ImmutableArray<int> Method() => new ImmutableArray<int>();
@@ -285,6 +288,7 @@ public class BlockScopedExpectations
     /// A method that uses a delegate instead of a lambda.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1130", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0039")]
     public static void SA1130_UseLambdaSyntax()
     {
         int x = 0;
@@ -363,6 +367,7 @@ public class BlockScopedExpectations
     /// A method that starts with a lowercase letter.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1300", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE1006")]
     public static void a_SA1300_ElementMustBeginWithUpperCaseLetter()
     {
     }
@@ -434,6 +439,7 @@ public class BlockScopedExpectations
     /// precedence.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1407", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0048")]
     public static void SA1407_ArithmeticExpressionsMustDeclarePrecedence()
     {
         int x = 1 + 2 * 3;
@@ -446,6 +452,7 @@ public class BlockScopedExpectations
     /// precedence.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1408", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0048")]
     public static void SA1408_ConditionalExpressionsMustDeclarePrecedence()
     {
         bool x = false || true && true && false || true;
@@ -458,6 +465,7 @@ public class BlockScopedExpectations
     /// trailing comma.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1413", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0300")]
     public static void SA1413_UseTrailingCommasInMultiLineInitializers()
     {
         static int[] Method() => new int[]
@@ -1279,11 +1287,10 @@ public class BlockScopedExpectations
     public class SA1617_VoidReturnValueMustNotBeDocumented()
     {
         /// <summary>
-        /// Digest the given value.
+        /// Do nothing.
         /// </summary>
-        /// <param name="value">The given value.</param>
         /// <returns>/dev/null.</returns>
-        public static void Method(int value)
+        public static void Method()
         {
         }
     }
@@ -1403,6 +1410,7 @@ public class BlockScopedExpectations
     /// A class that has a destructor that doesn't begin with the standard text.
     /// </summary>
     [CodeAnalysisViolationExpected("SA1643", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("CA1821")]
     public class SA1643_DestructorSummaryDocumentationMustBeginWithStandardText
     {
         /// <summary>

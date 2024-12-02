@@ -73,8 +73,12 @@ public class TestProjectBuilder
             result,
             $"Build failed: {testOutputLogger.ErrorMessage}");
 
+        var diagnostics =
+            new TestProjectAnalyzer(globalProperties).AnalyzeProject(projectPath);
+
         return new(
             compileFilePaths: GetCompileFilesFullPaths(project),
+            diagnostics: diagnostics,
             outputPath: outputPath,
             warningsAndErrors: warningAndErrorLogger);
     }

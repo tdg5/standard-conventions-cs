@@ -17,7 +17,7 @@ public class ClassWithElementsNotOrderedByConstance
 
     private ClassWithElementsNotOrderedByConstance()
     {
-        nonConstantField =
-            ConstantField == "public const" ? nonConstantField : "other";
+        NoopHelper.NoopMemberReference(nonConstantField);
+        NoopHelper.NoopMemberReference(ConstantField);
     }
 }
