@@ -3,4 +3,10 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>Tdg5.StandardConventions.Tests.Data.EditorConfigRules</RootNamespace>
     </PropertyGroup>
+
+    <!-- Config needed to make IDE0130 work at build-time. -->
+    <ItemGroup>
+        <CompilerVisibleProperty Include="RootNamespace" />
+        <CompilerVisibleProperty Include="ProjectDir" />
+    </ItemGroup>
 </Project>

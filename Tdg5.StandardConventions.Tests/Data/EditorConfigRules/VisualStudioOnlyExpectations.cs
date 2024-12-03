@@ -84,6 +84,19 @@ public class VisualStudioOnlyExpectations
     }
 
     /// <summary>
+    /// A method that contains an unnecessary suppression.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0079", "Warning", disabledReason: "Only shows up in Visual Studio")]
+    public static void IDE0079_RemoveUnnecessarySuppression()
+    {
+        /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓---- IDE0079 */
+#pragma warning disable IDE0051
+        NoopHelper.Noop("foo");
+        /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓---- IDE0079 */
+#pragma warning restore IDE0051
+    }
+
+    /// <summary>
     /// A method that contains a member reference using this that can be simplified.
     /// </summary>
     [CodeAnalysisViolationExpected(

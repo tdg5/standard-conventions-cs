@@ -4,7 +4,10 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// Attribute to specify an expected analysis code that should occur as part of
 /// the analysis of a given target.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Enum,
+    AllowMultiple = true,
+    Inherited = false)]
 public class FileAnalysisViolationExpectedAttribute : Attribute
 {
     /// <summary>

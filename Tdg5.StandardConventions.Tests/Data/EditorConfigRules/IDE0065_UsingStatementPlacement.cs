@@ -6,6 +6,7 @@ namespace Tdg5.StandardConventions.Tests.Data.EditorConfigRules
     /// The using statement above should cause an IDE0065 violation.
     /// </summary>
     [FileAnalysisViolationExpected("IDE0065", "Warning")]
+    [FileAnalysisViolationExpected("IDE0161", "Warning")]
     public class IDE0065_UsingStatementPlacement
     {
     }

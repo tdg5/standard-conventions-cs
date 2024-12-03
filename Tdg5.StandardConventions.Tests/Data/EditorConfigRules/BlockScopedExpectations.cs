@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Tdg5.StandardConventions.TestAnnotations;
 
 namespace Tdg5.StandardConventions.Tests.Data.EditorConfigRules;
@@ -423,30 +426,318 @@ public class BlockScopedExpectations
     }
 
     /// <summary>
-    /// A method that does not declare an accessibility modifier.
+    /// A method that uses a null forgiving operator where it is not necessary.
     /// </summary>
-    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
-    [IncidentalCodeAnalysisViolationExpected("SA1400")]
-    static void IDE0040_AddAccessibilityModifiers()
+    [CodeAnalysisViolationExpected("IDE0080", "Warning")]
+    public static void IDE0080_RemoveUnnecessarySuppressionOperator()
     {
+        string thing = "thing";
+        if (thing! is null)
+        {
+            NoopHelper.Noop();
+        }
     }
 
     /// <summary>
-    /// A method that is not used elsewhere in the code.
+    /// A method that uses the typeof operator followed by Name.
     /// </summary>
-    [CodeAnalysisViolationExpected("IDE0051", "Warning")]
-    private static void IDE0051_RemoveUnusedPrivateMember()
+    [CodeAnalysisViolationExpected("IDE0082", "Warning")]
+    public static void IDE0082_ConvertTypeofToNameof()
     {
+        string name = typeof(string).Name;
+        NoopHelper.Noop(name);
+    }
+
+    /// <summary>
+    /// A method that doesn't use the not operator when pattern matching.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0083", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0078")]
+    public static void IDE0083_UsePatternMatchingNotOperator()
+    {
+        object value = "value";
+        if (!(value is string))
+        {
+            NoopHelper.Noop();
+        }
+    }
+
+    /// <summary>
+    /// A method containing a new expression that could be simplified.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0090", "Warning")]
+    public static void IDE0090_SimplifyNewExpression()
+    {
+        object thing = new object();
+        NoopHelper.Noop(thing);
+    }
+
+    /// <summary>
+    /// A method that makes a comparison using an unnecessary equality operator.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0100", "Warning")]
+    public static void IDE0100_RemoveUnnecessaryEqualitysOperator()
+    {
+        bool value = true;
+        if (value == true)
+        {
+            NoopHelper.Noop();
+        }
+    }
+
+    /// <summary>
+    /// A method that contains an unnecessary discard.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0110", "Warning")]
+    public static void IDE0110_RemoveUnnecessaryDiscard()
+    {
+        object obj = 5;
+        switch (obj)
+        {
+            case int _:
+                NoopHelper.Noop(obj);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// A method that calls Enumerable.Where unnecessarily.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0120", "Info")]
+    public static void IDE0120_SimplifyLinqExpression()
+    {
+        var count = Enumerable.Range(0, 100)
+            .Where(x => x % 2 == 0)
+            .Count();
+        NoopHelper.Noop(count);
+    }
+
+    /// <summary>
+    /// A method that performs a type check where a null check is more appropriate.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0150", "Warning")]
+    public static void IDE0150_PreferNullCheckOverTypeCheck()
+    {
+        int[]? numbers = null;
+        if (numbers is not int[])
+        {
+            NoopHelper.Noop();
+        }
+    }
+
+    /// <summary>
+    /// A method that does not use extend property pattern matching.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0170", "Warning")]
+    public static void IDE0170_SimplifyPropertyPattern()
+    {
+        static bool IsEndOnXAxis(Segment segment) =>
+            segment is { Start: { Y: 0 } } or { End: { Y: 0 } };
+        NoopHelper.Noop(IsEndOnXAxis(null!));
+    }
+
+    /// <summary>
+    /// A method that swaps values without using a tuple.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0180", "Info")]
+    public static void IDE0180_UseTupleToSwapValues()
+    {
+        List<int> numbers = [5, 6, 4];
+
+        int temp = numbers[0];
+        numbers[0] = numbers[1];
+        numbers[1] = temp;
+    }
+
+    /// <summary>
+    /// A method containing an unused lambda expression.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0200", "Warning")]
+    public static void IDE0200_RemoveUnnecessaryLambdaExpression()
+    {
+        static bool IsEven(int x) => x % 2 == 0;
+        List<int> list = [1, 2, 3, 4, 5];
+        _ = list.Where(n => IsEven(n));
+    }
+
+    /// <summary>
+    /// A method containing a foreach statement that doesn't use an explicit cast.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0220", "Warning")]
+    public static void IDE0220_AddExplicitCastInForeachLoop()
+    {
+        var list = new List<object>();
+        foreach (string item in list)
+        {
+            NoopHelper.Noop(item);
+        }
+    }
+
+    /// <summary>
+    /// A method that could use a UTF-8 string instead of a byte array.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0230", "Info")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0300")]
+    public static void IDE0230_UseUtf8StringLiteral()
+    {
+        ReadOnlySpan<byte> span = new byte[] { 65, 66, 67 };
+        NoopHelper.Noop(span[0]);
+    }
+
+    /// <summary>
+    /// A method that contains an unnecessary nullable directive.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0240", "Warning")]
+    public static void IDE0240_NullableDirectiveIsRedundant()
+    {
+#nullable enable
+    }
+
+    /// <summary>
+    /// A method that contains an as expression that uses the null conditional
+    /// operator for member access.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0260", "Info")]
+    public static void IDE0260_PreferPatternMatchingOverAsWithNullConditionalOperator()
+    {
+        object? o = null;
+        if ((o as string)?.Length == 0)
+        {
+            NoopHelper.Noop();
+        }
+    }
+
+    /// <summary>
+    /// A method that contains a null check that could be replaced by the null
+    /// coalescing operator.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0270", "Warning")]
+    public static void IDE0270_PreferNullCoalescingExpressions()
+    {
+        static object? FindItem() => null;
+        var item = FindItem();
+        if (item == null)
+        {
+            throw new InvalidOperationException("Value is null.");
+        }
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression when creating an
+    /// array.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0300", "Warning")]
+    public static void IDE0300_UseCollectionExpressionForArray()
+    {
+        int[] list = new int[] { 1, 2, 3 };
+        NoopHelper.Noop(list);
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression when creating an
+    /// empty array.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0301", "Warning")]
+    public static void IDE0301_UseCollectionExpressionForEmpty()
+    {
+        int[] list = Array.Empty<int>();
+        NoopHelper.Noop(list);
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression when creating a
+    /// stackalloc array.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0302", "Warning")]
+    public static void IDE0302_UseCollectionExpressionForStackalloc()
+    {
+        ReadOnlySpan<int> collection = stackalloc int[] { 1, 2, 3 };
+        NoopHelper.Noop(collection[0]);
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression when creating an
+    /// immutable array.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0303", "Warning")]
+    public static void IDE0303_UseCollectionExpressionForCreate()
+    {
+        ImmutableArray<int> collection = ImmutableArray.Create(1, 2, 3);
+        NoopHelper.Noop(collection);
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression and instead uses an
+    /// immutable array builder.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0304", "Warning")]
+    public static void IDE0304_UseCollectionExpressionForBuilder()
+    {
+        var builder = ImmutableArray.CreateBuilder<int>();
+        builder.Add(1);
+        ImmutableArray<int> collection = builder.ToImmutable();
+        NoopHelper.Noop(collection);
+    }
+
+    /// <summary>
+    /// A method that does not use a collection expression and instead uses a
+    /// fluent expression.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0305", "Warning")]
+    public static void IDE0305_UseCollectionExpressionForFluent()
+    {
+        int x = 0;
+        List<int> list = new[] { x, 1, 2, 3 }.ToList();
+        NoopHelper.Noop(list);
+    }
+
+    /// <summary>
+    /// A method that includes an anonymous function that could be made static.
+    /// </summary>
+    [CodeAnalysisViolationExpected(
+        "IDE0320", "Info", disabledReason: "I couldn't trigger IDE0320.")]
+    public static void IDE0320_MakeAnonymousFunctionStatic()
+    {
+        var y = 0;
+        void Method(Func<int, int> function)
+        {
+            function(y + 1);
+        }
+
+        Method(static x => x + 1);
+    }
+
+    /// <summary>
+    /// A method that uses a conditional expression to decide to execute a
+    /// function or not.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE1005", "Warning")]
+    public static void IDE1005_UseConditionalDelegateCall()
+    {
+        Func<int, int>? func = null;
+        if (func != null)
+        {
+            func(0);
+        }
+    }
+
+    /// <summary>
+    /// A method that does not declare an accessibility modifier.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0040", "Warning")]
+    [IncidentalCodeAnalysisViolationExpected("SA1400")]
+    static void IDE0040_AddAccessibilityModifiers()
+    {
+        IDE0040_AddAccessibilityModifiers();
     }
 
     /// <summary>
     /// A method that contains a private method with an unused parameter.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0060", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     private static void IDE0060_RemoveUnusedParameter(int unusedParameter)
     {
+        IDE0060_RemoveUnusedParameter(0);
     }
 
     /// <summary>
@@ -479,6 +770,37 @@ public class BlockScopedExpectations
             this = new IDE0064_MakeStructFieldsWritable(5);
         }
     }
+
+    /// <summary>
+    /// A struct that contains only readonly fields and can be made readonly.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0250", "Info")]
+    public struct IDE0250_StructCanBeMadeReadonly
+    {
+        /// <summary>
+        /// A value.
+        /// </summary>
+        public readonly int Value;
+    }
+
+    /// <summary>
+    /// A struct that contains a member that could be made readonly.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0251", "Info")]
+    public struct IDE0251_MemberCanBeMadeReadonly
+    {
+        /// <summary>
+        /// A method that does nothing.
+        /// </summary>
+        public void Noop()
+        {
+            NoopHelper.Noop(this);
+        }
+    }
+
+    private record Point(int X, int Y);
+
+    private record Segment(Point Start, Point End);
 
     /// <summary>
     /// A class containing a constructor that uses an expression body.
@@ -640,6 +962,22 @@ public class BlockScopedExpectations
                 Color.Blue => "Blue",
                 _ => "Unknown",
             };
+        }
+    }
+
+    /// <summary>
+    /// A class that contains a method with an attribute that uses a literal
+    /// parameter name instead of the nameof operator.
+    /// </summary>
+    [CodeAnalysisViolationExpected("IDE0280", "Warning")]
+    public class IDE0280_UseNameOf
+    {
+        /// <summary>
+        /// A method that does nothing.
+        /// </summary>
+        /// <param name="input">Arbitrary input.</param>
+        public static void Method([NotNullIfNotNull("input")] string? input)
+        {
         }
     }
 }

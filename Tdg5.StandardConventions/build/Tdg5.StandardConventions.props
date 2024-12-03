@@ -2,6 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Tdg5StandardConventionsStylecopJsonPath>$(MSBuildThisFileDirectory)../stylecop.json</Tdg5StandardConventionsStylecopJsonPath>
   </PropertyGroup>

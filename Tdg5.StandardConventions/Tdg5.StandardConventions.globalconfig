@@ -11,6 +11,9 @@ csharp_preferred_modifier_order = public,private,protected,internal,static,exter
 # Prefer expression bodies for lambdas.
 csharp_style_expression_bodied_lambdas = true:warning
 
+# Namespace declarations should be file scoped.
+csharp_style_namespace_declarations = file_scoped
+
 # Prefer pattern matching instead of is expressions with type casts.
 csharp_style_pattern_matching_over_is_with_cast_check = true
 
@@ -38,7 +41,7 @@ dotnet_style_predefined_type_for_member_access = true:suggestion
 # Prefer compound assignment expressions.
 dotnet_style_prefer_compound_assignment = true:warning
 
-# Don't requrie this when accessing member event, field, method, or property.
+# Don't requrie 'this.' when accessing member event, field, method, or property.
 dotnet_style_qualification_for_event = false:suggestion
 dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
@@ -64,12 +67,13 @@ dotnet_diagnostic.IDE0004.severity = warning
 dotnet_diagnostic.IDE0005.severity = warning
 
 # IDE0009: Simplify member access.
+# Motivation: 'this.' is only required where necessary.
 dotnet_diagnostic.IDE0009.severity = none
 
 # IDE0011: Surround blocks of code with curly braces.
 dotnet_diagnostic.IDE0011.severity = warning
 
-# IDE0018: Surround blocks of code with curly braces.
+# IDE0018: Prefer inline 'out' variable declaration.
 dotnet_diagnostic.IDE0018.severity = warning
 
 # IDE0019: Use pattern matching to avoid null check.
@@ -102,7 +106,7 @@ dotnet_diagnostic.IDE0036.severity = warning
 # IDE0037: Use inferred member names.
 # Motivation: Allow explicit member names since they are less likely to be
 # broken accidentally by renaming a variable.
-dotnet_diagnostic.IDE0037.severity = none
+dotnet_diagnostic.IDE0037.severity = silent
 
 # IDE0038: Use pattern matching to avoid is check followed by cast (without variable).
 dotnet_diagnostic.IDE0038.severity = warning
@@ -132,6 +136,7 @@ dotnet_diagnostic.IDE0045.severity = suggestion
 dotnet_diagnostic.IDE0046.severity = suggestion
 
 # IDE0047: Remove unnecessary parentheses.
+# Motivation: Unnecessary parentheses can clarify intent.
 dotnet_diagnostic.IDE0047.severity = silent
 
 # IDE0048: Add parentheses for clarity.
@@ -162,6 +167,7 @@ dotnet_diagnostic.IDE0056.severity = suggestion
 dotnet_diagnostic.IDE0057.severity = suggestion
 
 # IDE0058: Expression value is never used.
+# Motivation: Don't require acknowledging a discarded return value.
 dotnet_diagnostic.IDE0058.severity = silent
 
 # IDE0059: Unnecessary assignment to a value.
@@ -171,6 +177,7 @@ dotnet_diagnostic.IDE0059.severity = warning
 dotnet_diagnostic.IDE0060.severity = warning
 
 # IDE0061: Use expression body for local functions.
+# Motivation: Though preferred, don't require expression bodies for local functions.
 dotnet_diagnostic.IDE0061.severity = silent
 
 # IDE0062: Make local function static.
@@ -219,9 +226,119 @@ dotnet_diagnostic.IDE0077.severity = warning
 # IDE0078: Use pattern matching.
 dotnet_diagnostic.IDE0078.severity = suggestion
 
+# IDE0079: Remove unnecessary suppression.
+dotnet_diagnostic.IDE0079.severity = warning
+
+# IDE0080: Remove unnecessary suppression operator.
+dotnet_diagnostic.IDE0080.severity = warning
+
+# IDE0082: Convert 'typeof' to 'nameof'.
+dotnet_diagnostic.IDE0082.severity = warning
+
+# IDE0083: Use pattern matching (not operator).
+dotnet_diagnostic.IDE0083.severity = warning
+
+# IDE0090: Simplify new expression.
+dotnet_diagnostic.IDE0090.severity = warning
+
+# IDE0100: Remove unnecessary equality operator.
+dotnet_diagnostic.IDE0100.severity = warning
+
+# IDE0110: Remove unnecessary discard.
+dotnet_diagnostic.IDE0110.severity = warning
+
+# IDE0120: Simplify LINQ expression.
+dotnet_diagnostic.IDE0120.severity = suggestion
+
+# IDE0130: Namespace does not match folder structure.
+dotnet_diagnostic.IDE0130.severity = warning
+
+# IDE0150: Prefer 'null' check over type check.
+dotnet_diagnostic.IDE0150.severity = warning
+
+# IDE0160: Use block-scoped namespace.
+# Motivation: Prefer file-scoped namespaces (IDE0161).
+dotnet_diagnostic.IDE0160.severity = none
+
+# IDE0161: Use file-scoped namespace.
+dotnet_diagnostic.IDE0161.severity = warning
+
+# IDE0170: Simplify property pattern.
+dotnet_diagnostic.IDE0170.severity = warning
+
+# IDE0180: Use tuple to swap values.
+dotnet_diagnostic.IDE0180.severity = suggestion
+
+# IDE0200: Remove unnecessary lambda expression.
+dotnet_diagnostic.IDE0200.severity = warning
+
+# IDE0210: Use top-level statements.
+# Motivation: A Program class should be preferred because it is easier to
+# document and more likely to use good hygiene.
+dotnet_diagnostic.IDE0210.severity = silent
+
+# IDE0211: Use program main.
+# Motivation: Though recommended, don't require a Program class.
+dotnet_diagnostic.IDE0211.severity = silent
+
+# IDE0220: Add explicit cast in foreach loop.
+dotnet_diagnostic.IDE0220.severity = warning
+
+# IDE0230: Use UTF8 string literal.
+dotnet_diagnostic.IDE0230.severity = suggestion
+
+# IDE0240: Nullable directive is redundant.
+dotnet_diagnostic.IDE0240.severity = warning
+
+# IDE0241: Nullable directive is unnecessary.
+dotnet_diagnostic.IDE0241.severity = warning
+
+# IDE0250: Struct can be made 'readonly'.
+dotnet_diagnostic.IDE0250.severity = suggestion
+
+# IDE0251: Member can be made 'readonly'.
+dotnet_diagnostic.IDE0251.severity = suggestion
+
+# IDE0260: Prefer pattern matching over as expression with null-conditional
+# member access.
+dotnet_diagnostic.IDE0260.severity = suggestion
+
+# IDE0270: Prefer null coalescing expressions.
+dotnet_diagnostic.IDE0270.severity = warning
+
+# IDE0280: Use 'nameof'.
+dotnet_diagnostic.IDE0280.severity = warning
+
 # IDE0290: Use primary constructor.
 # Motivation: Primary constructors can muddle class documentation.
 dotnet_diagnostic.IDE0290.severity = silent
+
+# IDE0300: Use collection expression for array.
+dotnet_diagnostic.IDE0300.severity = warning
+
+# IDE0301: Use collection expression for empty.
+dotnet_diagnostic.IDE0301.severity = warning
+
+# IDE0302: Use collection expression for stackalloc.
+dotnet_diagnostic.IDE0302.severity = warning
+
+# IDE0303: Use collection expression for Create().
+dotnet_diagnostic.IDE0303.severity = warning
+
+# IDE0304: Use collection expression for builder.
+dotnet_diagnostic.IDE0304.severity = warning
+
+# IDE0305: Use collection expression for fluent.
+dotnet_diagnostic.IDE0305.severity = warning
+
+# IDE0320: Make anonymous function static.
+dotnet_diagnostic.IDE0320.severity = suggestion
+
+# IDE0330: Prefer 'System.Threading.Lock'.
+dotnet_diagnostic.IDE0330.severity = warning
+
+# IDE1005: Use conditional delegate call.
+dotnet_diagnostic.IDE1005.severity = warning
 
 # SA0001: XML comment analysis should be enabled.
 dotnet_diagnostic.SA0001.severity = warning
@@ -321,6 +438,7 @@ dotnet_diagnostic.SA1028.severity = warning
 dotnet_diagnostic.SA1100.severity = warning
 
 # SA1101: Prefix local calls with this.
+# Motivation: 'this.' is only required where necessary.
 dotnet_diagnostic.SA1101.severity = none
 
 # SA1102: Query clause should follow previous clause.
@@ -346,6 +464,7 @@ dotnet_diagnostic.SA1107.severity = warning
 dotnet_diagnostic.SA1108.severity = warning
 
 # SA1109: Block statements should not contain embedded regions.
+# Motivation: All violations of rule SA1109 are also violations of rule SA1123.
 dotnet_diagnostic.SA1109.severity = none
 
 # SA1110: Opening parenthesis or bracket should be on declaration line.
@@ -394,6 +513,7 @@ dotnet_diagnostic.SA1124.severity = warning
 dotnet_diagnostic.SA1125.severity = warning
 
 # SA1126: Prefix calls correctly.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1126.severity = none
 
 # SA1127: Generic type constraints should be on their own line.
@@ -498,8 +618,8 @@ dotnet_diagnostic.SA1217.severity = warning
 dotnet_diagnostic.SA1300.severity = warning
 
 # SA1301: Element should begin with lower-case letter.
-# Motivation: As of 2024-11-14, there are no situations in which this rule will
-# fire.
+# Motivation: This rule is defunct and there are no situations in which this
+# rule will fire.
 dotnet_diagnostic.SA1301.severity = none
 
 # SA1302: Interface names should begin with I.
@@ -512,6 +632,7 @@ dotnet_diagnostic.SA1303.severity = warning
 dotnet_diagnostic.SA1304.severity = warning
 
 # SA1305: Field names should not use Hungarian notation.
+# Motivation: This rule is disabled by default and is too easily confused.
 dotnet_diagnostic.SA1305.severity = none
 
 # SA1306: Field names should begin with lower-case letter.
@@ -524,6 +645,7 @@ dotnet_diagnostic.SA1307.severity = warning
 dotnet_diagnostic.SA1308.severity = warning
 
 # SA1309: Field names should not begin with underscore.
+# Motivation: Allow field names to start with an underscore.
 dotnet_diagnostic.SA1309.severity = none
 
 # SA1310: Field names should not contain underscore.
@@ -542,9 +664,11 @@ dotnet_diagnostic.SA1313.severity = warning
 dotnet_diagnostic.SA1314.severity = warning
 
 # SX1309: Field names should begin with underscore.
+# Motivation: Don't require field names to start with an underscore.
 dotnet_diagnostic.SX1309.severity = none
 
 # SX1309S: Static field names should begin with underscore.
+# Motivation: Don't require static field names to start with an underscore.
 dotnet_diagnostic.SX1309S.severity = none
 
 # SA1119: Statement should not use unnecessary parenthesis.
@@ -578,6 +702,7 @@ dotnet_diagnostic.SA1407.severity = warning
 dotnet_diagnostic.SA1408.severity = warning
 
 # SA1409: Remove unnecessary code.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1409.severity = none
 
 # SA1410: Remove delegate parenthesis when possible.
@@ -668,7 +793,7 @@ dotnet_diagnostic.SA1601.severity = warning
 dotnet_diagnostic.SA1602.severity = warning
 
 # SA1603: Documentation should contain valid XML.
-# This is a duplicate of CS1570.
+# Motivation: This is a duplicate of CS1570.
 dotnet_diagnostic.SA1603.severity = none
 
 # SA1604: Element documentation should have summary.
@@ -687,6 +812,7 @@ dotnet_diagnostic.SA1607.severity = warning
 dotnet_diagnostic.SA1608.severity = warning
 
 # SA1609: Property documentation should have value.
+# Motivation: Value tends to repeat the content of summary.
 dotnet_diagnostic.SA1609.severity = none
 
 # SA1610: Property documentation should have value text.
@@ -744,18 +870,22 @@ dotnet_diagnostic.SA1626.severity = warning
 dotnet_diagnostic.SA1627.severity = warning
 
 # SA1628: Documentation text should begin with a capital letter.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1628.severity = none
 
 # SA1629: Documentation text should end with a period.
 dotnet_diagnostic.SA1629.severity = warning
 
 # SA1630: Documentation text should contain whitespace.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1630.severity = none
 
 # SA1631: Documentation should meet character percentage.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1631.severity = none
 
 # SA1632: Documentation text should meet minimum character length.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1632.severity = none
 
 # SA1633: File should have header.
@@ -810,15 +940,19 @@ dotnet_diagnostic.SA1642.severity = warning
 dotnet_diagnostic.SA1643.severity = warning
 
 # SA1644: Documentation headers should not contain blank lines.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1644.severity = none
 
 # SA1645: Included documentation file does not exist.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1645.severity = none
 
 # SA1646: Included documentation XPath does not exist.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1646.severity = none
 
 # SA1647: Include node does not contain valid file and path.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1647.severity = none
 
 # SA1648: Inheritdoc should be used with inheriting class.
@@ -828,6 +962,7 @@ dotnet_diagnostic.SA1648.severity = warning
 dotnet_diagnostic.SA1649.severity = warning
 
 # SA1650: Element documentation should be spelled correctly.
+# Motivation: StyleCopAnalyzers doesn't implement this classic rule.
 dotnet_diagnostic.SA1650.severity = none
 
 # SA1651: Do not use placeholder elements.

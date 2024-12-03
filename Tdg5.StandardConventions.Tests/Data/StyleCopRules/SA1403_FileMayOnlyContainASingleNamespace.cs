@@ -16,8 +16,9 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopRules.SA1403_FileMayOnlyCo
     /// Class in a different namespace.
     /// </summary>
     /// <remarks>
-    /// Also triggers SA1402.
+    /// Also triggers IDE0130 and SA1402.
     /// </remarks>
+    [FileAnalysisViolationExpected("IDE0130", "Warning")]
     [FileAnalysisViolationExpected("SA1402", "Warning")]
     [FileAnalysisViolationExpected("SA1403", "Warning")]
     public class SA1403_FileMayOnlyContainASingleNamespace

@@ -6,6 +6,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules
     /// The using statement above should cause an SA1200 violation.
     /// </summary>
     [FileAnalysisViolationExpected("IDE0065", "Warning")]
+    [FileAnalysisViolationExpected("IDE0161", "Warning")]
     [FileAnalysisViolationExpected(
         "SA1200",
         "Warning",
