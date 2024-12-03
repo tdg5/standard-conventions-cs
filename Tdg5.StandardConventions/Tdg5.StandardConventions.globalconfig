@@ -6,7 +6,7 @@ insert_final_newline = true
 is_global = true
 
 # Preferred modifier order.
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:warning
 
 # Prefer expression bodies for lambdas.
 csharp_style_expression_bodied_lambdas = true:warning
