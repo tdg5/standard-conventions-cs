@@ -580,7 +580,8 @@ public class BlockScopedExpectations
     /// A method that contains a closing brace that is not followed by a blank
     /// line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1513", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1513", "Warning", disabledReason: "SA1513 is silenced")]
     public static void SA1513_ClosingBraceMustBeFollowedByBlankLine()
     {
         static int Method() => 0;

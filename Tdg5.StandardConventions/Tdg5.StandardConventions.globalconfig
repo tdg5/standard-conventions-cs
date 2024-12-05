@@ -797,7 +797,8 @@ dotnet_diagnostic.SA1511.severity = warning
 dotnet_diagnostic.SA1512.severity = warning
 
 # SA1513: Closing brace should be followed by blank line.
-dotnet_diagnostic.SA1513.severity = warning
+# Motivation: This rule is too pragmatic in practice.
+dotnet_diagnostic.SA1513.severity = none
 
 # SA1514: Element documentation header should be preceded by blank line.
 dotnet_diagnostic.SA1514.severity = warning
