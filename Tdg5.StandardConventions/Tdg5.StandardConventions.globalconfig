@@ -47,6 +47,43 @@ dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion
 
+# CA1000: Do not declare static members on generic types.
+# Motivation: A static member on a generic type can be practical.
+dotnet_diagnostic.CA1000.severity = silent
+
+# CA1001: Types that own disposable fields should be disposable.
+dotnet_diagnostic.CA1001.severity = suggestion
+
+# CA1002: Do not expose generic lists.
+# Motivation: Working with List<T> is often practical.
+dotnet_diagnostic.CA1002.severity = silent
+
+# CA1018: Mark attributes with AttributeUsageAttribute.
+dotnet_diagnostic.CA1018.severity = warning
+
+# CA1036: Override methods on comparable types.
+dotnet_diagnostic.CA1036.severity = warning
+
+# CA1047: Do not declare protected member in sealed type.
+# Remarks: In C# this is covered by CS0628.
+dotnet_diagnostic.CA1047.severity = warning
+
+# CA1050: Declare types in namespaces.
+dotnet_diagnostic.CA1050.severity = warning
+
+# CA1051: Do not declare visible instance fields.
+# Motivation: SA1401 is enabled instead.
+dotnet_diagnostic.CA1051.severity = silent
+
+# CA1511: Use ArgumentException throw helper.
+dotnet_diagnostic.CA1511.severity = warning
+
+# CA1512: Use ArgumentOutOfRangeException throw helper.
+dotnet_diagnostic.CA1512.severity = warning
+
+# CA1513: Use ObjectDisposedException throw helper.
+dotnet_diagnostic.CA1513.severity = warning
+
 # CS1591: Missing documentation for public type.
 # Motivation: Prefer SA1600 instead.
 dotnet_diagnostic.CS1591.severity = none
