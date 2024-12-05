@@ -62,7 +62,7 @@ jobs:
             --title "$RELEASE_NAME" \
             --verify-tag \
             "$RELEASE_NAME" \
-            $OUTPUT_DIR/*.nupkg
+            "$OUTPUT_DIR/Tdg5.StandardConventions.${{ github.event.inputs.version }}.nupkg"
 
 name: Release package
 
