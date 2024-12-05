@@ -36,11 +36,11 @@ jobs:
 
       - name: Run quality checks
         run: |
-          # Check format
+          # Check format.
           dotnet format --verify-no-changes
 
-          # Run tests
-          dotnet test --no-restore
+          # Purge some NuGet caches and run tests.
+          HARD=true ./scripts/clean-and-test.sh
 
-          # Ensure pack works
+          # Ensure pack works.
           dotnet pack --no-restore

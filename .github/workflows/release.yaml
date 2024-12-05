@@ -21,7 +21,8 @@ jobs:
 
           dotnet format --verify-no-changes
 
-          dotnet test --no-restore
+          # Purge some NuGet caches and run tests.
+          HARD=true ./scripts/clean-and-test.sh
 
           dotnet pack \
             --configuration Release \
