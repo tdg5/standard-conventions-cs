@@ -568,7 +568,8 @@ public class BlockScopedExpectations
     /// A method that contains a single line comment that is not preceded by a
     /// blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1515", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1515", "Warning", disabledReason: "SA1515 is silenced")]
     public static void SA1515_SingleLineCommentMustBePrecededByBlankLine()
     {
         static int Method() => 0;
