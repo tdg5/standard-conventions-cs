@@ -304,7 +304,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that ignores a computed value.
     /// </summary>
-    [CodeAnalysisViolationExpected("IDE0058", "Info")]
+    [CodeAnalysisViolationExpected(
+        "IDE0058", "Info", disabledReason: "IDE0058 is silenced")]
     public static void IDE0058_RemoveUnnecessaryExpressionValue()
     {
         static int Method() => 5;
