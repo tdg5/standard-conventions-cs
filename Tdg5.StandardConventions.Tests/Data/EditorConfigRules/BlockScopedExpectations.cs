@@ -254,7 +254,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a lambda with a block body.
     /// </summary>
-    [CodeAnalysisViolationExpected("IDE0053", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "IDE0053", "Info", disabledReason: "IDE0053 is silenced")]
     [IncidentalCodeAnalysisViolationExpected("IDE0039")]
     public static void IDE0053_UseExpressionBodyForLambdas()
     {
@@ -303,8 +304,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that ignores a computed value.
     /// </summary>
-    [CodeAnalysisViolationExpected(
-        "IDE0058", "Warning", disabledReason: "IDE0058 has a severity of silent.")]
+    [CodeAnalysisViolationExpected("IDE0058", "Info")]
     public static void IDE0058_RemoveUnnecessaryExpressionValue()
     {
         static int Method() => 5;
@@ -325,7 +325,7 @@ public class BlockScopedExpectations
     /// A method that contains a local function with a block body.
     /// </summary>
     [CodeAnalysisViolationExpected(
-        "IDE0061", "Warning", disabledReason: "IDE0061 has a severity of silent.")]
+        "IDE0061", "Warning", disabledReason: "IDE0061 is silenced")]
     public static void IDE0061_UseExpressionBodyForLocalFunctions()
     {
         static int Method()
