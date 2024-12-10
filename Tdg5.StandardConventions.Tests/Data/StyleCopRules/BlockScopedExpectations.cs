@@ -479,7 +479,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that contains a statement that should use braces, but does not.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1503", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1503", "Warning", disabledReason: "SA1503 is silenced")]
     [IncidentalCodeAnalysisViolationExpected("IDE0011")]
     public static void SA1503_BracesMustNotBeOmitted()
     {

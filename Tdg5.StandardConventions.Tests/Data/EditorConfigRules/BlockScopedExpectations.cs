@@ -43,7 +43,8 @@ public class BlockScopedExpectations
     /// A method that contains a statement that should use braces, but does not.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0011", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("SA1503")]
+    [IncidentalCodeAnalysisViolationExpected(
+        "SA1503", disabledReason: "SA1503 is silenced")]
     public static void IDE0011_SurroundBlocksOfCodeWithCurlyBraces()
     {
         if (true)

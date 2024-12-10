@@ -768,7 +768,8 @@ dotnet_diagnostic.SA1501.severity = warning
 dotnet_diagnostic.SA1502.severity = warning
 
 # SA1503: Braces should not be omitted.
-dotnet_diagnostic.SA1503.severity = warning
+# Motivation: Prefer IDE001 which covers the same cases and has a quick fix action.
+dotnet_diagnostic.SA1503.severity = silent
 
 # SA1504: All accessors should be single-line or multi-line.
 dotnet_diagnostic.SA1504.severity = warning
