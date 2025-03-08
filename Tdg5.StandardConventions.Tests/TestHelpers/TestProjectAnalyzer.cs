@@ -35,6 +35,17 @@ public class TestProjectAnalyzer
             .AnalyzerReferences
             .SelectMany(r => r.GetAnalyzers(project.Language))
             .ToImmutableArray();
+        foreach (var analyzerReference in project.AnalyzerReferences)
+        {
+            Console.WriteLine(analyzerReference.Id);
+        }
+        foreach (var analyzer in analyzers)
+        {
+            foreach (var thing in analyzer.SupportedDiagnostics)
+            {
+                Console.WriteLine(thing.Id);
+            }
+        }
         var compilation = project.GetCompilationAsync().Result
             ?? throw new InvalidOperationException("Failed to compile project.");
 

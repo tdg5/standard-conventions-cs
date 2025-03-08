@@ -2,9 +2,9 @@ name: Quality Check
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dotnet-9.0.2-debug]
   push:
-    branches: [main]
+    branches: [dotnet-9.0.2-debug]
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         dotnet-version:
-          - '9.0'
+          - '9.0.100'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
