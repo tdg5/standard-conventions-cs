@@ -31,10 +31,29 @@ public class TestProjectAnalyzer
     public IEnumerable<Diagnostic> AnalyzeProject(string projectPath)
     {
         var project = workspace.OpenProjectAsync(projectPath).Result;
+        var analyzerOptions = project.AnalyzerOptions;
+        var provider = analyzerOptions.AnalyzerConfigOptionsProvider;
+        var options = provider.GlobalOptions;
+        foreach (var key in options.Keys)
+        {
+            var value = options.TryGetValue(key, out var v) ? v : "nada";
+            Console.WriteLine($"{key}: {value}");
+        }
         var analyzers = project
             .AnalyzerReferences
             .SelectMany(r => r.GetAnalyzers(project.Language))
             .ToImmutableArray();
+        foreach (var analyzerReference in project.AnalyzerReferences)
+        {
+            Console.WriteLine(analyzerReference.Id);
+            foreach (var analyzer in analyzerReference.GetAnalyzers(project.Language))
+            {
+                foreach (var thing in analyzer.SupportedDiagnostics)
+                {
+                    Console.WriteLine(thing.Id);
+                }
+            }
+        }
         var compilation = project.GetCompilationAsync().Result
             ?? throw new InvalidOperationException("Failed to compile project.");
 
