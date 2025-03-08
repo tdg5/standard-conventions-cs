@@ -46,12 +46,12 @@ public class TestProjectAnalyzer
         foreach (var analyzerReference in project.AnalyzerReferences)
         {
             Console.WriteLine(analyzerReference.Id);
-        }
-        foreach (var analyzer in analyzers)
-        {
-            foreach (var thing in analyzer.SupportedDiagnostics)
+            foreach (var analyzer in analyzerReference.GetAnalyzers(project.Language))
             {
-                Console.WriteLine(thing.Id);
+                foreach (var thing in analyzer.SupportedDiagnostics)
+                {
+                    Console.WriteLine(thing.Id);
+                }
             }
         }
         var compilation = project.GetCompilationAsync().Result
