@@ -11,4 +11,4 @@ fi
 
 dotnet clean
 
-dotnet test
+dotnet test --logger "console;verbosity=detailed"
