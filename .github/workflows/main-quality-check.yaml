@@ -17,12 +17,14 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         dotnet-version:
           - '9.0.100'
           - '9.0.102'
           - '9.0.103'
           - '9.0.200'
+          - '9.0.201'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
