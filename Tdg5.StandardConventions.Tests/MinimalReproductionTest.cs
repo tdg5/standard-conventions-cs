@@ -24,10 +24,13 @@ public class MinimalReproductionTest : BaseTestProjectAnalysisVerifierTest
     /// <summary>
     /// Gets a version of the project path that can be used as member data.
     /// </summary>
-    public static List<object[]> TheProjectPath { get; } = [["Data/StyleCopRules/StyleCopRules.csproj"]];
+    public static List<object[]> TheProjectPaths { get; } = [
+        ["Data/StyleCopRules/StyleCopRules.csproj"],
+        [Environment.GetEnvironmentVariable("ROOT_PROJECT_PATH")!]
+    ];
 
     /// <inheritdoc/>
-    public override string ProjectPath => (TheProjectPath[0][0] as string)!;
+    public override string ProjectPath => (TheProjectPaths[0][0] as string)!;
 
     /// <summary>
     /// The minimum reproduction.
@@ -35,7 +38,7 @@ public class MinimalReproductionTest : BaseTestProjectAnalysisVerifierTest
     /// <param name="projectPath">The project to run diagnostics on.</param>
     /// <returns>A task representing the completion of the test.</returns>
     [Theory]
-    [MemberData(nameof(TheProjectPath))]
+    [MemberData(nameof(TheProjectPaths))]
     public async Task MinimumReproduction(string projectPath)
     {
         var workspace = MSBuildWorkspace.Create();

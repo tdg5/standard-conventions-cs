@@ -15,6 +15,7 @@ jobs:
   quality-check:
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+      ROOT_PROJECT_PATH: ${{ github.workspace }}/Tdg5.StandardConventions/Tdg5.StandardConventions.csproj
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -45,8 +46,9 @@ jobs:
           # Check format.
           dotnet format --verify-no-changes
 
+          export ROOT_PROJECT_PATH
           # Purge some NuGet caches and run tests.
-          HARD=true ./scripts/clean-and-test.sh
+          HARD=true ROOT_PROJECT_PATH="$ROOT_PROJECT_PATH" ./scripts/clean-and-test.sh
 
           # Ensure pack works.
           dotnet pack --no-restore

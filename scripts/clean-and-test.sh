@@ -1,5 +1,10 @@
 #!/bin/bash
 
+ROOT_PROJECT_PATH="$ROOT_PROJECT_PATH"
+echo "$ROOT_PROJECT_PATH"
+
+export ROOT_PROJECT_PATH
+
 TEST_ARTIFACTS_PATH="$HOME/.cache/Tdg5.StandardConventions.Tests/test-artifacts"
 rm -rf "$TEST_ARTIFACTS_PATH"
 find . -type d \( -name bin -o -name obj \) -print0 | xargs -0 rm -rf
@@ -11,4 +16,4 @@ fi
 
 dotnet clean
 
-dotnet test --logger "console;verbosity=detailed"
+ROOT_PROJECT_PATH="$ROOT_PROJECT_PATH" dotnet test --logger "console;verbosity=detailed"
