@@ -27,6 +27,7 @@ jobs:
           - '9.0.104'
           - '9.0.200'
           - '9.0.201'
+          - '9.0.202'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
