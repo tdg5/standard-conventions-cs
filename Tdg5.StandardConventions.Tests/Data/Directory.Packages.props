@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Tdg5.StandardConventions" Version="999.999.999.999-test.999"/>
+    <PackageVersion Include="Tdg5.StandardConventions.TestAnnotations" Version="999.999.999.999-test.999"/>
+  </ItemGroup>
+</Project>
