@@ -7,62 +7,71 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.DocumentationRules;
 /// </summary>
 internal class UndocumentedInternalClassWithMembers
 {
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     public static bool UndocumentedPublicStaticField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     public bool UndocumentedPublicField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     internal static bool UndocumentedInternalStaticField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     internal bool UndocumentedInternalField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     protected static bool undocumentedProtectedStaticField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     [IncidentalCodeAnalysisViolationExpected(
         "SA1401", contains: "Field should be private")]
     protected bool undocumentedProtectedField = false;
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private static fields don't require documentation.")]
     private static readonly bool UndocumentedPrivateStaticField = false;
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private fields don't require documentation.")]
     private readonly bool undocumentedPrivateField = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public UndocumentedInternalClassWithMembers()
         : this(5)
     {
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     internal UndocumentedInternalClassWithMembers(int ignored)
         : this(5L)
     {
         NoopHelper.Noop(ignored);
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     protected UndocumentedInternalClassWithMembers(long ignored)
         : this(true)
     {
@@ -71,73 +80,83 @@ internal class UndocumentedInternalClassWithMembers
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private constructors don't require documentation.")]
     private UndocumentedInternalClassWithMembers(bool ignored)
     {
         NoopHelper.Noop(ignored);
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public static bool UndocumentedPublicStaticProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public bool UndocumentedPublicProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     internal static bool UndocumentedInternalStaticProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     protected bool UndocumentedProtectedProperty { get; set; } = false;
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private static property don't require documentation.")]
     private static bool UndocumentedPrivateStaticProperty { get; set; } = false;
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private property don't require documentation.")]
     private bool UndocumentedPrivateProperty { get; set; } = false;
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public static void UndocumentedPublicStaticMethod()
     {
         NoopHelper.NoopMemberReference(UndocumentedPublicStaticField);
         UndocumentedInternalStaticMethod();
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public void UndocumentedPublicMethod()
     {
         NoopHelper.NoopMemberReference(UndocumentedPublicField);
         UndocumentedInternalMethod();
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     internal static void UndocumentedInternalStaticMethod()
     {
         NoopHelper.NoopMemberReference(UndocumentedInternalStaticField);
         NoopHelper.NoopMemberReference(UndocumentedInternalStaticProperty);
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     internal void UndocumentedInternalMethod()
     {
         NoopHelper.NoopMemberReference(UndocumentedInternalField);
         UndocumentedProtectedMethod();
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     protected static void UndocumentedProtectedStaticMethod()
     {
         NoopHelper.NoopMemberReference(undocumentedProtectedStaticField);
         UndocumentedPrivateStaticMethod();
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     protected void UndocumentedProtectedMethod()
     {
         NoopHelper.NoopMemberReference(undocumentedProtectedField);
@@ -147,7 +166,7 @@ internal class UndocumentedInternalClassWithMembers
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private static methods don't require documentation.")]
     private static void UndocumentedPrivateStaticMethod()
     {
@@ -157,7 +176,7 @@ internal class UndocumentedInternalClassWithMembers
 
     [CodeAnalysisViolationExpected(
         "SA1600",
-        "Warning",
+        "Info",
         disabledReason: "Private methods don't require documentation.")]
     private void UndocumentedPrivateMethod()
     {

@@ -26,7 +26,7 @@ public class BlockScopedExpectations
     /// A method containing a query clause that doesn't immediately follow the
     /// previous clause.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1102", "Warning")]
+    [CodeAnalysisViolationExpected("SA1102", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1102_QueryClauseShouldFollowPreviousClause()
     {
         List<int> numbers = [1];
@@ -49,7 +49,8 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method containing multiple statements on the same line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1107", "Warning")]
+    [CodeAnalysisViolationExpected("SA1107", "Warning", disabledReason: "Not needed with csharpier")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0055", disabledReason: "Incompatible with csharpier")]
     public static void SA1107_CodeMustNotContainMultipleStatementsOnOneLine()
     {
         List<int> thing = [1]; thing.Add(2);
@@ -89,7 +90,7 @@ public class BlockScopedExpectations
     /// A method containing a parenthesis that is not on the same line as the
     /// method it relates to.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1110", "Warning")]
+    [CodeAnalysisViolationExpected("SA1110", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1110_OpeningParenthesisMustBeOnDeclarationLine()
     {
         List<int> thing = [];
@@ -101,8 +102,8 @@ public class BlockScopedExpectations
     /// A method containing a parenthesis that is not on the same line as the
     /// last parameter.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1111", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("SA1009")]
+    [CodeAnalysisViolationExpected("SA1111", "Warning", disabledReason: "Not needed with csharpier")]
+    [IncidentalCodeAnalysisViolationExpected("SA1009", disabledReason: "SA1009 is silenced")]
     public static void SA1111_ClosingParenthesisMustBeOnLineOfLastParameter()
     {
         List<int> thing = [];
@@ -116,8 +117,8 @@ public class BlockScopedExpectations
     /// closing parenthesis that is not on the same line as the opening
     /// parenthesis.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1112", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("SA1009")]
+    [CodeAnalysisViolationExpected("SA1112", "Warning", disabledReason: "Not needed with csharpier")]
+    [IncidentalCodeAnalysisViolationExpected("SA1009", disabledReason: "SA1009 is silenced")]
     public static void SA1112_ClosingParenthesisMustBeOnLineOfOpeningParenthesis()
     {
         static int Method() => 0;
@@ -129,8 +130,8 @@ public class BlockScopedExpectations
     /// A method containing a method call including a comma that is
     /// not on the same line as the previous parameter.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1113", "Warning")]
-    [IncidentalCodeAnalysisViolationExpected("SA1001")]
+    [CodeAnalysisViolationExpected("SA1113", "Warning", disabledReason: "Not needed with csharpier")]
+    [IncidentalCodeAnalysisViolationExpected("SA1001", disabledReason: "SA1001 is silenced")]
     public static void SA1113_CommaMustBeOnSameLineAsPreviousParameter()
     {
         static int Method(int a, int b) => a + b;
@@ -143,7 +144,7 @@ public class BlockScopedExpectations
     /// A method containing a method where the parameter list doesn't
     /// immediately follow the declaration.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1114", "Warning")]
+    [CodeAnalysisViolationExpected("SA1114", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1114_ParameterListMustFollowDeclaration()
     {
         static int Method(
@@ -156,7 +157,7 @@ public class BlockScopedExpectations
     /// A method containing a method where there in a blank line between
     /// arguments.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1115", "Warning")]
+    [CodeAnalysisViolationExpected("SA1115", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1115_ParameterMustFollowComma()
     {
         static int Method(
@@ -170,7 +171,7 @@ public class BlockScopedExpectations
     /// A method containing a method where the arguments are split across multiple
     /// lines but the first argument doesn't appear on a new line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1116", "Warning")]
+    [CodeAnalysisViolationExpected("SA1116", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1116_SplitParametersMustStartOnLineAfterDeclaration()
     {
         static int Method(int a,
@@ -182,7 +183,7 @@ public class BlockScopedExpectations
     /// A method containing a method where the arguments are not all on the
     /// same line or each on its own line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1117", "Warning")]
+    [CodeAnalysisViolationExpected("SA1117", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1117_ParametersMustBeOnSameLineOrSeparateLines()
     {
         static int Method(int a, int b,
@@ -194,7 +195,10 @@ public class BlockScopedExpectations
     /// A method containing a method call where a parameter other than the first
     /// is broken across multiple lines.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1118", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1118",
+        "Warning",
+        disabledReason: "Not needed with csharpier and SA1118 is silenced otherwise.")]
     public static void SA1118_ParameterMustNotSpanMultipleLines()
     {
         static int Method(int a, int b) => a + b;
@@ -267,7 +271,7 @@ public class BlockScopedExpectations
     /// A method with a generic constraint that is not on a new line.
     /// </summary>
     /// <typeparam name="T">A type parameter.</typeparam>
-    [CodeAnalysisViolationExpected("SA1127", "Warning")]
+    [CodeAnalysisViolationExpected("SA1127", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1127_GenericTypeConstraintsMustBeOnOwnLine<T>() where T : class
     {
     }
@@ -289,6 +293,7 @@ public class BlockScopedExpectations
     /// </summary>
     [CodeAnalysisViolationExpected("SA1130", "Warning")]
     [IncidentalCodeAnalysisViolationExpected("IDE0039")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0055", disabledReason: "Incompatible with csharpier")]
     public static void SA1130_UseLambdaSyntax()
     {
         int x = 0;
@@ -366,7 +371,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method that starts with a lowercase letter.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1300", "Warning")]
+    [CodeAnalysisViolationExpected("SA1300", "Warning", disabledReason: "SA1300 is silenced")]
     [IncidentalCodeAnalysisViolationExpected("IDE1006")]
     public static void a_SA1300_ElementMustBeginWithUpperCaseLetter()
     {
@@ -464,7 +469,7 @@ public class BlockScopedExpectations
     /// A method that contains a multi-line initializer that doesn't use a
     /// trailing comma.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1413", "Warning")]
+    [CodeAnalysisViolationExpected("SA1413", "Warning", disabledReason: "Incompatible with csharpier")]
     [IncidentalCodeAnalysisViolationExpected("IDE0300")]
     public static void SA1413_UseTrailingCommasInMultiLineInitializers()
     {
@@ -491,7 +496,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method tha contains multiple blank lines in a row.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1507", "Warning")]
+    [CodeAnalysisViolationExpected("SA1507", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1507_CodeMustNotContainMultipleBlankLinesInARow()
     {
         static int Method() => 0;
@@ -503,7 +508,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method tha contains a closing brace that is preceded by a blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1508", "Warning")]
+    [CodeAnalysisViolationExpected("SA1508", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1508_ClosingBracesMustNotBePrecededByBlankLine()
     {
         static int Method() => 0;
@@ -514,7 +519,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A method tha contains an opening brace that is prededed by a blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1509", "Warning")]
+    [CodeAnalysisViolationExpected("SA1509", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1509_OpeningBracesMustNotBePrecededByBlankLine()
 
     {
@@ -526,7 +531,7 @@ public class BlockScopedExpectations
     /// A method that contains a chained statment block that is preceded by a
     /// blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1510", "Warning")]
+    [CodeAnalysisViolationExpected("SA1510", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1510_ChainedStatementBlocksMustNotBePrecededByBlankLine()
     {
         try
@@ -542,7 +547,7 @@ public class BlockScopedExpectations
     /// A method that contains a while do footer that is preceded by a
     /// blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1511", "Warning")]
+    [CodeAnalysisViolationExpected("SA1511", "Warning", disabledReason: "Not needed with csharpier")]
     public static void SA1511_WhileDoFooterMustNotBePrecededByBlankLine()
     {
         do
@@ -556,7 +561,7 @@ public class BlockScopedExpectations
     /// A method that contains a single line comment that is followed by a blank
     /// line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1512", "Warning")]
+    [CodeAnalysisViolationExpected("SA1512", "Warning", disabledReason: "SA1512 is silenced")]
     public static void SA1512_SingleLineCommentsMustNotBeFollowedByBlankLine()
     {
         // Single line comment
@@ -570,7 +575,7 @@ public class BlockScopedExpectations
     /// blank line.
     /// </summary>
     [CodeAnalysisViolationExpected(
-        "SA1515", "Warning", disabledReason: "SA1515 is silenced")]
+        "SA1515", "Warning", disabledReason: "Incompatible with csharpier and is silenced otherwise")]
     public static void SA1515_SingleLineCommentMustBePrecededByBlankLine()
     {
         static int Method() => 0;
@@ -624,7 +629,8 @@ public class BlockScopedExpectations
             Method(3);
     }
 
-    [CodeAnalysisViolationExpected("SA1600", "Warning")]
+    [CodeAnalysisViolationExpected(
+        "SA1600", "Info", disabledReason: "SA1600 is silenced")]
     public static void SA1600_ElementsMustBeDocumented()
     {
     }
@@ -715,7 +721,7 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1128_ConstructorInitializerMustBeOnOwnLine
     {
-        [CodeAnalysisViolationExpected("SA1128", "Warning")]
+        [CodeAnalysisViolationExpected("SA1128", "Warning", disabledReason: "Not needed with csharpier")]
         private SA1128_ConstructorInitializerMustBeOnOwnLine() : this(1)
         {
         }
@@ -757,7 +763,7 @@ public class BlockScopedExpectations
     /// </summary>
     public class SA1136_EnumValuesShouldBeOnSeparateLines
     {
-        [CodeAnalysisViolationExpected("SA1136", "Warning")]
+        [CodeAnalysisViolationExpected("SA1136", "Warning", disabledReason: "Not needed with csharpier")]
         private enum SA1136_EnumValuesShouldBeOnSeparateLines_Enum
         {
             Value1, Value2,
@@ -1046,7 +1052,7 @@ public class BlockScopedExpectations
     /// A method that contains a property with a single-line getter and multi-line
     /// setter.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1504", "Warning")]
+    [CodeAnalysisViolationExpected("SA1504", "Warning", disabledReason: "Incompatible with csharpier")]
     public class SA1504_AllAccessorsMustBeSingleLineOrMultiLine
     {
         /// <summary>
@@ -1067,7 +1073,7 @@ public class BlockScopedExpectations
     /// A method that contains a property with a getter with a blank line after
     /// the opening brace.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1505", "Warning")]
+    [CodeAnalysisViolationExpected("SA1505", "Warning", disabledReason: "Not needed with csharpier")]
     public class SA1505_OpeningBracesMustNotBeFollowedByBlankLine
     {
         /// <summary>
@@ -1087,7 +1093,7 @@ public class BlockScopedExpectations
     /// A class that contains a method with documentation that contains a blank
     /// line after the summary tag.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1506", "Warning")]
+    [CodeAnalysisViolationExpected("SA1506", "Warning", disabledReason: "Not needed with csharpier")]
     public class SA1506_ElementDocumentationHeadersMustNotBeFollowedByBlankLine()
     {
         /// <summary>
@@ -1102,7 +1108,7 @@ public class BlockScopedExpectations
     /// <summary>
     /// A class that contains a two methods that aren't separated by a blank line.
     /// </summary>
-    [CodeAnalysisViolationExpected("SA1516", "Warning")]
+    [CodeAnalysisViolationExpected("SA1516", "Warning", disabledReason: "Incompatible with csharpier")]
     [IncidentalCodeAnalysisViolationExpected("IDE0051")]
     public class SA1516_ElementsMustBeSeparatedByBlankLine()
     {

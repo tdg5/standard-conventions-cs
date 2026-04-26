@@ -51,7 +51,7 @@
         "static",
         "readonly"
       ],
-      "systemUsingDirectivesFirst": false,
+      "systemUsingDirectivesFirst": true,
       "usingDirectivesPlacement": "outsideNamespace"
     },
     "readabilityRules": {

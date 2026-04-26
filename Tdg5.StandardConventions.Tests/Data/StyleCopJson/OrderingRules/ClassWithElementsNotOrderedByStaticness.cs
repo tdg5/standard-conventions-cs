@@ -18,6 +18,7 @@ public class ClassWithElementsNotOrderedByStaticness
     [CodeAnalysisViolationExpected(
         "SA1204",
         "Warning",
-        contains: "Static members should appear before non-static members")]
+        contains: "Static members should appear before non-static members",
+        disabledReason: "SA1204 is silenced")]
     public static string StaticProperty { get; set; } = "static";
 }

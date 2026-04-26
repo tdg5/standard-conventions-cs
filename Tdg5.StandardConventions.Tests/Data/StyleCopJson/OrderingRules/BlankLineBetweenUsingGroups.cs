@@ -11,7 +11,8 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.OrderingRules;
 [FileAnalysisViolationExpected(
     "SA1516",
     "Warning",
-    contains: "Using directives should not be separated by blank line")]
+    contains: "Using directives should not be separated by blank line",
+    disabledReason: "Incompatible with csharpier")]
 public class BlankLineBetweenUsingGroups
 {
     /// <summary>

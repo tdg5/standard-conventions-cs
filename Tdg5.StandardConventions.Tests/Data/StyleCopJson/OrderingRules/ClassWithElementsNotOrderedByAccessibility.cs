@@ -20,7 +20,8 @@ public class ClassWithElementsNotOrderedByAccessibility
     [CodeAnalysisViolationExpected(
         "SA1202",
         "Warning",
-        contains: "'protected' members should come before 'private' members")]
+        contains: "'protected' members should come before 'private' members",
+        disabledReason: "SA1202 is silenced")]
     protected void ProtectedMethod()
     {
         PrivateMethod();
@@ -33,7 +34,8 @@ public class ClassWithElementsNotOrderedByAccessibility
     [CodeAnalysisViolationExpected(
         "SA1202",
         "Warning",
-        contains: "'internal' members should come before 'protected' members")]
+        contains: "'internal' members should come before 'protected' members",
+        disabledReason: "SA1202 is silenced")]
     internal void InternalMethod()
     {
         NoopHelper.NoopMemberReference(field);
@@ -45,7 +47,8 @@ public class ClassWithElementsNotOrderedByAccessibility
     [CodeAnalysisViolationExpected(
         "SA1202",
         "Warning",
-        contains: "'public' members should come before 'internal' members")]
+        contains: "'public' members should come before 'internal' members",
+        disabledReason: "SA1202 is silenced")]
     public void PublicMethod()
     {
         NoopHelper.NoopMemberReference(field);

@@ -15,7 +15,8 @@ public class TopLevelTypes
 [CodeAnalysisViolationExpected(
     "SA1201",
     "Warning",
-    contains: "A delegate should not follow a class")]
+    contains: "A delegate should not follow a class",
+    disabledReason: "SA1201 is silenced")]
 [CodeAnalysisViolationExpected("SA1402", "Warning")]
 public delegate void PublicDelegate();
 

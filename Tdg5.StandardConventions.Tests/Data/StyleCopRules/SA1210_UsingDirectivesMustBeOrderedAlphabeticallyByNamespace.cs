@@ -1,5 +1,5 @@
 using Tdg5.StandardConventions.TestAnnotations;
-using System.IO;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace Tdg5.StandardConventions.Tests.Data.StyleCopRules;
 
@@ -11,7 +11,7 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopRules;
 public class SA1210_UsingDirectivesMustBeOrderedAlphabeticallyByNamespace
 {
     /// <summary>
-    /// Gets the reader.
+    /// Gets the exception.
     /// </summary>
-    public BinaryReader? Reader { get; } = null;
+    public RuntimeBinderException? Exception { get; } = null!;
 }
