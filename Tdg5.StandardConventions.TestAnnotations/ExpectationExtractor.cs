@@ -60,9 +60,10 @@ public static class ExpectationExtractor
             }
         }
 
-        return candidateAttributes
-            .Select(candidate => AttributeParser.TryParse(candidate)!)
-            .Where(_ => _ is not null)
-            .ToList();
+        return [
+            .. candidateAttributes
+                .Select(candidate => AttributeParser.TryParse(candidate)!)
+                .Where(_ => _ is not null),
+        ];
     }
 }

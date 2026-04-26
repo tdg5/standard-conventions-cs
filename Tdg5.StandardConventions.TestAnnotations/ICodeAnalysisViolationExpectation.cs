@@ -8,7 +8,7 @@ public interface ICodeAnalysisViolationExpectation
     /// <summary>
     /// Gets a value indicating whether or not the expectation is enabled.
     /// </summary>
-    public bool Enabled { get; }
+    bool Enabled { get; }
 
     /// <summary>
     /// Checks if the given violation matches the expectation.
@@ -16,11 +16,11 @@ public interface ICodeAnalysisViolationExpectation
     /// <param name="violation">The violation to check.</param>
     /// <returns>True if the violation matches the expectation, false
     /// otherwise.</returns>
-    public bool IsMatch(ICodeAnalysisViolation violation);
+    bool IsMatch(ICodeAnalysisViolation violation);
 
     /// <summary>
     /// Returns a string representation of the expectation.
     /// </summary>
     /// <returns>A string description of the expectation.</returns>
-    public string ToStringDescription();
+    string ToStringDescription();
 }

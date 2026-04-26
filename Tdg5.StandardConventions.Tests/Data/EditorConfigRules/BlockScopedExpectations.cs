@@ -158,6 +158,7 @@ public class BlockScopedExpectations
     /// A method that contains an anonymous function instead of a lambda.
     /// </summary>
     [CodeAnalysisViolationExpected("IDE0039", "Info")]
+    [IncidentalCodeAnalysisViolationExpected("IDE0350")]
     public static void IDE0039_UseLocalFunctionInsteadOfLambda()
     {
         Func<int, bool> isEven = (int n) => n % 2 == 0;

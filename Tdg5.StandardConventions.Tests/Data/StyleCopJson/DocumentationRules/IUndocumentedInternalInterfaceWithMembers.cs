@@ -8,8 +8,8 @@ namespace Tdg5.StandardConventions.Tests.Data.StyleCopJson.DocumentationRules;
 internal interface IUndocumentedInternalInterfaceWithMembers
 {
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
-    public bool UndocumentedPublicProperty { get; set; }
+    bool UndocumentedPublicProperty { get; set; }
 
     [CodeAnalysisViolationExpected("SA1600", "Warning")]
-    public void UndocumentedPublicMethod();
+    void UndocumentedPublicMethod();
 }

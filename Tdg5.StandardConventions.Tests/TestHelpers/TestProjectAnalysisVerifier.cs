@@ -45,10 +45,11 @@ public class TestProjectAnalysisVerifier
         var warningsAndErrors = buildResult.WarningsAndErrors;
         var filesRequiringVerification =
             GetPathsOfFilesRequiringVerification(buildResult);
-        List<ICodeAnalysisViolationExpectation> codeAnalysisViolationExpectations =
-            filesRequiringVerification.SelectMany(filePath =>
+        List<ICodeAnalysisViolationExpectation> codeAnalysisViolationExpectations = [
+            .. filesRequiringVerification.SelectMany(filePath =>
                 ExpectationExtractor
-                    .ExtractExpectations(projectPath, filePath)).ToList();
+                    .ExtractExpectations(projectPath, filePath)),
+        ];
         List<ICodeAnalysisViolation> codeAnalysisViolations = [
             .. warningsAndErrors.Warnings.Select(warning =>
                 new CodeAnalysisViolation(
@@ -210,6 +211,6 @@ public class TestProjectAnalysisVerifier
             uniqueFilePaths.Add(filePath);
         }
 
-        return uniqueFilePaths.Where(filePath => filePath.EndsWith(".cs")).ToArray();
+        return [.. uniqueFilePaths.Where(filePath => filePath.EndsWith(".cs"))];
     }
 }

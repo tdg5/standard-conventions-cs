@@ -86,21 +86,22 @@ public class TestProjectBuilder
     private static string[] GetCompileFilesFullPaths(Project project)
     {
         var projectDirectoryPath = Path.GetDirectoryName(project.FullPath);
-        return project.GetItems("Compile")
-            .Select(_ =>
-            {
-                string compileFilePath =
-                    Path.Join(projectDirectoryPath, _.EvaluatedInclude);
-
-                if (!File.Exists(compileFilePath))
+        return [
+            .. project.GetItems("Compile")
+                .Select(_ =>
                 {
-                    throw new FileNotFoundException(
-                        $"Referenced compile file not found: {compileFilePath}");
-                }
+                    string compileFilePath =
+                        Path.Join(projectDirectoryPath, _.EvaluatedInclude);
 
-                return compileFilePath;
-            })
-            .ToArray();
+                    if (!File.Exists(compileFilePath))
+                    {
+                        throw new FileNotFoundException(
+                            $"Referenced compile file not found: {compileFilePath}");
+                    }
+
+                    return compileFilePath;
+                }),
+        ];
     }
 
     /// <summary>

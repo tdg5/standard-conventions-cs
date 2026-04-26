@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         dotnet-version:
-          - '9.0'
+          - '10.0'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3

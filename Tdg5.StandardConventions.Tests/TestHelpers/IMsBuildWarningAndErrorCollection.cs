@@ -12,11 +12,11 @@ public interface IMsBuildWarningAndErrorCollection
     /// Gets a list of the <see cref="BuildErrorEventArgs"/> emitted during the
     /// build.
     /// </summary>
-    public List<BuildErrorEventArgs> Errors { get; }
+    List<BuildErrorEventArgs> Errors { get; }
 
     /// <summary>
     /// Gets a list of the <see cref="BuildWarningEventArgs"/> emitted during the
     /// build.
     /// </summary>
-    public List<BuildWarningEventArgs> Warnings { get; }
+    List<BuildWarningEventArgs> Warnings { get; }
 }
