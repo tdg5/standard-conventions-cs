@@ -16,7 +16,8 @@ internal class AttributeArguments
     public AttributeArguments(
         AttributeWithEffectiveRange attributeWithEffectiveRange,
         List<object> positionalArguments,
-        Dictionary<string, object> namedArguments)
+        Dictionary<string, object> namedArguments
+    )
     {
         AttributeWithEffectiveRange = attributeWithEffectiveRange;
         NamedArguments = namedArguments;

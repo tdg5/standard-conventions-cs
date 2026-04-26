@@ -1,7 +1,7 @@
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.MSBuild;
-using System.Collections.Immutable;
 
 namespace Tdg5.StandardConventions.Tests.TestHelpers;
 
@@ -32,10 +32,10 @@ public class TestProjectAnalyzer
     {
         var project = workspace.OpenProjectAsync(projectPath).Result;
         var analyzers = project
-            .AnalyzerReferences
-            .SelectMany(r => r.GetAnalyzers(project.Language))
+            .AnalyzerReferences.SelectMany(r => r.GetAnalyzers(project.Language))
             .ToImmutableArray();
-        var compilation = project.GetCompilationAsync().Result
+        var compilation =
+            project.GetCompilationAsync().Result
             ?? throw new InvalidOperationException("Failed to compile project.");
 
         var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers);

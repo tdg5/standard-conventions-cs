@@ -19,7 +19,8 @@ public abstract class BaseTestProjectAnalysisVerifierTest
     public BaseTestProjectAnalysisVerifierTest(ITestOutputHelper testOutputHelper)
     {
         analysisVerifier = new TestProjectAnalysisVerifier(
-            testProjectBuilder: new TestProjectBuilder(testOutputHelper));
+            testProjectBuilder: new TestProjectBuilder(testOutputHelper)
+        );
     }
 
     /// <summary>

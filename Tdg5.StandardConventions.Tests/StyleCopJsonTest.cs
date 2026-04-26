@@ -13,9 +13,7 @@ public class StyleCopJsonTest : BaseTestProjectAnalysisVerifierTest
     /// </summary>
     /// <param name="testOutputHelper">The test output helper.</param>
     public StyleCopJsonTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     /// <inheritdoc/>
     public override string ProjectPath => "Data/StyleCopJson/StyleCopJson.csproj";

@@ -23,7 +23,8 @@ public class TestProjectBuildResult
         string[] compileFilePaths,
         IEnumerable<Diagnostic> diagnostics,
         string outputPath,
-        IMsBuildWarningAndErrorCollection warningsAndErrors)
+        IMsBuildWarningAndErrorCollection warningsAndErrors
+    )
     {
         CompileFilePaths = compileFilePaths;
         Diagnostics = diagnostics;

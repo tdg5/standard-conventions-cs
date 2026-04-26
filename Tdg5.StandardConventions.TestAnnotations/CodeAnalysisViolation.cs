@@ -25,7 +25,8 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
         string projectPath,
         string filePath,
         int lineNumber,
-        string? message)
+        string? message
+    )
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(code, nameof(code));
         ArgumentException.ThrowIfNullOrWhiteSpace(projectPath, nameof(projectPath));
@@ -41,7 +42,8 @@ public class CodeAnalysisViolation : ICodeAnalysisViolation
             throw new ArgumentOutOfRangeException(
                 nameof(lineNumber),
                 lineNumber,
-                "The line number must be a non-negative integer.");
+                "The line number must be a non-negative integer."
+            );
         }
 
         Code = code;

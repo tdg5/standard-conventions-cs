@@ -20,7 +20,8 @@ public static class ExpectationExtractor
     /// <returns>The list of code analysis violation expectations.</returns>
     public static List<ICodeAnalysisViolationExpectation> ExtractExpectations(
         string projectPath,
-        string filePath)
+        string filePath
+    )
     {
         string code = File.ReadAllText(filePath);
         SyntaxTree tree = CSharpSyntaxTree.ParseText(code);
@@ -28,7 +29,8 @@ public static class ExpectationExtractor
         var descendentNodes = root.DescendantNodes();
 
         // Find all the member types that we care about attributes for.
-        List<MemberDeclarationSyntax> memberDeclarations = [
+        List<MemberDeclarationSyntax> memberDeclarations =
+        [
             .. descendentNodes.OfType<ClassDeclarationSyntax>(),
             .. descendentNodes.OfType<ConstructorDeclarationSyntax>(),
             .. descendentNodes.OfType<ConversionOperatorDeclarationSyntax>(),
@@ -48,19 +50,18 @@ public static class ExpectationExtractor
         List<AttributeWithEffectiveRange> candidateAttributes = [];
         foreach (var memberDeclaration in memberDeclarations)
         {
-            var memberAttributes =
-                memberDeclaration.AttributeLists.SelectMany(al => al.Attributes);
+            var memberAttributes = memberDeclaration.AttributeLists.SelectMany(al => al.Attributes);
             foreach (var attribute in memberAttributes)
             {
                 var lineSpan = memberDeclaration.GetLocation().GetLineSpan();
                 var startLine = lineSpan.StartLinePosition.Line + 1;
                 var endLine = lineSpan.EndLinePosition.Line + 1;
-                candidateAttributes.Add(
-                    new(attribute, projectPath, filePath, startLine, endLine));
+                candidateAttributes.Add(new(attribute, projectPath, filePath, startLine, endLine));
             }
         }
 
-        return [
+        return
+        [
             .. candidateAttributes
                 .Select(candidate => AttributeParser.TryParse(candidate)!)
                 .Where(_ => _ is not null),

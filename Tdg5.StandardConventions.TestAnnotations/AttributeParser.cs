@@ -1,6 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Tdg5.StandardConventions.TestAnnotations;
 
@@ -19,7 +19,8 @@ public static class AttributeParser
     /// cref="ICodeAnalysisViolationExpectation"/> or null if the attribute
     /// could not be parsed.</returns>
     internal static ICodeAnalysisViolationExpectation? TryParse(
-        AttributeWithEffectiveRange attributeWithEffectiveRange)
+        AttributeWithEffectiveRange attributeWithEffectiveRange
+    )
     {
         var attributeArguments = ParseAttributeArguments(attributeWithEffectiveRange);
         if (!TryGetAttributeName(attributeWithEffectiveRange.Attribute, out var attributeName))
@@ -51,28 +52,34 @@ public static class AttributeParser
     /// <returns>An instance of <see cref="CodeAnalysisViolationExpectation"/>
     /// representing the parsed attribute.</returns>
     private static AttributeArguments ParseAttributeArguments(
-        AttributeWithEffectiveRange attributeWithEffectiveRange)
+        AttributeWithEffectiveRange attributeWithEffectiveRange
+    )
     {
         var attribute = attributeWithEffectiveRange.Attribute;
-        var argumentList = attribute.ArgumentList
+        var argumentList =
+            attribute.ArgumentList
             ?? throw new InvalidOperationException(
-                $"Cannot parse {attribute}, argument list is missing.");
+                $"Cannot parse {attribute}, argument list is missing."
+            );
 
         var positionalArguments = new List<object>();
         var namedArguments = new Dictionary<string, object>();
         foreach (var argument in argumentList.Arguments)
         {
-            var expressionLiteral = argument.Expression as LiteralExpressionSyntax
+            var expressionLiteral =
+                argument.Expression as LiteralExpressionSyntax
                 ?? throw new InvalidOperationException(
-                    $"Cannot parse {argument.Expression} as a literal expression.");
-            var expressionValue = expressionLiteral.Token.Value
+                    $"Cannot parse {argument.Expression} as a literal expression."
+                );
+            var expressionValue =
+                expressionLiteral.Token.Value
                 ?? throw new InvalidOperationException(
-                    $"Cannot parse {expressionLiteral.Token} as a literal value.");
+                    $"Cannot parse {expressionLiteral.Token} as a literal value."
+                );
 
             if (argument.NameColon?.Name is IdentifierNameSyntax argumentName)
             {
-                namedArguments.Add(
-                    argumentName.Identifier.Text, expressionValue);
+                namedArguments.Add(argumentName.Identifier.Text, expressionValue);
             }
             else
             {
@@ -84,7 +91,9 @@ public static class AttributeParser
     }
 
     private static bool TryGetAttributeName(
-        AttributeSyntax attribute, [MaybeNullWhen(false)] out string attributeName)
+        AttributeSyntax attribute,
+        [MaybeNullWhen(false)] out string attributeName
+    )
     {
         SyntaxToken? identifier = null;
 

@@ -5,6 +5,4 @@ namespace Tdg5.StandardConventions.Tests.TestHelpers;
 /// registered.
 /// </summary>
 [CollectionDefinition("RequiresMsBuild")]
-public class RequiresMsBuildCollection : ICollectionFixture<MsBuildFixture>
-{
-}
+public class RequiresMsBuildCollection : ICollectionFixture<MsBuildFixture> { }

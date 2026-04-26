@@ -43,36 +43,38 @@ public class TestProjectAnalysisVerifier
     {
         var buildResult = testProjectBuilder.BuildProject(projectPath);
         var warningsAndErrors = buildResult.WarningsAndErrors;
-        var filesRequiringVerification =
-            GetPathsOfFilesRequiringVerification(buildResult);
-        List<ICodeAnalysisViolationExpectation> codeAnalysisViolationExpectations = [
+        var filesRequiringVerification = GetPathsOfFilesRequiringVerification(buildResult);
+        List<ICodeAnalysisViolationExpectation> codeAnalysisViolationExpectations =
+        [
             .. filesRequiringVerification.SelectMany(filePath =>
-                ExpectationExtractor
-                    .ExtractExpectations(projectPath, filePath)),
+                ExpectationExtractor.ExtractExpectations(projectPath, filePath)
+            ),
         ];
-        List<ICodeAnalysisViolation> codeAnalysisViolations = [
-            .. warningsAndErrors.Warnings.Select(warning =>
-                new CodeAnalysisViolation(
-                    code: warning.Code,
-                    filePath: warning.File,
-                    level: "Warning",
-                    lineNumber: warning.LineNumber,
-                    message: warning.Message,
-                    projectPath: projectPath)),
-            .. warningsAndErrors.Errors.Select(error =>
-                new CodeAnalysisViolation(
-                    code: error.Code,
-                    filePath: error.File,
-                    level: "Error",
-                    lineNumber: error.LineNumber,
-                    message: error.Message,
-                    projectPath: projectPath)),
-            .. buildResult.Diagnostics
-                .Where(diagnostic =>
+        List<ICodeAnalysisViolation> codeAnalysisViolations =
+        [
+            .. warningsAndErrors.Warnings.Select(warning => new CodeAnalysisViolation(
+                code: warning.Code,
+                filePath: warning.File,
+                level: "Warning",
+                lineNumber: warning.LineNumber,
+                message: warning.Message,
+                projectPath: projectPath
+            )),
+            .. warningsAndErrors.Errors.Select(error => new CodeAnalysisViolation(
+                code: error.Code,
+                filePath: error.File,
+                level: "Error",
+                lineNumber: error.LineNumber,
+                message: error.Message,
+                projectPath: projectPath
+            )),
+            .. buildResult
+                .Diagnostics.Where(diagnostic =>
                     diagnostic.Severity != DiagnosticSeverity.Hidden
                     && diagnostic.Severity != DiagnosticSeverity.Warning
                     && diagnostic.Severity != DiagnosticSeverity.Error
-                    && !diagnostic.IsSuppressed)
+                    && !diagnostic.IsSuppressed
+                )
                 .Select(diagnostic =>
                 {
                     var title = (string?)diagnostic.Descriptor.Title;
@@ -81,18 +83,22 @@ public class TestProjectAnalysisVerifier
                         : title;
                     return new CodeAnalysisViolation(
                         code: diagnostic.Id,
-                        filePath: diagnostic.Location.SourceTree?.FilePath ?? "<Diagnostic without file path>",
+                        filePath: diagnostic.Location.SourceTree?.FilePath
+                            ?? "<Diagnostic without file path>",
                         level: diagnostic.Severity.ToString(),
                         lineNumber: diagnostic.Location.GetLineSpan().StartLinePosition.Line,
                         message: message,
-                        projectPath: projectPath);
+                        projectPath: projectPath
+                    );
                 }),
         ];
 
         List<ICodeAnalysisViolation> unexpectedCodeViolations = [];
 
         List<ICodeAnalysisViolationExpectation> unmatchedExpectations =
-            [.. codeAnalysisViolationExpectations];
+        [
+            .. codeAnalysisViolationExpectations,
+        ];
 
         foreach (var violation in codeAnalysisViolations)
         {
@@ -132,14 +138,16 @@ public class TestProjectAnalysisVerifier
 
     private static void MakeAssertion(
         List<ICodeAnalysisViolation> unexpectedCodeViolations,
-        List<ICodeAnalysisViolationExpectation> unmatchedExpectations)
+        List<ICodeAnalysisViolationExpectation> unmatchedExpectations
+    )
     {
         var unexpectedCodeViolationsFailureMessage =
             $"Unexpected code analysis violations were emitted:"
             + $"{Environment.NewLine}  "
             + string.Join(
                 Environment.NewLine,
-                unexpectedCodeViolations.Select(CodeViolationToString));
+                unexpectedCodeViolations.Select(CodeViolationToString)
+            );
 
         var unresolvedExpectations = unmatchedExpectations
             .Where(expectation => expectation.Enabled)
@@ -150,8 +158,8 @@ public class TestProjectAnalysisVerifier
             + $"{Environment.NewLine}  "
             + string.Join(
                 Environment.NewLine,
-                unresolvedExpectations
-                    .Select(expectation => expectation.ToStringDescription()));
+                unresolvedExpectations.Select(expectation => expectation.ToStringDescription())
+            );
 
         if (unexpectedCodeViolations.Count + unresolvedExpectations.Count == 0)
         {
@@ -161,7 +169,8 @@ public class TestProjectAnalysisVerifier
 
         if (unexpectedCodeViolations.Count > 0 && unresolvedExpectations.Count > 0)
         {
-            var fullMessage = Environment.NewLine
+            var fullMessage =
+                Environment.NewLine
                 + unexpectedCodeViolationsFailureMessage
                 + Environment.NewLine
                 + unresolvedExpectationsFailureMessage;
@@ -169,7 +178,8 @@ public class TestProjectAnalysisVerifier
             // This will fail, so no short-circuiting is necessary.
             Assert.True(
                 unexpectedCodeViolations.Count + unresolvedExpectations.Count == 0,
-                fullMessage);
+                fullMessage
+            );
         }
 
         if (unexpectedCodeViolations.Count > 0)
@@ -177,12 +187,11 @@ public class TestProjectAnalysisVerifier
             // This will fail, so no short-circuiting is necessary.
             Assert.True(
                 unexpectedCodeViolations.Count == 0,
-                unexpectedCodeViolationsFailureMessage);
+                unexpectedCodeViolationsFailureMessage
+            );
         }
 
-        Assert.True(
-            unresolvedExpectations.Count == 0,
-            unresolvedExpectationsFailureMessage);
+        Assert.True(unresolvedExpectations.Count == 0, unresolvedExpectationsFailureMessage);
     }
 
     private static string CodeViolationToString(ICodeAnalysisViolation violation)
@@ -192,8 +201,7 @@ public class TestProjectAnalysisVerifier
             + $"  {violation.FilePath}:{violation.LineNumber}";
     }
 
-    private static string[] GetPathsOfFilesRequiringVerification(
-        TestProjectBuildResult buildResult)
+    private static string[] GetPathsOfFilesRequiringVerification(TestProjectBuildResult buildResult)
     {
         var uniqueFilePaths = new HashSet<string>();
         foreach (var warning in buildResult.WarningsAndErrors.Warnings)

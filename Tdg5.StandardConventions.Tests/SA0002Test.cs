@@ -13,9 +13,7 @@ public class SA0002Test : BaseTestProjectAnalysisVerifierTest
     /// </summary>
     /// <param name="testOutputHelper">The test output helper.</param>
     public SA0002Test(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     /// <inheritdoc/>
     public override string ProjectPath => "Data/SA0002/SA0002.csproj";

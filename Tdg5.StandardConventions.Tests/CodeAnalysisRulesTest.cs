@@ -13,9 +13,7 @@ public class CodeAnalysisRulesTest : BaseTestProjectAnalysisVerifierTest
     /// </summary>
     /// <param name="testOutputHelper">The test output helper.</param>
     public CodeAnalysisRulesTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     /// <inheritdoc/>
     public override string ProjectPath => "Data/CodeAnalysisRules/CodeAnalysisRules.csproj";

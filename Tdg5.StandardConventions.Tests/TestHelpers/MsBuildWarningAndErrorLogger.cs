@@ -11,9 +11,7 @@ internal class MsBuildWarningAndErrorLogger : ILogger, IMsBuildWarningAndErrorCo
     /// Initializes a new instance of the <see
     /// cref="MsBuildWarningAndErrorLogger"/> class.
     /// </summary>
-    public MsBuildWarningAndErrorLogger()
-    {
-    }
+    public MsBuildWarningAndErrorLogger() { }
 
     /// <summary>
     /// Gets a list of the <see cref="BuildErrorEventArgs"/> emitted during the
@@ -41,9 +39,7 @@ internal class MsBuildWarningAndErrorLogger : ILogger, IMsBuildWarningAndErrorCo
     }
 
     /// <inheritdoc/>
-    public void Shutdown()
-    {
-    }
+    public void Shutdown() { }
 
     private void OnErrorRaised(object sender, BuildErrorEventArgs eventArgs)
     {

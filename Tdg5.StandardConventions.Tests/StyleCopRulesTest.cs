@@ -13,9 +13,7 @@ public class StyleCopRulesTest : BaseTestProjectAnalysisVerifierTest
     /// </summary>
     /// <param name="testOutputHelper">The test output helper.</param>
     public StyleCopRulesTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     /// <inheritdoc/>
     public override string ProjectPath => "Data/StyleCopRules/StyleCopRules.csproj";

@@ -21,7 +21,8 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
         string code,
         string level,
         string? contains = null,
-        string? disabledReason = null)
+        string? disabledReason = null
+    )
     {
         Code = code;
         Contains = contains;
@@ -59,7 +60,8 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
     /// <returns>A new instance of the <see
     /// cref="ProjectAnalysisViolationExpectation"/> class.</returns>
     internal static ProjectAnalysisViolationExpectation GetExpecation(
-        AttributeArguments attributeArguments)
+        AttributeArguments attributeArguments
+    )
     {
         var attributeWithEffectiveRange = attributeArguments.AttributeWithEffectiveRange;
         var attribute = attributeWithEffectiveRange.Attribute;
@@ -80,8 +82,9 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(ProjectAnalysisViolationExpectedAttribute)}, {nameof(code)}"
-                + " argument could not be determined.");
+                    + $" {nameof(ProjectAnalysisViolationExpectedAttribute)}, {nameof(code)}"
+                    + " argument could not be determined."
+            );
         }
 
         object? levelArgument = null;
@@ -98,8 +101,9 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(ProjectAnalysisViolationExpectedAttribute)}, {nameof(level)}"
-                + " argument could not be determined.");
+                    + $" {nameof(ProjectAnalysisViolationExpectedAttribute)}, {nameof(level)}"
+                    + " argument could not be determined."
+            );
         }
 
         object? containsArgument = null;
@@ -131,6 +135,7 @@ public class ProjectAnalysisViolationExpectedAttribute : Attribute
             contains: contains,
             disabledReason: disabledReason,
             level: level,
-            projectPath: attributeWithEffectiveRange.ProjectPath);
+            projectPath: attributeWithEffectiveRange.ProjectPath
+        );
     }
 }

@@ -1,5 +1,5 @@
-using Microsoft.Build.Framework;
 using System.Collections;
+using Microsoft.Build.Framework;
 using Xunit.Abstractions;
 
 namespace Tdg5.StandardConventions.Tests.TestHelpers;
@@ -27,7 +27,8 @@ internal class MsBuildTestOutputLogger : ILogger
     public MsBuildTestOutputLogger(
         ITestOutputHelper testOutputHelper,
         bool dumpEnv = false,
-        bool verbose = true)
+        bool verbose = true
+    )
     {
         this.testOutputHelper = testOutputHelper;
         this.dumpEnv = dumpEnv;
@@ -56,9 +57,7 @@ internal class MsBuildTestOutputLogger : ILogger
     }
 
     /// <inheritdoc/>
-    public void Shutdown()
-    {
-    }
+    public void Shutdown() { }
 
     private void OnAnyEventRaised(object sender, BuildEventArgs eventArgs)
     {
@@ -89,7 +88,8 @@ internal class MsBuildTestOutputLogger : ILogger
             eventArgs.Message,
             eventArgs.File,
             eventArgs.LineNumber,
-            eventArgs.ColumnNumber);
+            eventArgs.ColumnNumber
+        );
         testOutputHelper.WriteLine(message);
         errors.Add(message);
     }
@@ -112,8 +112,7 @@ internal class MsBuildTestOutputLogger : ILogger
         testOutputHelper.WriteLine("Initial Properties:");
         foreach (DictionaryEntry keyValuePair in eventArgs.Properties)
         {
-            testOutputHelper
-                .WriteLine("{0}: {1}", keyValuePair.Key, keyValuePair.Value);
+            testOutputHelper.WriteLine("{0}: {1}", keyValuePair.Key, keyValuePair.Value);
         }
     }
 }

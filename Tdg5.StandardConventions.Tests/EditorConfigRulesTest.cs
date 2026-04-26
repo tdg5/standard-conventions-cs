@@ -13,9 +13,7 @@ public class EditorConfigRulesTest : BaseTestProjectAnalysisVerifierTest
     /// </summary>
     /// <param name="testOutputHelper">The test output helper.</param>
     public EditorConfigRulesTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     /// <inheritdoc/>
     public override string ProjectPath => "Data/EditorConfigRules/EditorConfigRules.csproj";

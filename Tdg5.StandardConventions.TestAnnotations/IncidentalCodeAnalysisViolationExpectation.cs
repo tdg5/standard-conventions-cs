@@ -5,8 +5,7 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// that is intended to identify violations that occur incidentally and are not
 /// the subject of a given test scenario.
 /// </summary>
-internal class IncidentalCodeAnalysisViolationExpectation
-    : ICodeAnalysisViolationExpectation
+internal class IncidentalCodeAnalysisViolationExpectation : ICodeAnalysisViolationExpectation
 {
     /// <summary>
     /// Initializes a new instance of the <see
@@ -33,7 +32,8 @@ internal class IncidentalCodeAnalysisViolationExpectation
         string projectPath,
         string filePath,
         int startLineNumber,
-        int endLineNumber)
+        int endLineNumber
+    )
     {
         Code = code;
         Contains = contains;
@@ -87,13 +87,12 @@ internal class IncidentalCodeAnalysisViolationExpectation
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
         Enabled
-            && violation.Code == Code
-            && violation.ProjectPath == ProjectPath
-            && violation.FilePath == FilePath
-            && violation.LineNumber >= StartLineNumber
-            && violation.LineNumber <= EndLineNumber
-            && (Contains is null ||
-                (violation.Message ?? string.Empty).Contains(Contains));
+        && violation.Code == Code
+        && violation.ProjectPath == ProjectPath
+        && violation.FilePath == FilePath
+        && violation.LineNumber >= StartLineNumber
+        && violation.LineNumber <= EndLineNumber
+        && (Contains is null || (violation.Message ?? string.Empty).Contains(Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
@@ -101,8 +100,10 @@ internal class IncidentalCodeAnalysisViolationExpectation
         return $"Any: {Code} -"
             + $" {FilePath}:{StartLineNumber}-{EndLineNumber}"
             + (Enabled ? string.Empty : $" (disabled: {DisabledReason})")
-            + (Contains is not null
-                ? $"{Environment.NewLine}Message containing: \"{Contains}\""
-                : string.Empty);
+            + (
+                Contains is not null
+                    ? $"{Environment.NewLine}Message containing: \"{Contains}\""
+                    : string.Empty
+            );
     }
 }

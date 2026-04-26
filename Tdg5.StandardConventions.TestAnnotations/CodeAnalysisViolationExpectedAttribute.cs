@@ -16,7 +16,8 @@ namespace Tdg5.StandardConventions.TestAnnotations;
         | AttributeTargets.Property
         | AttributeTargets.Struct,
     AllowMultiple = true,
-    Inherited = false)]
+    Inherited = false
+)]
 public class CodeAnalysisViolationExpectedAttribute : Attribute
 {
     /// <summary>
@@ -30,7 +31,11 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     /// <param name="disabledReason">Optional description explaining why the
     /// expectation is disabled.</param>
     public CodeAnalysisViolationExpectedAttribute(
-        string code, string level, string? contains = null, string? disabledReason = null)
+        string code,
+        string level,
+        string? contains = null,
+        string? disabledReason = null
+    )
     {
         Code = code;
         Contains = contains;
@@ -68,7 +73,8 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
     /// <returns>A new instance of the <see
     /// cref="CodeAnalysisViolationExpectation"/> class.</returns>
     internal static CodeAnalysisViolationExpectation GetExpecation(
-        AttributeArguments attributeArguments)
+        AttributeArguments attributeArguments
+    )
     {
         var attributeWithEffectiveRange = attributeArguments.AttributeWithEffectiveRange;
         var attribute = attributeWithEffectiveRange.Attribute;
@@ -77,16 +83,18 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)},"
-                + " start line number is missing.");
+                    + $" {nameof(CodeAnalysisViolationExpectedAttribute)},"
+                    + " start line number is missing."
+            );
         }
 
         if (attributeWithEffectiveRange.EndLine is null)
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)},"
-                + " end line number is missing.");
+                    + $" {nameof(CodeAnalysisViolationExpectedAttribute)},"
+                    + " end line number is missing."
+            );
         }
 
         var positionalArguments = attributeArguments.PositionalArguments;
@@ -106,8 +114,9 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(code)}"
-                + " argument could not be determined.");
+                    + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(code)}"
+                    + " argument could not be determined."
+            );
         }
 
         object? levelArgument = null;
@@ -124,8 +133,9 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
         {
             throw new InvalidOperationException(
                 $"Cannot parse {attribute} as a"
-                + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(level)}"
-                + " argument could not be determined.");
+                    + $" {nameof(CodeAnalysisViolationExpectedAttribute)}, {nameof(level)}"
+                    + " argument could not be determined."
+            );
         }
 
         object? containsArgument = null;
@@ -160,6 +170,7 @@ public class CodeAnalysisViolationExpectedAttribute : Attribute
             filePath: attributeWithEffectiveRange.FilePath,
             level: level,
             projectPath: attributeWithEffectiveRange.ProjectPath,
-            startLineNumber: attributeWithEffectiveRange.StartLine.Value);
+            startLineNumber: attributeWithEffectiveRange.StartLine.Value
+        );
     }
 }

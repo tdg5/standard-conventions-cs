@@ -4,8 +4,7 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// Default, block scoped implementation of <see
 /// cref="ICodeAnalysisViolationExpectation"/>.
 /// </summary>
-internal class CodeAnalysisViolationExpectation
-    : ICodeAnalysisViolationExpectation
+internal class CodeAnalysisViolationExpectation : ICodeAnalysisViolationExpectation
 {
     /// <summary>
     /// Initializes a new instance of the <see
@@ -35,7 +34,8 @@ internal class CodeAnalysisViolationExpectation
         string projectPath,
         string filePath,
         int startLineNumber,
-        int endLineNumber)
+        int endLineNumber
+    )
     {
         Code = code;
         Contains = contains;
@@ -95,17 +95,13 @@ internal class CodeAnalysisViolationExpectation
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
         Enabled
-            && violation.Code == Code
-            && violation.ProjectPath == ProjectPath
-            && violation.FilePath == FilePath
-            && violation.LineNumber >= StartLineNumber
-            && violation.LineNumber <= EndLineNumber
-            && string.Equals(
-                violation.Level,
-                Level,
-                StringComparison.InvariantCultureIgnoreCase)
-            && (Contains is null ||
-                (violation.Message ?? string.Empty).Contains(Contains));
+        && violation.Code == Code
+        && violation.ProjectPath == ProjectPath
+        && violation.FilePath == FilePath
+        && violation.LineNumber >= StartLineNumber
+        && violation.LineNumber <= EndLineNumber
+        && string.Equals(violation.Level, Level, StringComparison.InvariantCultureIgnoreCase)
+        && (Contains is null || (violation.Message ?? string.Empty).Contains(Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
@@ -113,8 +109,10 @@ internal class CodeAnalysisViolationExpectation
         return $"{Level}: {Code} -"
             + $" {FilePath}:{StartLineNumber}-{EndLineNumber}"
             + (Enabled ? string.Empty : $" (disabled: {DisabledReason})")
-            + (Contains is not null
-                ? $"{Environment.NewLine}Message containing: \"{Contains}\""
-                : string.Empty);
+            + (
+                Contains is not null
+                    ? $"{Environment.NewLine}Message containing: \"{Contains}\""
+                    : string.Empty
+            );
     }
 }

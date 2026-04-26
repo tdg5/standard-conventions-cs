@@ -1,6 +1,6 @@
+using System.Collections;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Framework;
-using System.Collections;
 using Xunit.Abstractions;
 
 namespace Tdg5.StandardConventions.Tests.TestHelpers;
@@ -35,12 +35,12 @@ public class TestProjectBuilder
     /// projects.</param>
     public TestProjectBuilder(
         ITestOutputHelper testOutputHelper,
-        Dictionary<string, string>? globalProperties = null)
+        Dictionary<string, string>? globalProperties = null
+    )
     {
         this.globalProperties = globalProperties ?? DefaultGlobalProperties;
         this.testOutputHelper = testOutputHelper;
-        testOutputLogger =
-            new MsBuildTestOutputLogger(testOutputHelper, verbose: false);
+        testOutputLogger = new MsBuildTestOutputLogger(testOutputHelper, verbose: false);
     }
 
     /// <summary>
@@ -69,34 +69,34 @@ public class TestProjectBuilder
         var result = project.Build("build", allLoggers);
         var outputPath = project.GetPropertyValue("TargetPath");
 
-        Assert.True(
-            result,
-            $"Build failed: {testOutputLogger.ErrorMessage}");
+        Assert.True(result, $"Build failed: {testOutputLogger.ErrorMessage}");
 
-        var diagnostics =
-            new TestProjectAnalyzer(globalProperties).AnalyzeProject(projectPath);
+        var diagnostics = new TestProjectAnalyzer(globalProperties).AnalyzeProject(projectPath);
 
         return new(
             compileFilePaths: GetCompileFilesFullPaths(project),
             diagnostics: diagnostics,
             outputPath: outputPath,
-            warningsAndErrors: warningAndErrorLogger);
+            warningsAndErrors: warningAndErrorLogger
+        );
     }
 
     private static string[] GetCompileFilesFullPaths(Project project)
     {
         var projectDirectoryPath = Path.GetDirectoryName(project.FullPath);
-        return [
-            .. project.GetItems("Compile")
+        return
+        [
+            .. project
+                .GetItems("Compile")
                 .Select(_ =>
                 {
-                    string compileFilePath =
-                        Path.Join(projectDirectoryPath, _.EvaluatedInclude);
+                    string compileFilePath = Path.Join(projectDirectoryPath, _.EvaluatedInclude);
 
                     if (!File.Exists(compileFilePath))
                     {
                         throw new FileNotFoundException(
-                            $"Referenced compile file not found: {compileFilePath}");
+                            $"Referenced compile file not found: {compileFilePath}"
+                        );
                     }
 
                     return compileFilePath;
@@ -124,7 +124,8 @@ public class TestProjectBuilder
         foreach (var property in project.AllEvaluatedProperties.OrderBy(_ => _.Name))
         {
             testOutputHelper.WriteLine(
-                $"{property.Name}:{property.EvaluatedValue}({property.UnevaluatedValue})");
+                $"{property.Name}:{property.EvaluatedValue}({property.UnevaluatedValue})"
+            );
         }
     }
 }

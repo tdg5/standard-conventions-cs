@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
@@ -54,11 +53,13 @@
     <MSBuild
       Projects="$(Tdg5StandardConventionsProjectPath)"
       Properties="Configuration=Release;Version=999.999.999.999-test.999"
-      Targets="Build" />
+      Targets="Build"
+    />
     <MSBuild
       Projects="$(Tdg5StandardConventionsProjectPath)"
       Properties="Configuration=Release;PackageOutputPath=$(HOME)/.cache/Tdg5.StandardConventions.Tests/test-artifacts;Version=999.999.999.999-test.999"
-      Targets="Pack" />
+      Targets="Pack"
+    />
   </Target>
 
   <!--
@@ -69,11 +70,12 @@
     <MSBuild
       Projects="$(Tdg5StandardConventionsTestAnnotationsProjectPath)"
       Properties="Configuration=Release;Version=999.999.999.999-test.999"
-      Targets="Build" />
+      Targets="Build"
+    />
     <MSBuild
       Projects="$(Tdg5StandardConventionsTestAnnotationsProjectPath)"
       Properties="Configuration=Release;PackageOutputPath=$(HOME)/.cache/Tdg5.StandardConventions.Tests/test-artifacts;Version=999.999.999.999-test.999"
-      Targets="Pack" />
+      Targets="Pack"
+    />
   </Target>
-
 </Project>

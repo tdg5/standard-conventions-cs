@@ -24,7 +24,8 @@ internal class AttributeWithEffectiveRange
         string projectPath,
         string filePath,
         int? startLine,
-        int? endLine)
+        int? endLine
+    )
     {
         Attribute = attribute;
         EndLine = endLine;

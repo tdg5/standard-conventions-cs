@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <DevelopmentDependency>true</DevelopmentDependency>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -18,19 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle"/>
-    <PackageReference Include="StyleCop.Analyzers.Unstable"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" />
+    <PackageReference Include="StyleCop.Analyzers.Unstable" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)../README.md" PackagePath="" />
-    <GlobalAnalyzerConfigFiles Include="Tdg5.StandardConventions.globalconfig"/>
+    <GlobalAnalyzerConfigFiles Include="Tdg5.StandardConventions.globalconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Tdg5.StandardConventions.globalconfig" PackagePath=""/>
-    <Content Include="build/Tdg5.StandardConventions.props" PackagePath="build/"/>
-    <Content Include="stylecop.json" PackagePath=""/>
+    <Content Include="Tdg5.StandardConventions.globalconfig" PackagePath="" />
+    <Content Include="build/Tdg5.StandardConventions.props" PackagePath="build/" />
+    <Content Include="stylecop.json" PackagePath="" />
   </ItemGroup>
-
 </Project>

@@ -4,8 +4,7 @@ namespace Tdg5.StandardConventions.TestAnnotations;
 /// Default, block scoped implementation of <see
 /// cref="ICodeAnalysisViolationExpectation"/>.
 /// </summary>
-internal class FileAnalysisViolationExpectation
-    : ICodeAnalysisViolationExpectation
+internal class FileAnalysisViolationExpectation : ICodeAnalysisViolationExpectation
 {
     /// <summary>
     /// Initializes a new instance of the <see
@@ -29,7 +28,8 @@ internal class FileAnalysisViolationExpectation
         string? contains,
         string? disabledReason,
         string projectPath,
-        string filePath)
+        string filePath
+    )
     {
         Code = code;
         Contains = contains;
@@ -77,23 +77,21 @@ internal class FileAnalysisViolationExpectation
     /// <inheritdoc/>
     public bool IsMatch(ICodeAnalysisViolation violation) =>
         Enabled
-            && violation.Code == Code
-            && violation.ProjectPath == ProjectPath
-            && violation.FilePath == FilePath
-            && string.Equals(
-                violation.Level,
-                Level,
-                StringComparison.InvariantCultureIgnoreCase)
-            && (Contains is null ||
-                (violation.Message ?? string.Empty).Contains(Contains));
+        && violation.Code == Code
+        && violation.ProjectPath == ProjectPath
+        && violation.FilePath == FilePath
+        && string.Equals(violation.Level, Level, StringComparison.InvariantCultureIgnoreCase)
+        && (Contains is null || (violation.Message ?? string.Empty).Contains(Contains));
 
     /// <inheritdoc/>
     public string ToStringDescription()
     {
         return $"{Level}: {Code} - {FilePath}"
             + (Enabled ? string.Empty : $" (disabled: {DisabledReason})")
-            + (Contains is not null
-                ? $"{Environment.NewLine}Message containing: \"{Contains}\""
-                : string.Empty);
+            + (
+                Contains is not null
+                    ? $"{Environment.NewLine}Message containing: \"{Contains}\""
+                    : string.Empty
+            );
     }
 }
